@@ -1,15 +1,23 @@
 const serverless = require('serverless-http')
+const { connectLambda } = require('@netlify/blobs')
 
 /**
- * Οπωσδήποτε σταθερό `require("../../backend/…")` ώστε το Netlify esbuild να ακολουθήσει το
- dependency graph και να επισυνάψει **express**, **cors**, κ.λπ. στο bundle της function.
- * Δυναμικό `require(variablePath)` (όπως πριν οδηγούσε σε φόρτωση «γυμνών» `.js` αρχείων
- * μέσω `included_files` χωρίς αντίστοιχα `node_modules` → Cannot find module 'express').
+ * Οπωσδήποτε σταθερό `require("../../backend/…")` ώστε το Netlify esbuild να τραβήξει μέσα στο bundle
+ * express/cors και το backend.
  *
- * Ο φάκελος `included_files backend/data/` παραμένει για τα JSON seed στο δίσκο (filesystem / Blobs seed).
+ * Με Lambda compatibility (`serverless-http`) τα Netlify Blobs ΔΕ ρυθμίζονται αυτόματα —
+ * πρέπει να κληθεί `connectLambda(event)` ΠΡΙΝ οποιαδήποτε `getStore()`.
+ *
+ * Δες: https://github.com/netlify/blobs#Lambda compatibility mode (README στο @netlify/blobs).
  */
 const createApp = require('../../backend/createApp.js')
 
 const app = createApp()
+const expressHandler = serverless(app)
 
-exports.handler = serverless(app)
+exports.handler = async (event, context) => {
+  if (event && typeof event.blobs === 'string' && event.blobs.length > 0) {
+    connectLambda(event)
+  }
+  return expressHandler(event, context)
+}
