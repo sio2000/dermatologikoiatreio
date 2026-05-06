@@ -13,20 +13,36 @@ async function cloneSeedFromDisk() {
 }
 
 /**
- * Στο Netlify Functions το filesystem κάτω από `/var/task` είναι read-only → κάθε εγγραφή
- * πρέπει να γίνεται μέσω Netlify Blobs, όχι `atomicWriteJson` σε `backend/data/`.
+ * Στο Netlify Functions (AWS Lambda η βάση) το `/var/task` είναι read-only — οποιαδήποτε γραφή σε
+ * `backend/data/` δίνει EROFS. Όλες οι εγγραφές πρέπει μέσω Netlify Blobs.
  *
- * - Ρητό `USE_BLOB_STORAGE=true|false|…` έχει προτεραιότητα.
- * - Αλλιώς, αν `NETLIFY=true` (που βάζει η πλατφόρμα στις Functions), χρησιμοποιούμε Blobs.
- * - Τοπικά `node backend/server.js`: χωρίς NETLIFY → σωματικό JSON στους δίσκους.
+ * Ο έλεγχος `NETLIFY` είναι αναξιόπιστος (λεκτάν μη ορισμένος ή esbuild quirks). Οι τιμές
+ * `AWS_LAMBDA_FUNCTION_NAME` / `AWS_EXECUTION_ENV` ορίζονται στην εκτέλεση κάθε φορά στην Lambda.
  */
+function runningOnAwsLambdaRuntime() {
+  const fn =
+    typeof process.env.AWS_LAMBDA_FUNCTION_NAME === 'string' &&
+    process.env.AWS_LAMBDA_FUNCTION_NAME.trim() !== ''
+  const env =
+    typeof process.env.AWS_EXECUTION_ENV === 'string' &&
+    process.env.AWS_EXECUTION_ENV.includes('Lambda')
+  return fn || env
+}
+
 function useBlobStore() {
+  const lambda = runningOnAwsLambdaRuntime()
+
   const raw = process.env.USE_BLOB_STORAGE
   if (typeof raw === 'string' && raw.trim() !== '') {
     const hint = raw.trim().toLowerCase()
-    if (['0', 'false', 'no', 'off'].includes(hint)) return false
     if (['1', 'true', 'yes', 'on'].includes(hint)) return true
+    if (['0', 'false', 'no', 'off'].includes(hint)) {
+      if (lambda) return true /* RO FS σε Lambda — να αγνοείται ψευδο-απενεργοποίηση Blobs */
+      return false
+    }
   }
+
+  if (lambda) return true
 
   if (process.env.NETLIFY === 'true' || process.env.NETLIFY === '1') return true
 
