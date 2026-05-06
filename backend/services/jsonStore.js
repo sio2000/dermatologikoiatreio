@@ -3,11 +3,14 @@ const path = require('path')
 const { withStoreLock } = require('../utils/storeLock')
 const { DATA_DIR, AVAILABILITY_FILE, BOOKINGS_FILE } = require('../utils/paths')
 
-/** Seed από τα αρχεία του repo — χρησιμοποιείται στην πρώτη εγγραφή Blobs. */
-const seedAvailability = require('../data/availability.json')
-const seedBookings = require('../data/bookings.json')
-
 const BLOB_KEY = 'booking-state-v1'
+
+/** Seed από τα αρχεία δίσκου — όχι `require("./x.json")` (σπάει με Netlify/esbuild bundles). */
+async function cloneSeedFromDisk() {
+  const availability = await readJsonArray(AVAILABILITY_FILE)
+  const bookings = await readJsonArray(BOOKINGS_FILE)
+  return { availability, bookings }
+}
 
 function useBlobStore() {
   return process.env.USE_BLOB_STORAGE === 'true'
@@ -16,13 +19,6 @@ function useBlobStore() {
 function getBlobStore() {
   const { getStore } = require('@netlify/blobs')
   return getStore({ name: 'advanced-derma-booking' })
-}
-
-function cloneSeed() {
-  return {
-    availability: JSON.parse(JSON.stringify(seedAvailability)),
-    bookings: JSON.parse(JSON.stringify(seedBookings)),
-  }
 }
 
 async function ensureDataDir() {
@@ -61,7 +57,7 @@ async function readFullState() {
     if (data != null && Array.isArray(data.availability) && Array.isArray(data.bookings)) {
       return { availability: data.availability, bookings: data.bookings }
     }
-    const seed = cloneSeed()
+    const seed = await cloneSeedFromDisk()
     await store.setJSON(BLOB_KEY, seed)
     return seed
   }
