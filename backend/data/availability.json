@@ -1,0 +1,67 @@
+[
+  {
+    "clinic": "athens",
+    "date": "2026-05-06",
+    "time": "09:00"
+  },
+  {
+    "clinic": "athens",
+    "date": "2026-05-06",
+    "time": "10:00"
+  },
+  {
+    "clinic": "athens",
+    "date": "2026-05-06",
+    "time": "00:00"
+  },
+  {
+    "clinic": "piraeus",
+    "date": "2026-05-05",
+    "time": "09:00"
+  },
+  {
+    "clinic": "piraeus",
+    "date": "2026-05-06",
+    "time": "09:00"
+  },
+  {
+    "clinic": "athens",
+    "date": "2026-05-08",
+    "time": "09:15"
+  },
+  {
+    "clinic": "athens",
+    "date": "2026-05-08",
+    "time": "11:00"
+  },
+  {
+    "clinic": "piraeus",
+    "date": "2026-05-15",
+    "time": "09:00"
+  },
+  {
+    "clinic": "athens",
+    "date": "2026-05-16",
+    "time": "09:00"
+  },
+  {
+    "clinic": "athens",
+    "date": "2026-05-16",
+    "time": "10:00"
+  },
+  {
+    "clinic": "piraeus",
+    "date": "2026-05-18",
+    "time": "09:00"
+  },
+  {
+    "clinic": "piraeus",
+    "date": "2026-05-19",
+    "time": "09:00"
+  },
+  {
+    "clinic": "piraeus",
+    "date": "2026-05-20",
+    "time": "09:00"
+  }
+]

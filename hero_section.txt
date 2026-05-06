@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Δρ. Χρυσούλα Ζησιμού — Δερματολογικό Ιατρείο Αθηνών</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#FAF9F7;--bg-warm:#F5F0EB;--nude:#E8D5C4;--peach:#D4A98A;--champagne:#C9A96E;
+--gold:#B8956A;--dark:#1A1A1A;--text:#2C2C2C;--text-light:#6B6B6B;--text-lighter:#999;
+--serif:'Cormorant Garamond',Georgia,serif;--sans:'Inter',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:var(--peach) var(--bg)}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::selection{background:var(--nude);color:var(--dark)}
+
+/* NAVIGATION */
+.nav{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:20px 40px;display:flex;justify-content:space-between;align-items:center;transition:all .6s cubic-bezier(.22,1,.36,1);mix-blend-mode:difference}
+.nav.scrolled{padding:14px 40px;mix-blend-mode:normal;background:rgba(250,249,247,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(200,190,180,.15)}
+.nav.scrolled .nav-logo,.nav.scrolled .nav-links a,.nav.scrolled .nav-cta{color:var(--dark)!important}
+.nav-logo{font-family:var(--serif);font-size:22px;font-weight:600;color:#fff;letter-spacing:.02em;text-decoration:none}
+.nav-logo span{font-weight:300;font-style:italic;opacity:.7;font-size:14px;margin-left:8px;font-family:var(--sans)}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-links a{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#fff;text-decoration:none;font-weight:400;transition:opacity .3s}
+.nav-links a:hover{opacity:.6}
+.nav-cta{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,.4);padding:10px 24px;text-decoration:none;transition:all .4s}
+.nav-cta:hover{background:rgba(255,255,255,.15)}
+.nav.scrolled .nav-cta{border-color:var(--dark);color:var(--dark)}
+.nav.scrolled .nav-cta:hover{background:var(--dark);color:#fff}
+
+/* HERO */
+.hero{position:relative;height:300vh;background:#0a0a0a}
+.hero-canvas-wrap{position:sticky;top:0;height:100vh;width:100%;overflow:hidden}
+#heroCanvas{width:100%;height:100%;display:block}
+.hero-content{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;pointer-events:none;z-index:10}
+.hero-eyebrow{font-family:var(--sans);font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:24px;opacity:0;transform:translateY(20px)}
+.hero-title{font-family:var(--serif);font-size:clamp(32px,5vw,68px);font-weight:300;color:#fff;text-align:center;max-width:800px;line-height:1.2;opacity:0;transform:translateY(30px)}
+.hero-subtitle{font-family:var(--sans);font-size:clamp(13px,1.4vw,16px);color:rgba(255,255,255,.55);text-align:center;max-width:500px;margin-top:20px;line-height:1.7;font-weight:300;letter-spacing:.02em;opacity:0;transform:translateY(20px)}
+.hero-cta-wrap{margin-top:40px;opacity:0;transform:translateY(20px);pointer-events:auto}
+.hero-cta{display:inline-flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,.35);padding:16px 36px;text-decoration:none;transition:all .5s cubic-bezier(.22,1,.36,1);font-family:var(--sans)}
+.hero-cta:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.6);gap:18px}
+.hero-cta svg{width:14px;height:14px;transition:transform .4s}
+.hero-cta:hover svg{transform:translateX(3px)}
+.hero-scroll-indicator{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0}
+.hero-scroll-indicator span{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);font-family:var(--sans)}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,rgba(255,255,255,.4),transparent);animation:scrollPulse 2s ease infinite}
+@keyframes scrollPulse{0%,100%{opacity:.4;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.2)}}
+
+/* EDITORIAL INDEX */
+.editorial-index{position:fixed;left:40px;top:50%;transform:translateY(-50%);z-index:100;display:flex;flex-direction:column;gap:6px;opacity:0;transition:opacity .6s}
+.editorial-index.visible{opacity:1}
+.editorial-index .idx-dot{width:24px;height:2px;background:rgba(0,0,0,.15);transition:all .5s;cursor:pointer;border:none;padding:0}
+.editorial-index .idx-dot.active{width:36px;background:var(--gold)}
+.editorial-index .idx-dot:hover{background:var(--peach)}
+
+/* SECTIONS */
+.section{padding:clamp(80px,12vw,160px) clamp(24px,6vw,80px);position:relative}
+.section-dark{background:var(--dark);color:#fff}
+.section-warm{background:var(--bg-warm)}
+.section-label{font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--text-lighter);margin-bottom:12px;font-family:var(--sans)}
+.section-count{font-family:var(--serif);font-size:13px;color:var(--text-lighter);font-style:italic;margin-bottom:40px}
+.section-heading{font-family:var(--serif);font-size:clamp(36px,5vw,72px);font-weight:300;line-height:1.15;margin-bottom:24px;max-width:700px}
+.section-body{font-size:15px;line-height:1.8;color:var(--text-light);max-width:520px;font-weight:300}
+.section-dark .section-label{color:rgba(255,255,255,.4)}
+.section-dark .section-body{color:rgba(255,255,255,.5)}
+
+/* PHILOSOPHY */
+.philosophy{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;max-width:1400px;margin:0 auto}
+.philosophy-visual{position:relative;height:70vh;overflow:hidden;border-radius:2px}
+.philosophy-visual img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.22,1,.36,1)}
+.philosophy-visual:hover img{transform:scale(1.03)}
+.philosophy-text{padding-right:40px}
+
+/* SERVICES */
+.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1400px;margin:60px auto 0}
+.service-card{position:relative;overflow:hidden;cursor:pointer;aspect-ratio:3/4;border-radius:2px;background:#e5ddd5}
+.service-card img{width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.22,1,.36,1);filter:brightness(.92)}
+.service-card:hover img{transform:scale(1.06);filter:brightness(1)}
+.service-overlay{position:absolute;bottom:0;left:0;width:100%;padding:30px 24px;background:linear-gradient(transparent,rgba(0,0,0,.65));z-index:2}
+.service-overlay h3{font-family:var(--serif);font-size:22px;font-weight:400;color:#fff;margin-bottom:4px}
+.service-overlay p{font-size:12px;color:rgba(255,255,255,.6);font-weight:300;letter-spacing:.02em}
+.service-glow{position:absolute;inset:0;opacity:0;transition:opacity .6s;background:radial-gradient(ellipse at center bottom,rgba(201,169,110,.15),transparent 70%);z-index:1;pointer-events:none}
+.service-card:hover .service-glow{opacity:1}
+
+/* FEATURED TREATMENT */
+.featured{position:relative;min-height:90vh;display:flex;align-items:center;overflow:hidden}
+.featured-bg{position:absolute;inset:0;z-index:0}
+.featured-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.4)}
+.featured-content{position:relative;z-index:2;padding:0 clamp(40px,8vw,120px);max-width:700px}
+.featured-label{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--champagne);margin-bottom:16px}
+.featured-heading{font-family:var(--serif);font-size:clamp(40px,5vw,64px);font-weight:300;color:#fff;line-height:1.15;margin-bottom:20px}
+.featured-desc{font-size:15px;color:rgba(255,255,255,.6);line-height:1.8;font-weight:300;margin-bottom:32px}
+.featured-cta{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#fff;border-bottom:1px solid rgba(255,255,255,.35);padding-bottom:4px;text-decoration:none;transition:all .4s}
+.featured-cta:hover{border-color:#fff;gap:14px}
+
+/* BEFORE AFTER */
+.ba-container{max-width:900px;margin:60px auto 0;position:relative;aspect-ratio:16/9;overflow:hidden;cursor:ew-resize;border-radius:2px;background:#1a1a1a}
+.ba-container img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;user-select:none;-webkit-user-drag:none}
+.ba-after{clip-path:inset(0 50% 0 0)}
+.ba-slider{position:absolute;top:0;left:50%;width:2px;height:100%;background:rgba(255,255,255,.8);z-index:10;transform:translateX(-50%);pointer-events:none}
+.ba-handle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;border:2px solid #fff;display:flex;align-items:center;justify-content:center;z-index:11;pointer-events:none;background:rgba(0,0,0,.3);backdrop-filter:blur(4px)}
+.ba-handle svg{width:18px;height:18px;color:#fff}
+.ba-label{position:absolute;bottom:16px;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.7);z-index:12;font-family:var(--sans)}
+.ba-label-before{left:16px}
+.ba-label-after{right:16px}
+
+/* DOCTOR */
+.doctor-section{display:grid;grid-template-columns:1fr 1fr;gap:80px;max-width:1400px;margin:0 auto;align-items:center}
+.doctor-portrait{position:relative;height:75vh;overflow:hidden;border-radius:2px}
+.doctor-portrait img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.doctor-info h2{font-family:var(--serif);font-size:clamp(36px,4vw,56px);font-weight:300;margin-bottom:8px}
+.doctor-info .doctor-title{font-size:14px;color:var(--gold);letter-spacing:.05em;margin-bottom:32px;font-weight:400}
+.doctor-info p{font-size:15px;line-height:1.9;color:var(--text-light);font-weight:300;margin-bottom:16px}
+.doctor-credentials{margin-top:32px;display:flex;flex-direction:column;gap:12px}
+.credential{display:flex;align-items:flex-start;gap:12px;font-size:13px;color:var(--text-light);line-height:1.6}
+.credential-dot{width:4px;height:4px;border-radius:50%;background:var(--champagne);margin-top:8px;flex-shrink:0}
+
+/* GALLERY */
+.gallery-grid{columns:3;gap:16px;max-width:1400px;margin:60px auto 0}
+.gallery-item{break-inside:avoid;margin-bottom:16px;overflow:hidden;border-radius:2px;cursor:pointer;position:relative}
+.gallery-item img{width:100%;display:block;transition:transform 1s cubic-bezier(.22,1,.36,1);filter:brightness(.95)}
+.gallery-item:hover img{transform:scale(1.04);filter:brightness(1.02)}
+
+/* BOOKING */
+.booking-wrap{max-width:700px;margin:60px auto 0}
+.booking-steps{display:flex;gap:0;margin-bottom:48px;border-bottom:1px solid rgba(0,0,0,.08)}
+.booking-step{flex:1;padding:16px 0;text-align:center;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-lighter);cursor:pointer;position:relative;transition:color .4s}
+.booking-step.active{color:var(--dark)}
+.booking-step.active::after{content:'';position:absolute;bottom:-1px;left:0;width:100%;height:2px;background:var(--gold)}
+.booking-step-num{font-family:var(--serif);font-size:20px;display:block;margin-bottom:6px;font-weight:300}
+.booking-panel{display:none;animation:fadeUp .5s ease}
+.booking-panel.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.booking-options{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.booking-option{padding:20px 24px;border:1px solid rgba(0,0,0,.08);cursor:pointer;transition:all .3s;border-radius:2px;font-size:14px;color:var(--text);background:transparent}
+.booking-option:hover{border-color:var(--peach);background:rgba(232,213,196,.08)}
+.booking-option.selected{border-color:var(--gold);background:rgba(201,169,110,.06)}
+.booking-option h4{font-family:var(--serif);font-size:18px;font-weight:400;margin-bottom:4px}
+.booking-option p{font-size:12px;color:var(--text-lighter);font-weight:300}
+.booking-nav{display:flex;justify-content:space-between;margin-top:36px}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:var(--dark);padding:14px 32px;border:none;cursor:pointer;transition:all .4s;font-family:var(--sans)}
+.btn-primary:hover{background:#333;gap:12px}
+.btn-secondary{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-light);background:none;border:1px solid rgba(0,0,0,.12);padding:14px 24px;cursor:pointer;transition:all .4s;font-family:var(--sans)}
+.btn-secondary:hover{border-color:var(--dark)}
+
+/* LOCATIONS */
+.locations-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;max-width:1100px;margin:60px auto 0}
+.location-card{padding:40px;border:1px solid rgba(0,0,0,.06);border-radius:2px;transition:all .5s}
+.location-card:hover{border-color:var(--peach);box-shadow:0 20px 60px rgba(0,0,0,.04)}
+.location-card h3{font-family:var(--serif);font-size:24px;font-weight:400;margin-bottom:16px}
+.location-card p{font-size:14px;color:var(--text-light);line-height:1.8;font-weight:300}
+.location-card .location-link{display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-top:20px;text-decoration:none;transition:gap .3s}
+.location-card .location-link:hover{gap:10px}
+
+/* FINAL CTA */
+.final-section{position:relative;min-height:80vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+#finalCanvas{position:absolute;inset:0;width:100%;height:100%}
+.final-content{position:relative;z-index:2}
+.final-content h2{font-family:var(--serif);font-size:clamp(36px,5vw,64px);font-weight:300;color:#fff;margin-bottom:16px}
+.final-content p{font-size:14px;color:rgba(255,255,255,.5);margin-bottom:36px;font-weight:300}
+.final-cta{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,.35);padding:16px 40px;text-decoration:none;transition:all .5s;font-family:var(--sans)}
+.final-cta:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.6)}
+
+/* FOOTER */
+.footer{padding:60px clamp(24px,6vw,80px) 30px;background:var(--dark);color:rgba(255,255,255,.5)}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px;margin-bottom:60px}
+.footer-brand{font-family:var(--serif);font-size:24px;color:#fff;font-weight:400;margin-bottom:12px}
+.footer-brand-sub{font-size:13px;line-height:1.7;font-weight:300}
+.footer h4{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:16px}
+.footer a{color:rgba(255,255,255,.5);text-decoration:none;font-size:13px;display:block;margin-bottom:10px;font-weight:300;transition:color .3s}
+.footer a:hover{color:#fff}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:24px;display:flex;justify-content:space-between;font-size:12px;font-weight:300}
+
+/* REVEAL ANIMATIONS */
+.reveal{opacity:0;transform:translateY(30px);transition:all .8s cubic-bezier(.22,1,.36,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+
+/* LOADING SCREEN */
+.loader{position:fixed;inset:0;background:var(--dark);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .8s ease .3s}
+.loader.done{opacity:0;pointer-events:none}
+.loader-text{font-family:var(--serif);font-size:28px;color:#fff;font-weight:300;opacity:0;animation:loaderFade 1s ease forwards}
+.loader-line{width:60px;height:1px;background:var(--gold);margin-top:16px;transform:scaleX(0);animation:loaderLine 1.5s ease .3s forwards}
+@keyframes loaderFade{to{opacity:1}}
+@keyframes loaderLine{to{transform:scaleX(1)}}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .philosophy,.doctor-section{grid-template-columns:1fr;gap:40px}
+  .services-grid{grid-template-columns:1fr 1fr}
+  .gallery-grid{columns:2}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .nav-links{display:none}
+  .locations-grid{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .services-grid{grid-template-columns:1fr}
+  .gallery-grid{columns:1}
+  .booking-options{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr;gap:32px}
+  .philosophy-visual,.doctor-portrait{height:50vh}
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div class="loader" id="loader">
+  <div class="loader-text">Δρ. Ζησιμού</div>
+  <div class="loader-line"></div>
+</div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo">ΔΖ <span>Dermatology</span></a>
+  <div class="nav-links">
+    <a href="#services">Θεραπείες</a>
+    <a href="#doctor">Ιατρός</a>
+    <a href="#gallery">Αποτελέσματα</a>
+    <a href="#locations">Ιατρεία</a>
+  </div>
+  <a href="#booking" class="nav-cta">Ραντεβού</a>
+</nav>
+
+<!-- EDITORIAL INDEX -->
+<div class="editorial-index" id="editorialIndex">
+  <button class="idx-dot active" data-section="0"></button>
+  <button class="idx-dot" data-section="1"></button>
+  <button class="idx-dot" data-section="2"></button>
+  <button class="idx-dot" data-section="3"></button>
+  <button class="idx-dot" data-section="4"></button>
+  <button class="idx-dot" data-section="5"></button>
+  <button class="idx-dot" data-section="6"></button>
+  <button class="idx-dot" data-section="7"></button>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-canvas-wrap">
+    <canvas id="heroCanvas"></canvas>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Δερματολογικό Ιατρείο Αθηνών</div>
+      <h1 class="hero-title">Η επιδερμίδα σας, στην πιο εξελιγμένη της μορφή</h1>
+      <p class="hero-subtitle">Με επιστημονική ακρίβεια. Με ορατά αποτελέσματα.</p>
+      <div class="hero-cta-wrap">
+        <a href="#booking" class="hero-cta">
+          Κλείστε Ραντεβού
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="hero-scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="section section-warm" id="philosophy">
+  <div class="philosophy">
+    <div class="philosophy-visual reveal">
+      <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&q=80" alt="Skincare" loading="lazy">
+    </div>
+    <div class="philosophy-text">
+      <div class="section-label reveal">Φιλοσοφία</div>
+      <div class="section-count reveal reveal-delay-1">01 — Η Προσέγγισή μας</div>
+      <h2 class="section-heading reveal reveal-delay-2">Αποκαθιστούμε τη φυσική ομορφιά του δέρματος</h2>
+      <p class="section-body reveal reveal-delay-3">Κάθε θεραπεία σχεδιάζεται ατομικά, με βάση την επιστημονική ανάλυση και τη βαθιά κατανόηση της δερματικής φυσιολογίας. Στόχος μας δεν είναι η αλλαγή — αλλά η αποκατάσταση, η λάμψη, η αρμονία.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div style="max-width:1400px;margin:0 auto">
+    <div class="section-label reveal">Θεραπείες</div>
+    <div class="section-count reveal reveal-delay-1">02 — Εξειδικευμένες Υπηρεσίες</div>
+    <h2 class="section-heading reveal reveal-delay-2">Ολοκληρωμένη δερματολογική φροντίδα</h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=600&q=80" alt="Αντιγήρανση" loading="lazy">
+      <div class="service-glow"></div>
+      <div class="service-overlay">
+        <h3>Αντιγήρανση</h3>
+        <p>Προηγμένα πρωτόκολλα ανανέωσης</p>
+      </div>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <img src="https://images.unsplash.com/photo-1612817288484-6f916006741a?w=600&q=80" alt="Ενέσιμες Θεραπείες" loading="lazy">
+      <div class="service-glow"></div>
+      <div class="service-overlay">
+        <h3>Ενέσιμες Θεραπείες</h3>
+        <p>Botox, υαλουρονικό, μεσοθεραπεία</p>
+      </div>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=80" alt="Laser" loading="lazy">
+      <div class="service-glow"></div>
+      <div class="service-overlay">
+        <h3>Laser</h3>
+        <p>Τεχνολογία αιχμής για κάθε ανάγκη</p>
+      </div>
+    </div>
+    <div class="service-card reveal reveal-delay-3">
+      <img src="https://images.unsplash.com/photo-1598524374912-6b0b0bab2256?w=600&q=80" alt="Κλινική Δερματολογία" loading="lazy">
+      <div class="service-glow"></div>
+      <div class="service-overlay">
+        <h3>Κλινική Δερματολογία</h3>
+        <p>Διάγνωση & θεραπεία δερματοπαθειών</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED TREATMENT -->
+<section class="featured section-dark" id="featured">
+  <div class="featured-bg">
+    <img src="https://images.unsplash.com/photo-1519824145371-296894a0daa9?w=1400&q=80" alt="Featured Treatment" loading="lazy">
+  </div>
+  <div class="featured-content">
+    <div class="featured-label reveal">Θεραπεία Του Μήνα</div>
+    <h2 class="featured-heading reveal reveal-delay-1">Hydra-Glow Facial</h2>
+    <p class="featured-desc reveal reveal-delay-2">Ένας συνδυασμός βαθιάς ενυδάτωσης, ήπιου chemical peel και LED φωτοθεραπείας. Το δέρμα αποκτά άμεση λάμψη, ομοιόμορφη υφή και νεανική αίσθηση — χωρίς χρόνο αποθεραπείας.</p>
+    <a href="#booking" class="featured-cta reveal reveal-delay-3">
+      Μάθετε περισσότερα
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- BEFORE / AFTER -->
+<section class="section" id="results">
+  <div style="max-width:1400px;margin:0 auto">
+    <div class="section-label reveal">Αποτελέσματα</div>
+    <div class="section-count reveal reveal-delay-1">04 — Πριν & Μετά</div>
+    <h2 class="section-heading reveal reveal-delay-2">Η διαφορά που κάνει η εξειδίκευση</h2>
+  </div>
+  <div class="ba-container reveal" id="baContainer">
+    <img src="https://images.unsplash.com/photo-1509967419530-da38b4704bc6?w=1200&q=80" alt="Before" class="ba-before" draggable="false">
+    <img src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?w=1200&q=80" alt="After" class="ba-after" draggable="false">
+    <div class="ba-slider" id="baSlider"></div>
+    <div class="ba-handle" id="baHandle">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 5l-5 7 5 7M16 5l5 7-5 7"/></svg>
+    </div>
+    <span class="ba-label ba-label-before">Πριν</span>
+    <span class="ba-label ba-label-after">Μετά</span>
+  </div>
+</section>
+
+<!-- DOCTOR -->
+<section class="section section-warm" id="doctor">
+  <div class="doctor-section">
+    <div class="doctor-portrait reveal">
+      <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=800&q=80" alt="Δρ. Χρυσούλα Ζησιμού" loading="lazy">
+    </div>
+    <div class="doctor-info">
+      <div class="section-label reveal">Ιατρός</div>
+      <div class="section-count reveal reveal-delay-1">05 — Εμπιστοσύνη & Εμπειρία</div>
+      <h2 class="reveal reveal-delay-2">Χρυσούλα Ζησιμού</h2>
+      <div class="doctor-title reveal reveal-delay-2">Δερματολόγος – Αφροδισιολόγος</div>
+      <p class="reveal reveal-delay-3">Με πάθος για την αισθητική δερματολογία και αφοσίωση στην επιστημονική τελειότητα, η Δρ. Ζησιμού προσφέρει εξατομικευμένες λύσεις που αναδεικνύουν τη φυσική ομορφιά.</p>
+      <div class="doctor-credentials reveal reveal-delay-3">
+        <div class="credential"><div class="credential-dot"></div><span>Πτυχίο Ιατρικής ΕΚΠΑ — Λίαν Καλώς</span></div>
+        <div class="credential"><div class="credential-dot"></div><span>Ειδίκευση στο Νοσοκομείο «Ανδρέας Συγγρός»</span></div>
+        <div class="credential"><div class="credential-dot"></div><span>Ενεργό μέλος EADV & IMCAS</span></div>
+        <div class="credential"><div class="credential-dot"></div><span>Κλινική εμπειρία από το 2014</span></div>
+        <div class="credential"><div class="credential-dot"></div><span>Συμμετοχή σε διεθνή συνέδρια & workshops</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="section" id="gallery">
+  <div style="max-width:1400px;margin:0 auto">
+    <div class="section-label reveal">Gallery</div>
+    <div class="section-count reveal reveal-delay-1">06 — Αισθητική</div>
+    <h2 class="section-heading reveal reveal-delay-2">Στιγμές ομορφιάς</h2>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1596755389378-c31d21fd1273?w=600&q=80" alt="Gallery 1" loading="lazy"></div>
+    <div class="gallery-item reveal reveal-delay-1"><img src="https://images.unsplash.com/photo-1505944270255-72b8c68c6a70?w=600&q=80" alt="Gallery 2" loading="lazy"></div>
+    <div class="gallery-item reveal reveal-delay-2"><img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=600&h=900&q=80" alt="Gallery 3" loading="lazy"></div>
+    <div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80" alt="Gallery 4" loading="lazy"></div>
+    <div class="gallery-item reveal reveal-delay-1"><img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=600&h=800&q=80" alt="Gallery 5" loading="lazy"></div>
+    <div class="gallery-item reveal reveal-delay-2"><img src="https://images.unsplash.com/photo-1519415510236-718bdfcd89c8?w=600&q=80" alt="Gallery 6" loading="lazy"></div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="section section-warm" id="booking">
+  <div style="max-width:1400px;margin:0 auto;text-align:center">
+    <div class="section-label reveal">Ραντεβού</div>
+    <div class="section-count reveal reveal-delay-1">07 — Κλείστε Ραντεβού</div>
+    <h2 class="section-heading reveal reveal-delay-2" style="margin:0 auto 8px">Το πρώτο βήμα για τη μεταμόρφωσή σας</h2>
+  </div>
+  <div class="booking-wrap reveal reveal-delay-3">
+    <div class="booking-steps">
+      <div class="booking-step active" data-step="0"><span class="booking-step-num">01</span>Θεραπεία</div>
+      <div class="booking-step" data-step="1"><span class="booking-step-num">02</span>Ιατρείο</div>
+      <div class="booking-step" data-step="2"><span class="booking-step-num">03</span>Ημερομηνία</div>
+      <div class="booking-step" data-step="3"><span class="booking-step-num">04</span>Ώρα</div>
+    </div>
+
+    <div class="booking-panel active" data-panel="0">
+      <div class="booking-options">
+        <div class="booking-option" onclick="selectOption(this)"><h4>Αντιγήρανση</h4><p>Mesθεραπεία, PRP, Microneedling</p></div>
+        <div class="booking-option" onclick="selectOption(this)"><h4>Ενέσιμα</h4><p>Botox, Υαλουρονικό Οξύ</p></div>
+        <div class="booking-option" onclick="selectOption(this)"><h4>Laser</h4><p>Αποτρίχωση, Ανάπλαση, Αγγεία</p></div>
+        <div class="booking-option" onclick="selectOption(this)"><h4>Δερματολογία</h4><p>Διάγνωση & Θεραπεία</p></div>
+        <div class="booking-option" onclick="selectOption(this)"><h4>Chemical Peels</h4><p>Ελαφριά & Μέσου Βάθους</p></div>
+        <div class="booking-option" onclick="selectOption(this)"><h4>Hydra Facial</h4><p>Βαθύς Καθαρισμός & Ενυδάτωση</p></div>
+      </div>
+    </div>
+
+    <div class="booking-panel" data-panel="1">
+      <div class="booking-options">
+        <div class="booking-option" onclick="selectOption(this)"><h4>Κολωνάκι</h4><p>Σκουφά 42, Αθήνα 106 73</p></div>
+        <div class="booking-option" onclick="selectOption(this)"><h4>Γλυφάδα</h4><p>Λαζαράκη 15, Γλυφάδα 166 74</p></div>
+      </div>
+    </div>
+
+    <div class="booking-panel" data-panel="2">
+      <div class="booking-options">
+        <div class="booking-option" onclick="selectOption(this)"><h4>Δευτέρα</h4><p>16 Δεκεμβρίου 2024</p></div>
+        <div class="booking-option" onclick="selectOption(this)"><h4>Τρίτη</h4><p>17 Δεκεμβρίου 2024</p></div>
+        <div class="booking-option" onclick="selectOption(this)"><h4>Τετάρτη</h4><p>18 Δεκεμβρίου 2024</p></div>
+        <div class="booking-option" onclick="selectOption(this)"><h4>Πέμπτη</h4><p>19 Δεκεμβρίου 2024</p></div>
+      </div>
+    </div>
+
+    <div class="booking-panel" data-panel="3">
+      <div class="booking-options">
+        <div class="booking-option" onclick="selectOption(this)"><h4>10:00</h4><p>Πρωινό</p></div>
+        <div class="booking-option" onclick="selectOption(this)"><h4>12:00</h4><p>Μεσημέρι</p></div>
+        <div class="booking-option" onclick="selectOption(this)"><h4>15:00</h4><p>Απόγευμα</p></div>
+        <div class="booking-option" onclick="selectOption(this)"><h4>18:00</h4><p>Βράδυ</p></div>
+      </div>
+    </div>
+
+    <div class="booking-nav">
+      <button class="btn-secondary" id="bookingPrev" onclick="changeStep(-1)" style="visibility:hidden">Πίσω</button>
+      <button class="btn-primary" id="bookingNext" onclick="changeStep(1)">
+        Επόμενο
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATIONS -->
+<section class="section" id="locations">
+  <div style="max-width:1400px;margin:0 auto;text-align:center">
+    <div class="section-label reveal">Ιατρεία</div>
+    <div class="section-count reveal reveal-delay-1">08 — Τοποθεσίες</div>
+    <h2 class="section-heading reveal reveal-delay-2" style="margin:0 auto 8px">Σας περιμένουμε</h2>
+  </div>
+  <div class="locations-grid">
+    <div class="location-card reveal">
+      <h3>Κολωνάκι</h3>
+      <p>Σκουφά 42, Αθήνα 106 73<br>Τηλ: 210 361 4000<br><br>Δευτ–Παρ: 09:00–21:00<br>Σάβ: 10:00–15:00</p>
+      <a href="#" class="location-link">Οδηγίες <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+    <div class="location-card reveal reveal-delay-1">
+      <h3>Γλυφάδα</h3>
+      <p>Λαζαράκη 15, Γλυφάδα 166 74<br>Τηλ: 210 894 5000<br><br>Δευτ–Παρ: 09:00–21:00<br>Σάβ: 10:00–15:00</p>
+      <a href="#" class="location-link">Οδηγίες <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL -->
+<section class="final-section section-dark">
+  <canvas id="finalCanvas"></canvas>
+  <div class="final-content">
+    <h2 class="reveal">Το αποτέλεσμα είναι ορατό.</h2>
+    <p class="reveal reveal-delay-1">Εμπιστευτείτε την επιδερμίδα σας σε ειδικούς.</p>
+    <a href="#booking" class="final-cta reveal reveal-delay-2">
+      Κλείστε το ραντεβού σας
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">Δρ. Χρυσούλα Ζησιμού</div>
+      <p class="footer-brand-sub">Δερματολόγος – Αφροδισιολόγος<br>Αισθητική & Κλινική Δερματολογία</p>
+    </div>
+    <div>
+      <h4>Θεραπείες</h4>
+      <a href="#">Αντιγήρανση</a>
+      <a href="#">Ενέσιμα</a>
+      <a href="#">Laser</a>
+      <a href="#">Δερματολογία</a>
+    </div>
+    <div>
+      <h4>Ιατρείο</h4>
+      <a href="#">Κολωνάκι</a>
+      <a href="#">Γλυφάδα</a>
+      <a href="#">Ραντεβού</a>
+    </div>
+    <div>
+      <h4>Επικοινωνία</h4>
+      <a href="#">info@drzisimou.gr</a>
+      <a href="#">210 361 4000</a>
+      <a href="#">Instagram</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 Δρ. Ζησιμού Dermatology. All rights reserved.</span>
+    <span>Designed with precision.</span>
+  </div>
+</footer>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.183.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.183.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+
+/* ============================================
+   HERO — LIQUID LIFT CINEMATIC EXPERIENCE
+   ============================================ */
+
+const heroCanvas = document.getElementById('heroCanvas');
+const renderer = new THREE.WebGLRenderer({ canvas: heroCanvas, antialias: true, alpha: false });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.1;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0d0a08);
+
+const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+camera.position.set(0, 2.8, 4.5);
+camera.lookAt(0, 0, 0);
+
+// Scroll state
+let scrollProgress = 0;
+let mouseX = 0, mouseY = 0;
+let targetMouseX = 0, targetMouseY = 0;
+
+// Lights
+const ambientLight = new THREE.AmbientLight(0xffeedd, 0.15);
+ambientLight.name = 'heroAmbient';
+scene.add(ambientLight);
+
+const mainLight = new THREE.DirectionalLight(0xffd4a8, 0.8);
+mainLight.name = 'heroMainLight';
+mainLight.position.set(2, 5, 3);
+scene.add(mainLight);
+
+const warmLight = new THREE.PointLight(0xffb88c, 0.6, 10);
+warmLight.name = 'heroWarmLight';
+warmLight.position.set(-2, 3, 1);
+scene.add(warmLight);
+
+const rimLight = new THREE.PointLight(0xffecd2, 0.4, 8);
+rimLight.name = 'heroRimLight';
+rimLight.position.set(0, 1, -3);
+scene.add(rimLight);
+
+// Liquid Surface Shader
+const surfaceVertexShader = `
+  uniform float uTime;
+  uniform float uScroll;
+  uniform vec2 uMouse;
+  varying vec2 vUv;
+  varying vec3 vNormal;
+  varying vec3 vPosition;
+  varying float vElevation;
+
+  // Simplex noise
+  vec3 mod289(vec3 x){return x-floor(x*(1./289.))*289.;}
+  vec4 mod289(vec4 x){return x-floor(x*(1./289.))*289.;}
+  vec4 permute(vec4 x){return mod289(((x*34.)+1.)*x);}
+  vec4 taylorInvSqrt(vec4 r){return 1.79284291400159-.85373472095314*r;}
+  float snoise(vec3 v){
+    const vec2 C=vec2(1./6.,1./3.);
+    const vec4 D=vec4(0.,.5,1.,2.);
+    vec3 i=floor(v+dot(v,C.yyy));
+    vec3 x0=v-i+dot(i,C.xxx);
+    vec3 g=step(x0.yzx,x0.xyz);
+    vec3 l=1.-g;
+    vec3 i1=min(g.xyz,l.zxy);
+    vec3 i2=max(g.xyz,l.zxy);
+    vec3 x1=x0-i1+C.xxx;
+    vec3 x2=x0-i2+C.yyy;
+    vec3 x3=x0-D.yyy;
+    i=mod289(i);
+    vec4 p=permute(permute(permute(i.z+vec4(0.,i1.z,i2.z,1.))+i.y+vec4(0.,i1.y,i2.y,1.))+i.x+vec4(0.,i1.x,i2.x,1.));
+    float n_=.142857142857;
+    vec3 ns=n_*D.wyz-D.xzx;
+    vec4 j=p-49.*floor(p*ns.z*ns.z);
+    vec4 x_=floor(j*ns.z);
+    vec4 y_=floor(j-7.*x_);
+    vec4 x=x_*ns.x+ns.yyyy;
+    vec4 y=y_*ns.x+ns.yyyy;
+    vec4 h=1.-abs(x)-abs(y);
+    vec4 b0=vec4(x.xy,y.xy);
+    vec4 b1=vec4(x.zw,y.zw);
+    vec4 s0=floor(b0)*2.+1.;
+    vec4 s1=floor(b1)*2.+1.;
+    vec4 sh=-step(h,vec4(0.));
+    vec4 a0=b0.xzyw+s0.xzyw*sh.xxyy;
+    vec4 a1=b1.xzyw+s1.xzyw*sh.zzww;
+    vec3 p0=vec3(a0.xy,h.x);
+    vec3 p1=vec3(a0.zw,h.y);
+    vec3 p2=vec3(a1.xy,h.z);
+    vec3 p3=vec3(a1.zw,h.w);
+    vec4 norm=taylorInvSqrt(vec4(dot(p0,p0),dot(p1,p1),dot(p2,p2),dot(p3,p3)));
+    p0*=norm.x;p1*=norm.y;p2*=norm.z;p3*=norm.w;
+    vec4 m=max(.6-vec4(dot(x0,x0),dot(x1,x1),dot(x2,x2),dot(x3,x3)),0.);
+    m=m*m;
+    return 42.*dot(m*m,vec4(dot(p0,x0),dot(p1,x1),dot(p2,x2),dot(p3,x3)));
+  }
+
+  void main(){
+    vUv = uv;
+    vec3 pos = position;
+
+    float t = uTime * 0.3;
+    float scrollFactor = uScroll;
+
+    // Base waves - calm liquid
+    float wave1 = snoise(vec3(pos.x * 1.5 + t * 0.5, pos.z * 1.5, t * 0.3)) * 0.12;
+    float wave2 = snoise(vec3(pos.x * 3.0 - t * 0.3, pos.z * 3.0 + t * 0.2, t * 0.5)) * 0.06;
+    float wave3 = snoise(vec3(pos.x * 5.0 + t * 0.15, pos.z * 5.0 - t * 0.1, t * 0.4)) * 0.03;
+
+    // Ripple from center (scroll controlled)
+    float dist = length(pos.xz);
+    float ripple = sin(dist * 6.0 - uTime * 2.0) * exp(-dist * 0.5) * scrollFactor * 0.15;
+
+    // Mouse interaction
+    float mouseDist = length(pos.xz - uMouse * 3.0);
+    float mouseRipple = sin(mouseDist * 8.0 - uTime * 3.0) * exp(-mouseDist * 1.5) * 0.04;
+
+    // Smoothing with scroll
+    float smoothFactor = mix(1.0, 0.3, scrollFactor);
+    float elevation = (wave1 + wave2 + wave3) * smoothFactor + ripple + mouseRipple;
+
+    pos.y += elevation;
+    vElevation = elevation;
+    vPosition = pos;
+
+    // Compute normal
+    float eps = 0.01;
+    float hL = snoise(vec3((pos.x - eps) * 1.5 + t * 0.5, pos.z * 1.5, t * 0.3)) * 0.12 * smoothFactor;
+    float hR = snoise(vec3((pos.x + eps) * 1.5 + t * 0.5, pos.z * 1.5, t * 0.3)) * 0.12 * smoothFactor;
+    float hD = snoise(vec3(pos.x * 1.5 + t * 0.5, (pos.z - eps) * 1.5, t * 0.3)) * 0.12 * smoothFactor;
+    float hU = snoise(vec3(pos.x * 1.5 + t * 0.5, (pos.z + eps) * 1.5, t * 0.3)) * 0.12 * smoothFactor;
+    vec3 computedNormal = normalize(vec3(hL - hR, 2.0 * eps, hD - hU));
+    vNormal = normalMatrix * computedNormal;
+
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+  }
+`;
+
+const surfaceFragmentShader = `
+  uniform float uTime;
+  uniform float uScroll;
+  varying vec2 vUv;
+  varying vec3 vNormal;
+  varying vec3 vPosition;
+  varying float vElevation;
+
+  void main(){
+    vec3 viewDir = normalize(cameraPosition - vPosition);
+    vec3 normal = normalize(vNormal);
+
+    // Fresnel
+    float fresnel = pow(1.0 - max(dot(viewDir, normal), 0.0), 3.0);
+
+    // Base colors - nude/champagne
+    vec3 baseColor = vec3(0.85, 0.72, 0.58);
+    vec3 highlightColor = vec3(1.0, 0.92, 0.80);
+    vec3 deepColor = vec3(0.35, 0.25, 0.18);
+    vec3 glowColor = vec3(1.0, 0.88, 0.70);
+
+    // Color based on elevation and scroll
+    float colorMix = smoothstep(-0.1, 0.15, vElevation);
+    vec3 surfaceColor = mix(deepColor, baseColor, colorMix);
+
+    // Add highlight
+    float highlight = pow(max(dot(normal, normalize(vec3(1.0, 2.0, 1.0))), 0.0), 8.0);
+    surfaceColor += highlightColor * highlight * 0.4;
+
+    // Glow spreading with scroll
+    float dist = length(vUv - 0.5);
+    float glowSpread = smoothstep(1.0 - uScroll * 1.2, 0.0, dist);
+    surfaceColor = mix(surfaceColor, glowColor, glowSpread * uScroll * 0.4);
+
+    // Fresnel rim
+    surfaceColor += glowColor * fresnel * (0.3 + uScroll * 0.4);
+
+    // Luminous refinement at end
+    float refinement = uScroll * uScroll;
+    surfaceColor = mix(surfaceColor, highlightColor, refinement * 0.3);
+
+    // Soft vignette
+    float vignette = 1.0 - smoothstep(0.3, 1.2, dist);
+    surfaceColor *= (0.7 + vignette * 0.3);
+
+    float alpha = 0.92 + fresnel * 0.08;
+    gl_FragColor = vec4(surfaceColor, alpha);
+  }
+`;
+
+// Create liquid surface
+const surfaceGeom = new THREE.PlaneGeometry(8, 8, 200, 200);
+surfaceGeom.rotateX(-Math.PI / 2);
+const surfaceMat = new THREE.ShaderMaterial({
+  vertexShader: surfaceVertexShader,
+  fragmentShader: surfaceFragmentShader,
+  uniforms: {
+    uTime: { value: 0 },
+    uScroll: { value: 0 },
+    uMouse: { value: new THREE.Vector2(0, 0) }
+  },
+  transparent: true,
+  side: THREE.DoubleSide
+});
+const surface = new THREE.Mesh(surfaceGeom, surfaceMat);
+surface.name = 'liquidSurface';
+scene.add(surface);
+
+// Drop light sphere
+const dropGeom = new THREE.SphereGeometry(0.06, 32, 32);
+const dropMat = new THREE.MeshBasicMaterial({ color: 0xffecd2, transparent: true, opacity: 0.9 });
+const drop = new THREE.Mesh(dropGeom, dropMat);
+drop.name = 'lightDrop';
+drop.position.set(0, 2, 0);
+scene.add(drop);
+
+const dropLight = new THREE.PointLight(0xffd4a8, 1, 5);
+dropLight.name = 'dropPointLight';
+drop.add(dropLight);
+
+// Post processing
+const composer = new EffectComposer(renderer);
+const renderPass = new RenderPass(scene, camera);
+composer.addPass(renderPass);
+
+const bloomPass = new UnrealBloomPass(
+  new THREE.Vector2(window.innerWidth, window.innerHeight),
+  0.6, 0.6, 0.7
+);
+composer.addPass(bloomPass);
+
+const outputPass = new OutputPass();
+composer.addPass(outputPass);
+
+// Animation
+const clock = new THREE.Clock();
+let cameraStartZ = 4.5;
+
+function animateHero() {
+  const elapsed = clock.getElapsedTime();
+
+  // Smooth mouse
+  mouseX += (targetMouseX - mouseX) * 0.05;
+  mouseY += (targetMouseY - mouseY) * 0.05;
+
+  // Update uniforms
+  surfaceMat.uniforms.uTime.value = elapsed;
+  surfaceMat.uniforms.uScroll.value = scrollProgress;
+  surfaceMat.uniforms.uMouse.value.set(mouseX, mouseY);
+
+  // Drop animation (falls with scroll)
+  const dropY = THREE.MathUtils.lerp(2.0, 0.05, Math.min(scrollProgress * 2, 1));
+  drop.position.y = dropY;
+  dropMat.opacity = scrollProgress < 0.5 ? 0.9 : THREE.MathUtils.lerp(0.9, 0, (scrollProgress - 0.5) * 2);
+  dropLight.intensity = 1 + scrollProgress * 2;
+
+  // Camera cinematic push-in
+  camera.position.z = THREE.MathUtils.lerp(cameraStartZ, 3.2, scrollProgress * 0.5);
+  camera.position.y = THREE.MathUtils.lerp(2.8, 2.2, scrollProgress * 0.3);
+  camera.position.x = Math.sin(elapsed * 0.1) * 0.15 + mouseX * 0.3;
+  camera.lookAt(0, 0, 0);
+
+  // Bloom increases with scroll
+  bloomPass.strength = 0.4 + scrollProgress * 0.8;
+
+  composer.render();
+}
+
+renderer.setAnimationLoop(animateHero);
+
+// Mouse tracking
+window.addEventListener('mousemove', (e) => {
+  targetMouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+  targetMouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+});
+
+// Scroll tracking for hero
+const heroSection = document.getElementById('hero');
+window.addEventListener('scroll', () => {
+  const heroRect = heroSection.getBoundingClientRect();
+  const heroHeight = heroSection.offsetHeight - window.innerHeight;
+  if (heroHeight > 0) {
+    scrollProgress = Math.max(0, Math.min(1, -heroRect.top / heroHeight));
+  }
+});
+
+// Resize
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  composer.setSize(window.innerWidth, window.innerHeight);
+});
+
+/* ============================================
+   FINAL SECTION — CALM GLOW CANVAS
+   ============================================ */
+
+const finalCanvas = document.getElementById('finalCanvas');
+const fCtx = finalCanvas.getContext('2d');
+let fW, fH;
+
+function resizeFinalCanvas() {
+  const rect = finalCanvas.parentElement.getBoundingClientRect();
+  fW = finalCanvas.width = rect.width * Math.min(window.devicePixelRatio, 2);
+  fH = finalCanvas.height = rect.height * Math.min(window.devicePixelRatio, 2);
+  finalCanvas.style.width = rect.width + 'px';
+  finalCanvas.style.height = rect.height + 'px';
+}
+resizeFinalCanvas();
+window.addEventListener('resize', resizeFinalCanvas);
+
+function drawFinalCanvas(time) {
+  fCtx.fillStyle = '#0d0a08';
+  fCtx.fillRect(0, 0, fW, fH);
+
+  const cx = fW / 2, cy = fH / 2;
+  const maxR = Math.max(fW, fH) * 0.5;
+
+  // Soft glowing orb
+  const pulse = 0.7 + Math.sin(time * 0.001) * 0.1;
+  const grad = fCtx.createRadialGradient(cx, cy, 0, cx, cy, maxR * pulse);
+  grad.addColorStop(0, 'rgba(255,228,190,0.12)');
+  grad.addColorStop(0.3, 'rgba(200,160,110,0.06)');
+  grad.addColorStop(0.6, 'rgba(100,70,40,0.03)');
+  grad.addColorStop(1, 'rgba(13,10,8,0)');
+  fCtx.fillStyle = grad;
+  fCtx.fillRect(0, 0, fW, fH);
+
+  // Secondary warm glow
+  const grad2 = fCtx.createRadialGradient(cx + Math.sin(time * 0.0005) * 50, cy, 0, cx, cy, maxR * 0.4);
+  grad2.addColorStop(0, 'rgba(255,200,150,0.06)');
+  grad2.addColorStop(1, 'rgba(13,10,8,0)');
+  fCtx.fillStyle = grad2;
+  fCtx.fillRect(0, 0, fW, fH);
+
+  requestAnimationFrame(drawFinalCanvas);
+}
+requestAnimationFrame(drawFinalCanvas);
+
+/* ============================================
+   SCROLL REVEAL & NAV & INTERACTIONS
+   ============================================ */
+
+// Loader
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('done');
+    // Animate hero content
+    const heroEls = document.querySelectorAll('.hero-eyebrow,.hero-title,.hero-subtitle,.hero-cta-wrap,.hero-scroll-indicator');
+    heroEls.forEach((el, i) => {
+      setTimeout(() => {
+        el.style.transition = 'all 1s cubic-bezier(.22,1,.36,1)';
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      }, 600 + i * 200);
+    });
+  }, 1800);
+});
+
+// Nav scroll
+const nav = document.getElementById('nav');
+const editorialIndex = document.getElementById('editorialIndex');
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  nav.classList.toggle('scrolled', scrollY > 100);
+  editorialIndex.classList.toggle('visible', scrollY > window.innerHeight && scrollY < document.body.scrollHeight - window.innerHeight * 2);
+});
+
+// Reveal on scroll
+const revealEls = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+revealEls.forEach(el => revealObserver.observe(el));
+
+// Editorial index dots
+const sections = document.querySelectorAll('section, .section');
+const idxDots = document.querySelectorAll('.idx-dot');
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const idx = Array.from(sections).indexOf(entry.target);
+      idxDots.forEach((d, i) => d.classList.toggle('active', i === idx));
+    }
+  });
+}, { threshold: 0.3 });
+sections.forEach(s => sectionObserver.observe(s));
+
+idxDots.forEach(dot => {
+  dot.addEventListener('click', () => {
+    const idx = parseInt(dot.dataset.section);
+    if (sections[idx]) sections[idx].scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+// Before/After slider
+const baContainer = document.getElementById('baContainer');
+const baAfter = baContainer.querySelector('.ba-after');
+const baSlider = document.getElementById('baSlider');
+const baHandle = document.getElementById('baHandle');
+let isDragging = false;
+
+function updateBA(x) {
+  const rect = baContainer.getBoundingClientRect();
+  const pos = Math.max(0, Math.min(1, (x - rect.left) / rect.width));
+  baAfter.style.clipPath = `inset(0 ${(1 - pos) * 100}% 0 0)`;
+  baSlider.style.left = pos * 100 + '%';
+  baHandle.style.left = pos * 100 + '%';
+}
+
+baContainer.addEventListener('mousedown', (e) => { isDragging = true; updateBA(e.clientX); });
+baContainer.addEventListener('touchstart', (e) => { isDragging = true; updateBA(e.touches[0].clientX); }, { passive: true });
+window.addEventListener('mousemove', (e) => { if (isDragging) updateBA(e.clientX); });
+window.addEventListener('touchmove', (e) => { if (isDragging) updateBA(e.touches[0].clientX); }, { passive: true });
+window.addEventListener('mouseup', () => isDragging = false);
+window.addEventListener('touchend', () => isDragging = false);
+
+// Service card tilt
+document.querySelectorAll('.service-card').forEach(card => {
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    card.style.transform = `perspective(800px) rotateY(${x * 4}deg) rotateX(${-y * 4}deg)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = 'perspective(800px) rotateY(0) rotateX(0)';
+    card.style.transition = 'transform 0.5s ease';
+  });
+  card.addEventListener('mouseenter', () => {
+    card.style.transition = 'transform 0.1s ease';
+  });
+});
+
+</script>
+
+<script>
+/* ============================================
+   BOOKING LOGIC (Non-module)
+   ============================================ */
+let currentStep = 0;
+const totalSteps = 4;
+
+function selectOption(el) {
+  el.parentElement.querySelectorAll('.booking-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function changeStep(dir) {
+  const newStep = currentStep + dir;
+  if (newStep < 0 || newStep >= totalSteps) return;
+
+  if (newStep === totalSteps - 1) {
+    document.getElementById('bookingNext').textContent = 'Επιβεβαίωση';
+  } else {
+    document.getElementById('bookingNext').innerHTML = 'Επόμενο <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+  }
+
+  currentStep = newStep;
+  document.querySelectorAll('.booking-step').forEach((s, i) => s.classList.toggle('active', i === currentStep));
+  document.querySelectorAll('.booking-panel').forEach((p, i) => p.classList.toggle('active', i === currentStep));
+  document.getElementById('bookingPrev').style.visibility = currentStep === 0 ? 'hidden' : 'visible';
+}
+
+// Smooth scroll for anchors
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', (e) => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>

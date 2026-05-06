@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ΔΕΡΜΑ — Χρυσούλα Ζησιμού</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#0a0a0c;
+--fg:#e8e4df;
+--accent:#c9a87c;
+--accent2:#8b6914;
+--muted:#6b6560;
+--glass:rgba(255,255,255,0.04);
+--line:rgba(201,168,124,0.15);
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--fg);overflow-x:hidden;cursor:default}
+::selection{background:var(--accent);color:var(--bg)}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:10px}
+
+#hero-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:auto}
+
+.overlay{position:relative;z-index:10;pointer-events:none}
+.overlay *{pointer-events:auto}
+
+.hero-section{position:relative;height:400vh;width:100%}
+
+.hero-ui{position:fixed;top:0;left:0;width:100%;height:100vh;z-index:20;pointer-events:none;display:flex;flex-direction:column;justify-content:space-between;padding:40px 50px;transition:opacity .8s}
+.hero-ui *{pointer-events:auto}
+
+.nav{display:flex;justify-content:space-between;align-items:flex-start;width:100%}
+.logo{font-size:13px;font-weight:500;letter-spacing:6px;text-transform:uppercase;line-height:1.6;color:var(--fg);opacity:.9}
+.logo span{display:block;font-weight:300;font-size:10px;letter-spacing:10px;color:var(--accent);margin-top:2px}
+
+.nav-links{display:flex;gap:30px;align-items:center}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:11px;letter-spacing:3px;text-transform:uppercase;transition:color .4s}
+.nav-links a:hover{color:var(--accent)}
+
+.menu-btn{width:32px;height:20px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;margin-left:30px}
+.menu-btn span{display:block;height:1px;background:var(--fg);transition:all .3s;transform-origin:center}
+.menu-btn:hover span{background:var(--accent)}
+.menu-btn:hover span:nth-child(2){width:60%}
+
+.hero-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none}
+.hero-title{font-size:clamp(36px,6vw,80px);font-weight:300;letter-spacing:clamp(4px,1.5vw,20px);text-transform:uppercase;line-height:1.1;opacity:0;animation:fadeUp 1.5s ease .5s forwards}
+.hero-title em{font-style:italic;font-weight:400;color:var(--accent)}
+.hero-subtitle{font-size:11px;letter-spacing:8px;text-transform:uppercase;color:var(--muted);margin-top:20px;opacity:0;animation:fadeUp 1.5s ease .9s forwards}
+
+.hero-bottom{display:flex;justify-content:space-between;align-items:flex-end;width:100%}
+.state-label{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--accent);opacity:.7;transition:all .5s}
+.state-label .num{font-size:28px;font-weight:200;display:block;margin-bottom:5px;letter-spacing:0;color:var(--fg)}
+
+.scroll-hint{display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeUp 1.5s ease 1.3s forwards}
+.scroll-hint span{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--muted)}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--accent),transparent);animation:scrollPulse 2s ease infinite}
+
+.nav-arrows{position:fixed;top:50%;right:50px;transform:translateY(-50%);z-index:25;display:flex;flex-direction:column;gap:15px}
+.nav-arrow{width:40px;height:40px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .4s;background:transparent;color:var(--fg);font-size:14px}
+.nav-arrow:hover{border-color:var(--accent);background:rgba(201,168,124,0.08);color:var(--accent)}
+
+.progress-bar{position:fixed;left:50px;top:50%;transform:translateY(-50%);z-index:25;display:flex;flex-direction:column;gap:20px;align-items:center}
+.progress-dot{width:6px;height:6px;border-radius:50%;border:1px solid var(--muted);transition:all .5s;cursor:pointer}
+.progress-dot.active{background:var(--accent);border-color:var(--accent);box-shadow:0 0 15px rgba(201,168,124,0.4)}
+.progress-line{width:1px;height:20px;background:var(--line)}
+
+/* SECTIONS */
+.section{position:relative;z-index:10;background:var(--bg)}
+.section-pad{padding:120px 80px}
+
+/* CONNECTION LINES */
+.neural-lines{position:fixed;top:0;left:0;width:100%;height:100%;z-index:5;pointer-events:none}
+
+/* CAROUSEL */
+.carousel-section{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;background:linear-gradient(180deg,var(--bg) 0%,#0d0b08 50%,var(--bg) 100%)}
+.carousel-title{font-size:11px;letter-spacing:8px;text-transform:uppercase;color:var(--accent);margin-bottom:60px;opacity:0;transition:opacity 1s}
+.carousel-title.vis{opacity:1}
+
+.carousel-container{width:100%;height:500px;position:relative;perspective:1200px;display:flex;align-items:center;justify-content:center}
+.carousel-track{position:relative;width:300px;height:400px;transform-style:preserve-3d}
+.carousel-card{position:absolute;width:300px;height:400px;border:1px solid var(--line);background:var(--glass);backdrop-filter:blur(20px);display:flex;flex-direction:column;justify-content:flex-end;padding:30px;cursor:pointer;transition:border-color .5s,box-shadow .5s;overflow:hidden}
+.carousel-card::before{content:'';position:absolute;top:0;left:0;right:0;height:60%;background:linear-gradient(180deg,rgba(201,168,124,0.06),transparent);pointer-events:none}
+.carousel-card:hover{border-color:var(--accent);box-shadow:0 0 40px rgba(201,168,124,0.1)}
+.carousel-card .card-num{font-size:60px;font-weight:200;color:rgba(201,168,124,0.12);position:absolute;top:20px;right:25px}
+.carousel-card .card-icon{width:40px;height:40px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:16px}
+.carousel-card h3{font-size:18px;font-weight:400;letter-spacing:2px;margin-bottom:8px}
+.carousel-card p{font-size:11px;color:var(--muted);line-height:1.7;letter-spacing:.5px}
+.carousel-card .card-line{width:30px;height:1px;background:var(--accent);margin-top:15px;transition:width .5s}
+.carousel-card:hover .card-line{width:60px}
+
+/* FEATURED TREATMENT */
+.featured-section{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;gap:0;position:relative}
+.featured-visual{position:relative;overflow:hidden;min-height:80vh}
+.featured-visual img{width:100%;height:100%;object-fit:cover;transition:transform 1.5s cubic-bezier(.25,.46,.45,.94);filter:brightness(.85) contrast(1.1)}
+.featured-visual:hover img{transform:scale(1.05)}
+.featured-visual .overlay-gradient{position:absolute;inset:0;background:linear-gradient(90deg,transparent 60%,var(--bg) 100%)}
+.featured-content{display:flex;flex-direction:column;justify-content:center;padding:80px 60px;position:relative}
+.featured-tag{font-size:10px;letter-spacing:6px;text-transform:uppercase;color:var(--accent);margin-bottom:30px}
+.featured-content h2{font-size:clamp(28px,3.5vw,48px);font-weight:300;line-height:1.3;letter-spacing:2px;margin-bottom:25px}
+.featured-content h2 em{font-style:italic;color:var(--accent)}
+.featured-content p{font-size:13px;line-height:2;color:var(--muted);max-width:400px;margin-bottom:40px}
+.featured-cta{display:inline-flex;align-items:center;gap:15px;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--fg);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:10px;transition:all .5s}
+.featured-cta:hover{border-color:var(--accent);color:var(--accent);gap:25px}
+.featured-cta .arrow{transition:transform .5s}
+.featured-cta:hover .arrow{transform:translateX(5px)}
+
+/* BEFORE AFTER */
+.ba-section{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:100px 80px;position:relative}
+.ba-title{font-size:11px;letter-spacing:8px;text-transform:uppercase;color:var(--accent);margin-bottom:50px}
+.ba-container{position:relative;width:min(800px,90vw);aspect-ratio:16/10;overflow:hidden;cursor:col-resize;border:1px solid var(--line)}
+.ba-container img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover}
+.ba-after{clip-path:inset(0 0 0 50%)}
+.ba-slider{position:absolute;top:0;left:50%;width:2px;height:100%;background:var(--accent);z-index:5;pointer-events:none}
+.ba-slider::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:40px;height:40px;border:1px solid var(--accent);border-radius:50%;background:rgba(10,10,12,.8)}
+.ba-slider::after{content:'⟷';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:14px;color:var(--accent)}
+.ba-labels{display:flex;justify-content:space-between;width:min(800px,90vw);margin-top:15px}
+.ba-labels span{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--muted)}
+
+/* DOCTOR */
+.doctor-section{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
+.doctor-img{position:relative;overflow:hidden;min-height:80vh}
+.doctor-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.8) contrast(1.05)}
+.doctor-img::after{content:'';position:absolute;inset:0;background:linear-gradient(270deg,var(--bg) 0%,transparent 50%)}
+.doctor-content{display:flex;flex-direction:column;justify-content:center;padding:80px 60px}
+.doctor-name{font-size:clamp(24px,3vw,42px);font-weight:300;letter-spacing:3px;margin-bottom:5px}
+.doctor-title{font-size:12px;letter-spacing:5px;text-transform:uppercase;color:var(--accent);margin-bottom:50px}
+.timeline{position:relative;padding-left:30px}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--accent),var(--line),transparent)}
+.timeline-item{margin-bottom:35px;position:relative;opacity:0;transform:translateX(-20px);transition:all .8s}
+.timeline-item.vis{opacity:1;transform:translateX(0)}
+.timeline-item::before{content:'';position:absolute;left:-33px;top:5px;width:7px;height:7px;border-radius:50%;border:1px solid var(--accent);background:var(--bg);transition:all .5s}
+.timeline-item.vis::before{background:var(--accent);box-shadow:0 0 10px rgba(201,168,124,0.4)}
+.timeline-year{font-size:10px;letter-spacing:4px;color:var(--accent);margin-bottom:5px}
+.timeline-text{font-size:13px;color:var(--muted);line-height:1.6}
+
+/* GALLERY */
+.gallery-section{padding:100px 40px;position:relative}
+.gallery-header{text-align:center;margin-bottom:60px}
+.gallery-header h2{font-size:11px;letter-spacing:8px;text-transform:uppercase;color:var(--accent)}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.gallery-item{position:relative;overflow:hidden;aspect-ratio:3/4;cursor:pointer}
+.gallery-item:nth-child(2){aspect-ratio:4/5}
+.gallery-item:nth-child(3){aspect-ratio:2/3;grid-row:span 2}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform 1.5s cubic-bezier(.25,.46,.45,.94),filter .8s;filter:brightness(.75) saturate(.9)}
+.gallery-item:hover img{transform:scale(1.08);filter:brightness(.9) saturate(1)}
+.gallery-item .gallery-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,10,12,.7) 0%,transparent 50%);opacity:0;transition:opacity .5s;display:flex;align-items:flex-end;padding:20px}
+.gallery-item:hover .gallery-overlay{opacity:1}
+.gallery-overlay span{font-size:11px;letter-spacing:3px;text-transform:uppercase}
+
+/* BOOKING */
+.booking-section{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:100px 80px;position:relative}
+.booking-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;max-width:1100px;width:100%}
+.booking-info h2{font-size:clamp(24px,3vw,38px);font-weight:300;letter-spacing:3px;line-height:1.4;margin-bottom:20px}
+.booking-info h2 em{font-style:italic;color:var(--accent)}
+.booking-info p{font-size:13px;color:var(--muted);line-height:2;margin-bottom:30px}
+.booking-steps{display:flex;flex-direction:column;gap:20px}
+.booking-step{display:flex;align-items:center;gap:15px;padding:15px;border:1px solid var(--line);transition:all .5s;cursor:pointer}
+.booking-step:hover{border-color:var(--accent);background:var(--glass)}
+.booking-step .step-num{font-size:24px;font-weight:200;color:var(--accent);min-width:40px}
+.booking-step .step-text{font-size:12px;letter-spacing:1px;color:var(--muted)}
+
+.booking-form{display:flex;flex-direction:column;gap:20px}
+.form-group{position:relative}
+.form-group label{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;display:block}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:14px 0;background:transparent;border:none;border-bottom:1px solid var(--line);color:var(--fg);font-family:'Inter',sans-serif;font-size:14px;outline:none;transition:border-color .4s;letter-spacing:1px}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--accent)}
+.form-group select{-webkit-appearance:none;cursor:pointer}
+.form-group select option{background:var(--bg);color:var(--fg)}
+.submit-btn{padding:18px 40px;background:transparent;border:1px solid var(--accent);color:var(--accent);font-family:'Inter',sans-serif;font-size:11px;letter-spacing:5px;text-transform:uppercase;cursor:pointer;transition:all .5s;margin-top:10px}
+.submit-btn:hover{background:var(--accent);color:var(--bg)}
+
+/* LOCATIONS */
+.locations-section{padding:100px 80px;position:relative}
+.locations-header{text-align:center;margin-bottom:60px}
+.locations-header h2{font-size:11px;letter-spacing:8px;text-transform:uppercase;color:var(--accent)}
+.locations-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:30px;max-width:900px;margin:0 auto}
+.location-card{border:1px solid var(--line);padding:40px;position:relative;transition:all .5s;overflow:hidden}
+.location-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);transform:scaleX(0);transition:transform .8s}
+.location-card:hover::before{transform:scaleX(1)}
+.location-card:hover{border-color:rgba(201,168,124,0.3)}
+.location-card .loc-marker{width:10px;height:10px;border-radius:50%;border:1px solid var(--accent);margin-bottom:20px;position:relative}
+.location-card .loc-marker::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:1px solid rgba(201,168,124,0.2);animation:markerPulse 2s ease infinite}
+.location-card h3{font-size:16px;font-weight:400;letter-spacing:2px;margin-bottom:8px}
+.location-card p{font-size:12px;color:var(--muted);line-height:1.8}
+.location-card .loc-phone{color:var(--accent);text-decoration:none;font-size:12px;display:inline-block;margin-top:15px;letter-spacing:1px;transition:opacity .3s}
+.location-card .loc-phone:hover{opacity:.7}
+
+/* FOOTER */
+.footer{padding:60px 80px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;position:relative;z-index:10;background:var(--bg)}
+.footer-left{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--muted)}
+.footer-right{display:flex;gap:30px}
+.footer-right a{color:var(--muted);text-decoration:none;font-size:10px;letter-spacing:3px;text-transform:uppercase;transition:color .4s}
+.footer-right a:hover{color:var(--accent)}
+
+/* GLOW CONNECTOR */
+.glow-line{position:absolute;width:1px;background:linear-gradient(to bottom,transparent,var(--accent),transparent);opacity:.15;z-index:3}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scrollPulse{0%,100%{opacity:.4}50%{opacity:1}}
+@keyframes markerPulse{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.5);opacity:0}}
+
+/* LOADING */
+#loader{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .8s,visibility .8s}
+#loader.hidden{opacity:0;visibility:hidden}
+#loader .loader-text{font-size:10px;letter-spacing:8px;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
+#loader .loader-bar{width:200px;height:1px;background:var(--line);position:relative;overflow:hidden}
+#loader .loader-fill{position:absolute;left:0;top:0;height:100%;background:var(--accent);width:0%;transition:width .3s}
+
+/* CANVAS OVERLAY EFFECTS */
+.canvas-vignette{position:fixed;inset:0;pointer-events:none;z-index:2;background:radial-gradient(ellipse at center,transparent 40%,rgba(10,10,12,.6) 100%)}
+
+/* SECTION REVEAL */
+.reveal{opacity:0;transform:translateY(40px);transition:all 1s cubic-bezier(.25,.46,.45,.94)}
+.reveal.vis{opacity:1;transform:translateY(0)}
+
+@media(max-width:900px){
+.hero-ui{padding:25px 30px}
+.section-pad{padding:80px 30px}
+.featured-section,.doctor-section{grid-template-columns:1fr}
+.booking-inner{grid-template-columns:1fr}
+.gallery-grid{grid-template-columns:1fr 1fr}
+.locations-grid{grid-template-columns:1fr}
+.nav-arrows,.progress-bar{display:none}
+.nav-links{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-text">ΔΕΡΜΑ</div>
+  <div class="loader-bar"><div class="loader-fill" id="loader-fill"></div></div>
+</div>
+
+<!-- 3D CANVAS -->
+<canvas id="hero-canvas"></canvas>
+<div class="canvas-vignette"></div>
+
+<!-- NEURAL LINES SVG -->
+<svg class="neural-lines" id="neural-svg"></svg>
+
+<!-- HERO UI -->
+<div class="hero-ui" id="hero-ui">
+  <div class="nav">
+    <div class="logo">ΔΕΡΜΑ<span>Αισθητική Δερματολογία</span></div>
+    <div style="display:flex;align-items:center">
+      <div class="nav-links">
+        <a href="#treatments">Θεραπείες</a>
+        <a href="#gallery">Χώρος</a>
+        <a href="#booking">Ραντεβού</a>
+      </div>
+      <div class="menu-btn" id="menu-btn">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-center">
+    <h1 class="hero-title">Η <em>Τέχνη</em> της<br>Μεταμόρφωσης</h1>
+    <p class="hero-subtitle">Ανακαλύψτε την τέλεια επιδερμίδα</p>
+  </div>
+  <div class="hero-bottom">
+    <div class="state-label" id="state-label">
+      <span class="num" id="state-num">01</span>
+      <span id="state-text">ΒΑΣΗ ΟΜΟΡΦΙΑΣ</span>
+    </div>
+    <div class="scroll-hint">
+      <span>Κύλιση</span>
+      <div class="scroll-line"></div>
+    </div>
+    <div style="font-size:10px;letter-spacing:3px;color:var(--muted)">FOREWORD</div>
+  </div>
+</div>
+
+<!-- PROGRESS -->
+<div class="progress-bar" id="progress-bar">
+  <div class="progress-dot active" data-state="0"></div>
+  <div class="progress-line"></div>
+  <div class="progress-dot" data-state="1"></div>
+  <div class="progress-line"></div>
+  <div class="progress-dot" data-state="2"></div>
+  <div class="progress-line"></div>
+  <div class="progress-dot" data-state="3"></div>
+</div>
+
+<!-- NAV ARROWS -->
+<div class="nav-arrows">
+  <div class="nav-arrow" id="nav-up">↑</div>
+  <div class="nav-arrow" id="nav-down">↓</div>
+</div>
+
+<!-- CONTENT SECTIONS -->
+<div class="overlay">
+  <!-- SPACER FOR HERO SCROLL -->
+  <div class="hero-section" id="hero-scroll-area"></div>
+
+  <!-- CAROUSEL -->
+  <div class="carousel-section section" id="treatments">
+    <div class="carousel-title reveal" id="carousel-title">Εξατομικευμένες Θεραπείες</div>
+    <div class="carousel-container" id="carousel-container">
+      <div class="carousel-track" id="carousel-track"></div>
+    </div>
+  </div>
+
+  <!-- FEATURED -->
+  <div class="featured-section section">
+    <div class="featured-visual">
+      <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1200&q=80" alt="Treatment" loading="lazy">
+      <div class="overlay-gradient"></div>
+    </div>
+    <div class="featured-content reveal">
+      <div class="featured-tag">Κορυφαία Θεραπεία</div>
+      <h2>Προηγμένη<br><em>Αναζωογόνηση</em><br>Προσώπου</h2>
+      <p>Συνδυάζουμε τις πιο σύγχρονες τεχνολογίες laser με βιοσυμβατά υλικά νέας γενιάς για αποτελέσματα που ξεπερνούν κάθε προσδοκία.</p>
+      <a href="#booking" class="featured-cta">Μάθετε Περισσότερα <span class="arrow">→</span></a>
+    </div>
+  </div>
+
+  <!-- BEFORE / AFTER -->
+  <div class="ba-section section" id="before-after">
+    <div class="ba-title reveal">Πριν & Μετά</div>
+    <div class="ba-container" id="ba-container">
+      <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=1000&q=80" alt="Before" class="ba-before">
+      <img src="https://images.unsplash.com/photo-1596755389378-c31d21fd1273?w=1000&q=80" alt="After" class="ba-after" id="ba-after">
+      <div class="ba-slider" id="ba-slider"></div>
+    </div>
+    <div class="ba-labels">
+      <span>Πριν</span>
+      <span>Μετά</span>
+    </div>
+  </div>
+
+  <!-- DOCTOR -->
+  <div class="doctor-section section">
+    <div class="doctor-img">
+      <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=1000&q=80" alt="Doctor" loading="lazy">
+    </div>
+    <div class="doctor-content">
+      <div class="doctor-name reveal">Χρυσούλα Ζησιμού</div>
+      <div class="doctor-title reveal">Δερματολόγος – Αφροδισιολόγος</div>
+      <div class="timeline" id="timeline">
+        <div class="timeline-item" data-delay="0">
+          <div class="timeline-year">2005</div>
+          <div class="timeline-text">Πτυχίο Ιατρικής — Πανεπιστήμιο Αθηνών</div>
+        </div>
+        <div class="timeline-item" data-delay="150">
+          <div class="timeline-year">2009</div>
+          <div class="timeline-text">Ειδίκευση Δερματολογίας — Νοσοκομείο Ανδρέας Συγγρός</div>
+        </div>
+        <div class="timeline-item" data-delay="300">
+          <div class="timeline-year">2012</div>
+          <div class="timeline-text">Μετεκπαίδευση Αισθητικής Δερματολογίας — Παρίσι</div>
+        </div>
+        <div class="timeline-item" data-delay="450">
+          <div class="timeline-year">2015</div>
+          <div class="timeline-text">Ίδρυση Κλινικής ΔΕΡΜΑ — Αθήνα</div>
+        </div>
+        <div class="timeline-item" data-delay="600">
+          <div class="timeline-year">2020</div>
+          <div class="timeline-text">Πάνω από 15.000 θεραπείες — Διεθνής αναγνώριση</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GALLERY -->
+  <div class="gallery-section section" id="gallery">
+    <div class="gallery-header"><h2 class="reveal">Ο Χώρος Μας</h2></div>
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600&q=80" alt="Clinic" loading="lazy"><div class="gallery-overlay"><span>Υποδοχή</span></div></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=600&q=80" alt="Treatment Room" loading="lazy"><div class="gallery-overlay"><span>Θεραπευτήριο</span></div></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&q=80" alt="Lab" loading="lazy"><div class="gallery-overlay"><span>Εργαστήριο</span></div></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=600&q=80" alt="Lounge" loading="lazy"><div class="gallery-overlay"><span>Χώρος Αναμονής</span></div></div>
+    </div>
+  </div>
+
+  <!-- BOOKING -->
+  <div class="booking-section section" id="booking">
+    <div class="booking-inner">
+      <div class="booking-info reveal">
+        <h2>Κλείστε το<br><em>Ραντεβού</em> σας</h2>
+        <p>Η προσωπική σας διαδρομή μεταμόρφωσης ξεκινά με ένα απλό βήμα. Επιλέξτε τη θεραπεία σας και αφήστε μας να φροντίσουμε τα υπόλοιπα.</p>
+        <div class="booking-steps">
+          <div class="booking-step"><span class="step-num">01</span><span class="step-text">Επιλογή θεραπείας</span></div>
+          <div class="booking-step"><span class="step-num">02</span><span class="step-text">Ημερομηνία & ώρα</span></div>
+          <div class="booking-step"><span class="step-num">03</span><span class="step-text">Επιβεβαίωση</span></div>
+        </div>
+      </div>
+      <div class="booking-form reveal">
+        <div class="form-group">
+          <label>Ονοματεπώνυμο</label>
+          <input type="text" placeholder="Εισάγετε το όνομά σας">
+        </div>
+        <div class="form-group">
+          <label>Τηλέφωνο</label>
+          <input type="tel" placeholder="+30">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="email@example.com">
+        </div>
+        <div class="form-group">
+          <label>Θεραπεία</label>
+          <select>
+            <option>Επιλέξτε θεραπεία</option>
+            <option>Αντιγήρανση</option>
+            <option>Ενέσιμες Θεραπείες</option>
+            <option>Laser</option>
+            <option>Καθαρισμός</option>
+            <option>Αναζωογόνηση</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Σημειώσεις</label>
+          <textarea rows="3" placeholder="Προαιρετικό μήνυμα..." style="resize:none"></textarea>
+        </div>
+        <button class="submit-btn">Κλείστε Ραντεβού</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOCATIONS -->
+  <div class="locations-section section">
+    <div class="locations-header"><h2 class="reveal">Τοποθεσίες</h2></div>
+    <div class="locations-grid">
+      <div class="location-card reveal">
+        <div class="loc-marker"></div>
+        <h3>Κολωνάκι</h3>
+        <p>Πατριάρχου Ιωακείμ 28<br>Αθήνα, 106 74</p>
+        <a href="tel:+302107654321" class="loc-phone">+30 210 765 4321</a>
+      </div>
+      <div class="location-card reveal">
+        <div class="loc-marker"></div>
+        <h3>Γλυφάδα</h3>
+        <p>Λαζαράκη 12<br>Γλυφάδα, 166 74</p>
+        <a href="tel:+302108987654" class="loc-phone">+30 210 898 7654</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">© 2024 ΔΕΡΜΑ — Χρυσούλα Ζησιμού</div>
+    <div class="footer-right">
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      <a href="#">LinkedIn</a>
+    </div>
+  </div>
+</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.183.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.183.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+
+// ============ LOADER ============
+const loaderFill = document.getElementById('loader-fill');
+const loaderEl = document.getElementById('loader');
+let loadProgress = 0;
+const loadInterval = setInterval(() => {
+  loadProgress += Math.random() * 15;
+  if (loadProgress >= 100) {
+    loadProgress = 100;
+    clearInterval(loadInterval);
+    setTimeout(() => loaderEl.classList.add('hidden'), 400);
+  }
+  loaderFill.style.width = loadProgress + '%';
+}, 200);
+
+// ============ THREE.JS SETUP ============
+const canvas = document.getElementById('hero-canvas');
+const scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2(0x0a0a0c, 0.08);
+
+const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
+camera.position.set(0, 0, 5);
+
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.2;
+
+// ============ POST-PROCESSING ============
+const composer = new EffectComposer(renderer);
+composer.addPass(new RenderPass(scene, camera));
+
+const bloomPass = new UnrealBloomPass(
+  new THREE.Vector2(window.innerWidth, window.innerHeight),
+  0.8, 0.4, 0.85
+);
+composer.addPass(bloomPass);
+composer.addPass(new OutputPass());
+
+// ============ LIGHTS ============
+const ambientLight = new THREE.AmbientLight(0x1a1510, 0.6);
+ambientLight.name = 'ambientLight1';
+scene.add(ambientLight);
+
+const mainLight = new THREE.DirectionalLight(0xc9a87c, 1.5);
+mainLight.name = 'mainLight1';
+mainLight.position.set(2, 3, 4);
+scene.add(mainLight);
+
+const fillLight = new THREE.PointLight(0x8b6914, 0.8, 20);
+fillLight.name = 'fillLight1';
+fillLight.position.set(-3, -1, 3);
+scene.add(fillLight);
+
+const rimLight = new THREE.PointLight(0xffe0b2, 0.5, 15);
+rimLight.name = 'rimLight1';
+rimLight.position.set(0, 2, -3);
+scene.add(rimLight);
+
+// ============ BEAUTY SURFACE (Custom Shader) ============
+const surfaceGeo = new THREE.PlaneGeometry(6, 6, 200, 200);
+
+const surfaceVertexShader = `
+  uniform float uTime;
+  uniform float uState;
+  uniform float uMouse;
+  varying vec2 vUv;
+  varying float vElevation;
+  varying vec3 vNormal;
+  varying vec3 vPosition;
+
+  // Simplex noise
+  vec3 mod289(vec3 x){return x - floor(x * (1.0 / 289.0)) * 289.0;}
+  vec4 mod289(vec4 x){return x - floor(x * (1.0 / 289.0)) * 289.0;}
+  vec4 permute(vec4 x){return mod289(((x*34.0)+1.0)*x);}
+  vec4 taylorInvSqrt(vec4 r){return 1.79284291400159 - 0.85373472095314 * r;}
+  float snoise(vec3 v){
+    const vec2 C = vec2(1.0/6.0, 1.0/3.0);
+    const vec4 D = vec4(0.0, 0.5, 1.0, 2.0);
+    vec3 i  = floor(v + dot(v, C.yyy));
+    vec3 x0 = v - i + dot(i, C.xxx);
+    vec3 g = step(x0.yzx, x0.xyz);
+    vec3 l = 1.0 - g;
+    vec3 i1 = min(g.xyz, l.zxy);
+    vec3 i2 = max(g.xyz, l.zxy);
+    vec3 x1 = x0 - i1 + C.xxx;
+    vec3 x2 = x0 - i2 + C.yyy;
+    vec3 x3 = x0 - D.yyy;
+    i = mod289(i);
+    vec4 p = permute(permute(permute(
+              i.z + vec4(0.0, i1.z, i2.z, 1.0))
+            + i.y + vec4(0.0, i1.y, i2.y, 1.0))
+            + i.x + vec4(0.0, i1.x, i2.x, 1.0));
+    float n_ = 0.142857142857;
+    vec3 ns = n_ * D.wyz - D.xzx;
+    vec4 j = p - 49.0 * floor(p * ns.z * ns.z);
+    vec4 x_ = floor(j * ns.z);
+    vec4 y_ = floor(j - 7.0 * x_);
+    vec4 x = x_ * ns.x + ns.yyyy;
+    vec4 y = y_ * ns.x + ns.yyyy;
+    vec4 h = 1.0 - abs(x) - abs(y);
+    vec4 b0 = vec4(x.xy, y.xy);
+    vec4 b1 = vec4(x.zw, y.zw);
+    vec4 s0 = floor(b0)*2.0 + 1.0;
+    vec4 s1 = floor(b1)*2.0 + 1.0;
+    vec4 sh = -step(h, vec4(0.0));
+    vec4 a0 = b0.xzyw + s0.xzyw*sh.xxyy;
+    vec4 a1 = b1.xzyw + s1.xzyw*sh.zzww;
+    vec3 p0 = vec3(a0.xy,h.x);
+    vec3 p1 = vec3(a0.zw,h.y);
+    vec3 p2 = vec3(a1.xy,h.z);
+    vec3 p3 = vec3(a1.zw,h.w);
+    vec4 norm = taylorInvSqrt(vec4(dot(p0,p0), dot(p1,p1), dot(p2,p2), dot(p3,p3)));
+    p0 *= norm.x; p1 *= norm.y; p2 *= norm.z; p3 *= norm.w;
+    vec4 m = max(0.6 - vec4(dot(x0,x0), dot(x1,x1), dot(x2,x2), dot(x3,x3)), 0.0);
+    m = m * m;
+    return 42.0 * dot(m*m, vec4(dot(p0,x0), dot(p1,x1), dot(p2,x2), dot(p3,x3)));
+  }
+
+  void main(){
+    vUv = uv;
+    vec3 pos = position;
+
+    float baseWave = snoise(vec3(pos.xy * 1.5, uTime * 0.15)) * 0.15;
+    float detailWave = snoise(vec3(pos.xy * 3.0, uTime * 0.25)) * 0.05;
+
+    // State-based displacement
+    float analysisGrid = 0.0;
+    if(uState > 0.5 && uState < 1.5){
+      analysisGrid = sin(pos.x * 20.0) * sin(pos.y * 20.0) * 0.02 * (uState - 0.5);
+    }
+
+    float treatmentSmooth = 0.0;
+    if(uState > 1.5 && uState < 2.5){
+      treatmentSmooth = snoise(vec3(pos.xy * 5.0, uTime * 0.5)) * 0.08 * (uState - 1.5);
+    }
+
+    float resultCalm = 0.0;
+    if(uState > 2.5){
+      resultCalm = snoise(vec3(pos.xy * 0.8, uTime * 0.1)) * 0.1 * min(uState - 2.5, 1.0);
+    }
+
+    float elevation = baseWave + detailWave + analysisGrid + treatmentSmooth + resultCalm;
+    pos.z += elevation;
+
+    vElevation = elevation;
+    vNormal = normalize(normal + vec3(elevation * 2.0));
+    vPosition = pos;
+
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+  }
+`;
+
+const surfaceFragmentShader = `
+  uniform float uTime;
+  uniform float uState;
+  uniform vec2 uMousePos;
+  varying vec2 vUv;
+  varying float vElevation;
+  varying vec3 vNormal;
+  varying vec3 vPosition;
+
+  void main(){
+    // Base color: warm champagne tones
+    vec3 baseColor = vec3(0.85, 0.78, 0.68);
+    vec3 deepColor = vec3(0.15, 0.12, 0.08);
+    vec3 accentColor = vec3(0.79, 0.66, 0.49);
+    vec3 glowColor = vec3(1.0, 0.92, 0.78);
+
+    // Fresnel-like edge glow
+    vec3 viewDir = normalize(cameraPosition - vPosition);
+    float fresnel = pow(1.0 - max(dot(vNormal, viewDir), 0.0), 3.0);
+
+    // Base mix
+    vec3 color = mix(deepColor, baseColor, vUv.y * 0.6 + 0.2);
+
+    // Elevation coloring
+    color = mix(color, accentColor, vElevation * 3.0 + 0.3);
+
+    // Mouse light influence
+    float mouseDist = distance(vUv, uMousePos);
+    float mouseLight = smoothstep(0.4, 0.0, mouseDist) * 0.6;
+    color += glowColor * mouseLight;
+
+    // State-based effects
+    // Analysis: scanning lines
+    if(uState > 0.5 && uState < 2.0){
+      float scanLine = smoothstep(0.01, 0.0, abs(sin(vUv.y * 40.0 + uTime * 3.0) - 0.95));
+      color += vec3(0.3, 0.5, 0.7) * scanLine * min(uState - 0.5, 1.0) * 0.5;
+
+      float gridX = smoothstep(0.02, 0.0, abs(fract(vUv.x * 15.0) - 0.5) - 0.48);
+      float gridY = smoothstep(0.02, 0.0, abs(fract(vUv.y * 15.0) - 0.5) - 0.48);
+      color += vec3(0.2, 0.4, 0.6) * (gridX + gridY) * min(uState - 0.5, 1.0) * 0.15;
+    }
+
+    // Treatment: warm glow
+    if(uState > 1.5 && uState < 3.0){
+      float treatGlow = sin(uTime * 2.0) * 0.5 + 0.5;
+      color += glowColor * treatGlow * 0.2 * min(uState - 1.5, 1.0);
+      float beam = smoothstep(0.15, 0.0, abs(vUv.x - 0.5 + sin(uTime) * 0.2));
+      color += vec3(1.0, 0.85, 0.6) * beam * 0.3 * min(uState - 1.5, 1.0);
+    }
+
+    // Result: radiance
+    if(uState > 2.5){
+      float radiance = smoothstep(0.5, 0.0, distance(vUv, vec2(0.5))) * 0.3;
+      color += glowColor * radiance * min(uState - 2.5, 1.0);
+      color = mix(color, glowColor * 0.9, fresnel * 0.4 * min(uState - 2.5, 1.0));
+    }
+
+    // Fresnel edge
+    color += accentColor * fresnel * 0.3;
+
+    // Alpha based on distance from center
+    float alpha = smoothstep(3.5, 1.5, length(vPosition.xy));
+
+    gl_FragColor = vec4(color, alpha);
+  }
+`;
+
+const surfaceMaterial = new THREE.ShaderMaterial({
+  vertexShader: surfaceVertexShader,
+  fragmentShader: surfaceFragmentShader,
+  uniforms: {
+    uTime: { value: 0 },
+    uState: { value: 0 },
+    uMousePos: { value: new THREE.Vector2(0.5, 0.5) },
+  },
+  transparent: true,
+  side: THREE.DoubleSide,
+});
+
+const surface = new THREE.Mesh(surfaceGeo, surfaceMaterial);
+surface.name = 'beautySurface';
+surface.rotation.x = -0.4;
+scene.add(surface);
+
+// ============ PARTICLE SYSTEM ============
+const particleCount = 2000;
+const particleGeo = new THREE.BufferGeometry();
+const particlePositions = new Float32Array(particleCount * 3);
+const particleSpeeds = new Float32Array(particleCount);
+
+for (let i = 0; i < particleCount; i++) {
+  particlePositions[i * 3] = (Math.random() - 0.5) * 12;
+  particlePositions[i * 3 + 1] = (Math.random() - 0.5) * 12;
+  particlePositions[i * 3 + 2] = (Math.random() - 0.5) * 8 - 1;
+  particleSpeeds[i] = Math.random() * 0.3 + 0.1;
+}
+
+particleGeo.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+particleGeo.setAttribute('aSpeed', new THREE.BufferAttribute(particleSpeeds, 1));
+
+const particleVertShader = `
+  attribute float aSpeed;
+  uniform float uTime;
+  uniform float uState;
+  varying float vAlpha;
+
+  void main(){
+    vec3 pos = position;
+    pos.y += sin(uTime * aSpeed + position.x) * 0.3;
+    pos.x += cos(uTime * aSpeed * 0.5 + position.z) * 0.2;
+
+    float dist = length(pos.xy);
+    vAlpha = smoothstep(6.0, 2.0, dist) * (0.3 + uState * 0.15);
+
+    vec4 mvPos = modelViewMatrix * vec4(pos, 1.0);
+    gl_PointSize = max(1.0, (3.0 - uState * 0.5) * (300.0 / -mvPos.z));
+    gl_Position = projectionMatrix * mvPos;
+  }
+`;
+
+const particleFragShader = `
+  varying float vAlpha;
+  void main(){
+    float d = length(gl_PointCoord - 0.5);
+    if(d > 0.5) discard;
+    float alpha = smoothstep(0.5, 0.1, d) * vAlpha;
+    gl_FragColor = vec4(0.79, 0.66, 0.49, alpha);
+  }
+`;
+
+const particleMat = new THREE.ShaderMaterial({
+  vertexShader: particleVertShader,
+  fragmentShader: particleFragShader,
+  uniforms: {
+    uTime: { value: 0 },
+    uState: { value: 0 },
+  },
+  transparent: true,
+  depthWrite: false,
+  blending: THREE.AdditiveBlending,
+});
+
+const particles = new THREE.Points(particleGeo, particleMat);
+particles.name = 'particles1';
+scene.add(particles);
+
+// ============ ENERGY LINES (Instanced) ============
+const lineCount = 40;
+const lineGeo = new THREE.BufferGeometry();
+const linePoints = [];
+const segments = 60;
+for (let i = 0; i <= segments; i++) {
+  linePoints.push(new THREE.Vector3(i / segments - 0.5, 0, 0));
+}
+lineGeo.setFromPoints(linePoints);
+
+const lineMat = new THREE.ShaderMaterial({
+  vertexShader: `
+    uniform float uTime;
+    uniform float uIndex;
+    uniform float uState;
+    varying float vAlpha;
+    void main(){
+      vec3 pos = position;
+      float offset = uIndex * 0.7;
+      pos.x *= 8.0;
+      pos.y = sin(pos.x * 2.0 + uTime * 0.8 + offset) * 0.8 + (uIndex - 20.0) * 0.15;
+      pos.z = cos(pos.x * 1.5 + uTime * 0.5 + offset) * 0.3 - 1.0;
+      vAlpha = smoothstep(4.0, 1.0, abs(pos.x)) * (0.08 + uState * 0.05);
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+    }
+  `,
+  fragmentShader: `
+    varying float vAlpha;
+    void main(){
+      gl_FragColor = vec4(0.79, 0.66, 0.49, vAlpha);
+    }
+  `,
+  uniforms: {
+    uTime: { value: 0 },
+    uIndex: { value: 0 },
+    uState: { value: 0 },
+  },
+  transparent: true,
+  depthWrite: false,
+  blending: THREE.AdditiveBlending,
+});
+
+const lines = [];
+for (let i = 0; i < lineCount; i++) {
+  const mat = lineMat.clone();
+  mat.uniforms.uIndex = { value: i };
+  const line = new THREE.Line(lineGeo, mat);
+  line.name = `energyLine_${i}`;
+  scene.add(line);
+  lines.push(line);
+}
+
+// ============ SCROLL STATE MANAGEMENT ============
+let scrollProgress = 0;
+let currentState = 0;
+let targetState = 0;
+const mouse = new THREE.Vector2(0.5, 0.5);
+const stateLabels = [
+  { num: '01', text: 'ΒΑΣΗ ΟΜΟΡΦΙΑΣ' },
+  { num: '02', text: 'ΑΝΑΛΥΣΗ' },
+  { num: '03', text: 'ΘΕΡΑΠΕΙΑ' },
+  { num: '04', text: 'ΑΠΟΤΕΛΕΣΜΑ' },
+];
+
+const stateNumEl = document.getElementById('state-num');
+const stateTextEl = document.getElementById('state-text');
+const progressDots = document.querySelectorAll('.progress-dot');
+
+function updateState(progress) {
+  targetState = Math.min(progress * 4, 3.5);
+  const stateIndex = Math.min(Math.floor(targetState), 3);
+
+  stateNumEl.textContent = stateLabels[stateIndex].num;
+  stateTextEl.textContent = stateLabels[stateIndex].text;
+
+  progressDots.forEach((dot, i) => {
+    dot.classList.toggle('active', i <= stateIndex);
+  });
+}
+
+// Hero scroll tracking
+window.addEventListener('scroll', () => {
+  const heroSection = document.getElementById('hero-scroll-area');
+  const rect = heroSection.getBoundingClientRect();
+  const totalScroll = heroSection.offsetHeight - window.innerHeight;
+  scrollProgress = Math.max(0, Math.min(1, -rect.top / totalScroll));
+  updateState(scrollProgress);
+
+  // Fade hero UI after hero
+  const heroUI = document.getElementById('hero-ui');
+  const navArrows = document.querySelector('.nav-arrows');
+  const progressBar = document.getElementById('progress-bar');
+
+  if (-rect.top > totalScroll + 100) {
+    heroUI.style.opacity = '0';
+    heroUI.style.pointerEvents = 'none';
+    if (navArrows) navArrows.style.opacity = '0';
+    if (progressBar) progressBar.style.opacity = '0';
+  } else {
+    heroUI.style.opacity = '1';
+    heroUI.style.pointerEvents = '';
+    if (navArrows) navArrows.style.opacity = '1';
+    if (progressBar) progressBar.style.opacity = '1';
+  }
+});
+
+// Mouse tracking
+window.addEventListener('mousemove', (e) => {
+  mouse.x = e.clientX / window.innerWidth;
+  mouse.y = 1.0 - e.clientY / window.innerHeight;
+
+  mainLight.position.x = (mouse.x - 0.5) * 6;
+  mainLight.position.y = (mouse.y - 0.5) * 4 + 2;
+});
+
+// Click interaction
+canvas.addEventListener('click', () => {
+  targetState = Math.min(targetState + 0.5, 3.5);
+});
+
+// Nav arrows
+document.getElementById('nav-up').addEventListener('click', () => {
+  window.scrollBy({ top: -window.innerHeight, behavior: 'smooth' });
+});
+document.getElementById('nav-down').addEventListener('click', () => {
+  window.scrollBy({ top: window.innerHeight, behavior: 'smooth' });
+});
+
+// ============ ANIMATION LOOP ============
+const clock = new THREE.Clock();
+
+function animate() {
+  const elapsed = clock.getElapsedTime();
+  const delta = clock.getDelta();
+
+  // Smooth state transition
+  currentState += (targetState - currentState) * 0.03;
+
+  // Update uniforms
+  surfaceMaterial.uniforms.uTime.value = elapsed;
+  surfaceMaterial.uniforms.uState.value = currentState;
+  surfaceMaterial.uniforms.uMousePos.value.set(mouse.x, mouse.y);
+
+  particleMat.uniforms.uTime.value = elapsed;
+  particleMat.uniforms.uState.value = currentState;
+
+  lines.forEach((line) => {
+    line.material.uniforms.uTime.value = elapsed;
+    line.material.uniforms.uState.value = currentState;
+  });
+
+  // Camera subtle motion
+  camera.position.x += (mouse.x * 0.5 - 0.25 - camera.position.x) * 0.02;
+  camera.position.y += (mouse.y * 0.3 - 0.15 - camera.position.y) * 0.02;
+  camera.lookAt(0, 0, 0);
+
+  // Bloom intensity based on state
+  bloomPass.strength = 0.6 + currentState * 0.15;
+
+  composer.render();
+}
+
+renderer.setAnimationLoop(animate);
+
+// ============ RESIZE ============
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  composer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// ============ 3D CAROUSEL ============
+const carouselData = [
+  { title: 'Αντιγήρανση', desc: 'Προηγμένες θεραπείες αντιγήρανσης με τελευταίας τεχνολογίας laser και βιοδιεγερτικά πρωτόκολλα.', icon: '✦' },
+  { title: 'Ενέσιμες', desc: 'Υαλουρονικό οξύ, botox και μεσοθεραπεία για φυσική ανανέωση και αρμονικό αποτέλεσμα.', icon: '◈' },
+  { title: 'Laser', desc: 'Τεχνολογίες fractional, IPL και Nd:YAG για αποτελεσματική αντιμετώπιση κάθε δερματικού ζητήματος.', icon: '◇' },
+  { title: 'Καθαρισμός', desc: 'Βαθύς δερματολογικός καθαρισμός με ενζυματικό peeling και υπερηχητική σπάτουλα.', icon: '○' },
+  { title: 'Αναζωογόνηση', desc: 'PRP, μεσοθεραπεία με βιταμίνες και ανάπλαση κολλαγόνου για λαμπερή επιδερμίδα.', icon: '◎' },
+];
+
+const track = document.getElementById('carousel-track');
+const carouselCards = [];
+const cardAngle = (2 * Math.PI) / carouselData.length;
+const radius = 400;
+
+carouselData.forEach((item, i) => {
+  const card = document.createElement('div');
+  card.className = 'carousel-card';
+  card.innerHTML = `
+    <span class="card-num">0${i + 1}</span>
+    <div class="card-icon">${item.icon}</div>
+    <h3>${item.title}</h3>
+    <p>${item.desc}</p>
+    <div class="card-line"></div>
+  `;
+  track.appendChild(card);
+  carouselCards.push(card);
+});
+
+let carouselAngle = 0;
+let carouselAutoSpeed = 0.002;
+let carouselDragSpeed = 0;
+let isDragging = false;
+let lastX = 0;
+
+const carouselContainer = document.getElementById('carousel-container');
+carouselContainer.addEventListener('mousedown', (e) => { isDragging = true; lastX = e.clientX; });
+window.addEventListener('mouseup', () => { isDragging = false; });
+window.addEventListener('mousemove', (e) => {
+  if (isDragging) {
+    carouselDragSpeed = (e.clientX - lastX) * 0.003;
+    lastX = e.clientX;
+  }
+});
+
+function updateCarousel() {
+  if (!isDragging) {
+    carouselDragSpeed *= 0.95;
+  }
+  carouselAngle += carouselAutoSpeed + carouselDragSpeed;
+
+  carouselCards.forEach((card, i) => {
+    const angle = carouselAngle + i * cardAngle;
+    const x = Math.sin(angle) * radius;
+    const z = Math.cos(angle) * radius - radius;
+    const scale = (z + radius * 2) / (radius * 2);
+    const opacity = 0.3 + scale * 0.7;
+    const rotY = -angle * (180 / Math.PI) * 0.3;
+
+    card.style.transform = `translateX(${x}px) translateZ(${z}px) scale(${0.6 + scale * 0.4}) rotateY(${rotY}deg)`;
+    card.style.opacity = opacity;
+    card.style.zIndex = Math.round(scale * 100);
+  });
+
+  requestAnimationFrame(updateCarousel);
+}
+updateCarousel();
+
+// ============ BEFORE/AFTER SLIDER ============
+const baContainer = document.getElementById('ba-container');
+const baAfter = document.getElementById('ba-after');
+const baSlider = document.getElementById('ba-slider');
+let baActive = false;
+
+function updateBA(x) {
+  const rect = baContainer.getBoundingClientRect();
+  let pct = (x - rect.left) / rect.width;
+  pct = Math.max(0.05, Math.min(0.95, pct));
+  baAfter.style.clipPath = `inset(0 0 0 ${pct * 100}%)`;
+  baSlider.style.left = `${pct * 100}%`;
+}
+
+baContainer.addEventListener('mousedown', (e) => { baActive = true; updateBA(e.clientX); });
+window.addEventListener('mouseup', () => { baActive = false; });
+window.addEventListener('mousemove', (e) => { if (baActive) updateBA(e.clientX); });
+baContainer.addEventListener('touchstart', (e) => { baActive = true; updateBA(e.touches[0].clientX); });
+window.addEventListener('touchend', () => { baActive = false; });
+window.addEventListener('touchmove', (e) => { if (baActive) updateBA(e.touches[0].clientX); });
+
+// ============ SCROLL REVEAL ============
+const revealElements = document.querySelectorAll('.reveal');
+const timelineItems = document.querySelectorAll('.timeline-item');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('vis');
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+revealElements.forEach(el => observer.observe(el));
+
+const timelineObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const delay = parseInt(entry.target.dataset.delay) || 0;
+      setTimeout(() => entry.target.classList.add('vis'), delay);
+    }
+  });
+}, { threshold: 0.2 });
+
+timelineItems.forEach(el => timelineObserver.observe(el));
+
+// Carousel title reveal
+const carouselTitleEl = document.getElementById('carousel-title');
+const carouselObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+}, { threshold: 0.3 });
+carouselObs.observe(carouselTitleEl);
+
+// ============ NEURAL LINES SVG ============
+const neuralSvg = document.getElementById('neural-svg');
+const neuralLineCount = 8;
+const neuralPaths = [];
+
+for (let i = 0; i < neuralLineCount; i++) {
+  const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  path.setAttribute('fill', 'none');
+  path.setAttribute('stroke', 'rgba(201,168,124,0.06)');
+  path.setAttribute('stroke-width', '0.5');
+  neuralSvg.appendChild(path);
+  neuralPaths.push({
+    el: path,
+    startX: Math.random() * window.innerWidth,
+    startY: Math.random() * window.innerHeight,
+    endX: Math.random() * window.innerWidth,
+    endY: Math.random() * window.innerHeight,
+    speed: Math.random() * 0.3 + 0.1,
+    offset: Math.random() * Math.PI * 2,
+  });
+}
+
+function updateNeuralLines(time) {
+  neuralPaths.forEach(p => {
+    const mx = Math.sin(time * p.speed + p.offset) * 100;
+    const my = Math.cos(time * p.speed * 0.7 + p.offset) * 80;
+    const cx1 = (p.startX + p.endX) / 2 + mx;
+    const cy1 = (p.startY + p.endY) / 2 + my;
+    p.el.setAttribute('d', `M${p.startX},${p.startY} Q${cx1},${cy1} ${p.endX},${p.endY}`);
+  });
+  requestAnimationFrame(() => updateNeuralLines(performance.now() / 1000));
+}
+updateNeuralLines(0);
+
+</script>
+</body>
+</html>
