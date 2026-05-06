@@ -6,7 +6,8 @@
   directory = "netlify/functions"
   node_bundler = "esbuild"
   external_node_modules = ["@netlify/blobs"]
-  included_files = ["backend/**"]
+  # Μόνο data αρχεία στο zip· ο υπόλοιπος backend κώδικας είναι μέσα στο bundled `api`.
+  included_files = ["backend/data/**"]
 
 [functions.environment]
   USE_BLOB_STORAGE = "true"
