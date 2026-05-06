@@ -23,5 +23,5 @@ dist-ssr
 *.sln
 *.sw?
 
-# GitHub rejects files >100 MB; host large video locally under public/BIOFILLER.mov or URL
+# GitHub rejects files >100 MB; large source video stays local only (web uses public/videos/biofiller.mp4)
 /src/assets/BIOFILLER.mov
