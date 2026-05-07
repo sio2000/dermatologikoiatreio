@@ -6,6 +6,7 @@ const {
   addAvailabilitySlot,
   addAvailabilitySlotsBatch,
   removeAvailabilitySlot,
+  removeBookingById,
 } = require('../services/jsonStore')
 const { withStoreLock } = require('../utils/storeLock')
 
@@ -102,6 +103,21 @@ async function getAdminBookings(req, res) {
   }
 }
 
+async function deleteAdminBooking(req, res) {
+  try {
+    const id = req.body?.id
+    if (typeof id !== 'string' || id.trim() === '') {
+      return res.status(400).json({ error: 'Booking id required' })
+    }
+    await removeBookingById(id.trim())
+    return res.json({ ok: true })
+  } catch (e) {
+    const status = e.status || 500
+    if (status >= 500) console.error(e)
+    return res.status(status).json({ error: e.message || 'Server error' })
+  }
+}
+
 module.exports = {
   postLogin,
   getAdminAvailability,
@@ -109,4 +125,5 @@ module.exports = {
   postAdminAvailabilityBatch,
   deleteAdminAvailability,
   getAdminBookings,
+  deleteAdminBooking,
 }

@@ -428,9 +428,12 @@ export function Booking() {
                       setSlot('')
                     }}
                   >
-                    <div className="location-name">{place.title}</div>
-                    <div className="location-addr" style={{ whiteSpace: 'pre-line' }}>
-                      {place.lines}
+                    <span className="opt-indicator" aria-hidden />
+                    <div className="location-card-body">
+                      <div className="location-name">{place.title}</div>
+                      <div className="location-addr" style={{ whiteSpace: 'pre-line' }}>
+                        {place.lines}
+                      </div>
                     </div>
                   </button>
                 ))}

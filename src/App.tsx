@@ -93,8 +93,8 @@ export default function App() {
         <Marquee />
         <Philosophy />
         <Doctor />
-        <Services />
         <TreatmentsCarousel />
+        <Services />
         <BiofillerSpotlight />
         <RhinoplastySpotlight />
         <Results />

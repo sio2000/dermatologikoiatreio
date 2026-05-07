@@ -38,18 +38,5 @@
     "phone": "6900000000",
     "email": "marios@gmail.com",
     "createdAt": "2026-05-06T00:49:20.819Z"
-  },
-  {
-    "id": "a3a57efa-686a-4c0e-bc40-e3112efdc792",
-    "clinic": "piraeus",
-    "date": "2026-05-15",
-    "time": "09:00",
-    "name": "edwsagg",
-    "phone": "6457465878",
-    "email": "dfsgfgdhsd@gmail.com",
-    "treatment": "biofiller",
-    "treatmentLabel": "Biofiller",
-    "notes": "dhgfthredhre",
-    "createdAt": "2026-05-06T22:32:01.608Z"
   }
 ]

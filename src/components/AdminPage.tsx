@@ -447,6 +447,7 @@ function AdminCalendar({
 export function AdminPage() {
   const [token, setToken] = useState<string | null>(() => sessionStorage.getItem('derma_admin_token'))
   const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
   const [loginErr, setLoginErr] = useState('')
   const [slots, setSlots] = useState<Slot[]>([])
   const [bookings, setBookings] = useState<BookingRow[]>([])
@@ -571,6 +572,24 @@ export function AdminPage() {
     }
   }
 
+  async function deleteBooking(bookingId: string) {
+    if (!token) return
+    const ok = window.confirm('Να διαγραφεί οριστικά αυτή η κράτηση;')
+    if (!ok) return
+    try {
+      const res = await fetch(apiUrl('/api/admin/bookings'), {
+        method: 'DELETE',
+        headers: authHeaders(token),
+        body: JSON.stringify({ id: bookingId }),
+      })
+      const data = await res.json().catch(() => ({}))
+      if (!res.ok) throw new Error(data.error || 'Αποτυχία διαγραφής')
+      await loadData()
+    } catch (e) {
+      setLoadErr(e instanceof Error ? e.message : 'Σφάλμα διαγραφής')
+    }
+  }
+
   function logout() {
     sessionStorage.removeItem('derma_admin_token')
     setToken(null)
@@ -587,14 +606,25 @@ export function AdminPage() {
             <label className="admin-label" htmlFor="admin-pw">
               Κωδικός πρόσβασης
             </label>
-            <input
-              id="admin-pw"
-              type="password"
-              className="admin-input"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              autoComplete="current-password"
-            />
+            <div className="admin-password-wrap">
+              <input
+                id="admin-pw"
+                type={showPassword ? 'text' : 'password'}
+                className="admin-input admin-input--password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                autoComplete="current-password"
+              />
+              <button
+                type="button"
+                className="admin-password-toggle"
+                onClick={() => setShowPassword((v) => !v)}
+                aria-label={showPassword ? 'Απόκρυψη κωδικού πρόσβασης' : 'Εμφάνιση κωδικού πρόσβασης'}
+                aria-pressed={showPassword}
+              >
+                {showPassword ? '🙈' : '👁'}
+              </button>
+            </div>
             {loginErr && <p className="admin-err">{loginErr}</p>}
             <button type="submit" className="admin-btn admin-btn-primary admin-btn-block">
               Σύνδεση
@@ -769,6 +799,13 @@ export function AdminPage() {
                           }
                         >
                           Προβολή παρατηρήσεων
+                        </button>
+                        <button
+                          type="button"
+                          className="admin-btn admin-btn-danger admin-btn-booking-delete"
+                          onClick={() => void deleteBooking(b.id)}
+                        >
+                          Διαγραφή κράτησης
                         </button>
                       </div>
                     </article>

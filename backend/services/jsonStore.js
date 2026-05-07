@@ -219,6 +219,21 @@ async function createBooking(record) {
   })
 }
 
+async function removeBookingById(bookingId) {
+  return withStoreLock(async () => {
+    const state = await readFullState()
+    const next = state.bookings.filter((b) => b.id !== bookingId)
+    if (next.length === state.bookings.length) {
+      const err = new Error('Booking not found')
+      err.status = 404
+      throw err
+    }
+    state.bookings = next
+    await writeFullState(state)
+    return true
+  })
+}
+
 module.exports = {
   readAvailability,
   readBookings,
@@ -229,6 +244,7 @@ module.exports = {
   addAvailabilitySlotsBatch,
   removeAvailabilitySlot,
   createBooking,
+  removeBookingById,
   slotKey,
   AVAILABILITY_FILE,
   BOOKINGS_FILE,
