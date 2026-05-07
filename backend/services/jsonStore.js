@@ -161,6 +161,28 @@ async function addAvailabilitySlot(slot) {
   })
 }
 
+/** Μία read+write — απαραίτητο στο serverless + Netlify Blobs eventual consistency (αλλιώς χάνονται τα μισά slots). */
+async function addAvailabilitySlotsBatch(slots) {
+  return withStoreLock(async () => {
+    const state = await readFullState()
+    let added = 0
+    let skipped = 0
+    const seen = new Set(state.availability.map((s) => slotKey(s)))
+    for (const slot of slots) {
+      const k = slotKey(slot)
+      if (seen.has(k)) {
+        skipped++
+        continue
+      }
+      seen.add(k)
+      state.availability.push(slot)
+      added++
+    }
+    await writeFullState(state)
+    return { added, skipped }
+  })
+}
+
 async function removeAvailabilitySlot(slot) {
   return withStoreLock(async () => {
     const state = await readFullState()
@@ -204,6 +226,7 @@ module.exports = {
   writeBookings,
   getFreeSlotsForClinic,
   addAvailabilitySlot,
+  addAvailabilitySlotsBatch,
   removeAvailabilitySlot,
   createBooking,
   slotKey,

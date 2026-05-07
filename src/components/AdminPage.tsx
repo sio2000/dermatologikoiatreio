@@ -254,20 +254,19 @@ function AdminCalendar({
       return
     }
     setBusy(true)
-    let added = 0
-    let skipped = 0
     try {
-      for (const t of times) {
-        const res = await fetch(apiUrl('/api/admin/availability'), {
-          method: 'POST',
-          headers: authHeaders(token),
-          body: JSON.stringify({ clinic: clinicId, date: pickedDay, time: t }),
-        })
-        const data = await res.json().catch(() => ({}))
-        if (res.status === 409) skipped++
-        else if (!res.ok) throw new Error(data.error || 'Αποτυχία')
-        else added++
-      }
+      const slots = times.map((t) => ({ clinic: clinicId, date: pickedDay, time: t }))
+      const res = await fetch(apiUrl('/api/admin/availability/batch'), {
+        method: 'POST',
+        headers: authHeaders(token),
+        body: JSON.stringify({ slots }),
+      })
+      const data = await res.json().catch(() => ({} as Record<string, unknown>))
+      if (!res.ok) throw new Error(typeof data.error === 'string' ? data.error : 'Αποτυχία')
+      const added =
+        typeof data.added === 'number' && Number.isFinite(data.added) ? data.added : 0
+      const skipped =
+        typeof data.skipped === 'number' && Number.isFinite(data.skipped) ? data.skipped : 0
       setRangeMsg(`Προστέθηκαν ${added} ώρες${skipped ? ` (${skipped} υπήρχαν ήδη)` : ''}.`)
       onSlotsChange()
     } catch (e) {

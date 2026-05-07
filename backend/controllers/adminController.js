@@ -4,6 +4,7 @@ const {
   readAvailability,
   readBookings,
   addAvailabilitySlot,
+  addAvailabilitySlotsBatch,
   removeAvailabilitySlot,
 } = require('../services/jsonStore')
 const { withStoreLock } = require('../utils/storeLock')
@@ -40,6 +41,25 @@ async function postAdminAvailability(req, res) {
     const slot = assertSlotShape(req.body || {})
     await addAvailabilitySlot(slot)
     return res.status(201).json({ slot })
+  } catch (e) {
+    const status = e.status || 500
+    if (status >= 500) console.error(e)
+    return res.status(status).json({ error: e.message || 'Server error' })
+  }
+}
+
+async function postAdminAvailabilityBatch(req, res) {
+  try {
+    const raw = req.body?.slots
+    if (!Array.isArray(raw) || raw.length === 0) {
+      return res.status(400).json({ error: 'Χρειάζεται μη κενός πίνακας slots' })
+    }
+    const slots = []
+    for (const item of raw) {
+      slots.push(assertSlotShape(item || {}))
+    }
+    const { added, skipped } = await addAvailabilitySlotsBatch(slots)
+    return res.status(201).json({ added, skipped })
   } catch (e) {
     const status = e.status || 500
     if (status >= 500) console.error(e)
@@ -86,6 +106,7 @@ module.exports = {
   postLogin,
   getAdminAvailability,
   postAdminAvailability,
+  postAdminAvailabilityBatch,
   deleteAdminAvailability,
   getAdminBookings,
 }
