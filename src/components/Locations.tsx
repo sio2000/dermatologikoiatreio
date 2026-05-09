@@ -89,7 +89,7 @@ export function Locations() {
           </div>
           <h3 className="location-clinic-name">Advanced Derma Piraeus</h3>
           <p className="location-address">
-            Γρηγορίου Λαμπράκη 109
+            Γρηγορίου Λαμπράκη 109, 1ος όροφος
             <br />
             185 34 · Πειραιάς
           </p>

@@ -44,7 +44,7 @@ const LOCATIONS = [
   {
     id: 'piraeus' as const,
     title: 'Πειραιάς — Advanced Derma Piraeus',
-    lines: 'Γρ. Λαμπράκη 109\n185 34 · Πειραιάς',
+    lines: 'Γρ. Λαμπράκη 109\n1ος όροφος\n185 34 · Πειραιάς',
   },
 ]
 

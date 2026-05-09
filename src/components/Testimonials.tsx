@@ -32,10 +32,20 @@ export function Testimonials() {
       import: 'default',
     }) as Record<string, string>
 
-    return Object.entries(files)
-      .filter(([path]) => !path.includes('hero.png') && !path.includes('vite.svg') && !path.includes('react.svg'))
+    const akmiEntry = Object.entries(files).find(([path]) => /\u03b1\u03ba\u03bc\u03b7\.png$/i.test(path))
+    const akmiUrl = akmiEntry?.[1]
+
+    const others = Object.entries(files)
+      .filter(([path]) =>
+        !path.includes('hero.png') &&
+        !path.includes('vite.svg') &&
+        !path.includes('react.svg') &&
+        !/\u03b1\u03ba\u03bc\u03b7\.png$/i.test(path),
+      )
       .map(([, url]) => url)
-      .slice(0, 10)
+      .slice(0, 9)
+
+    return akmiUrl ? [akmiUrl, ...others] : others
   }, [])
   const loopGallery = [...localGallery, ...localGallery]
 

@@ -109,7 +109,7 @@ export function Footer() {
               <a href="#locations">Στρατάρχου Παπάγου Αλεξάνδρου 50, Ζωγράφος</a>
             </li>
             <li>
-              <a href="#locations">Γρηγορίου Λαμπράκη 109, Πειραιάς</a>
+              <a href="#locations">Γρηγορίου Λαμπράκη 109, 1ος όροφος, Πειραιάς</a>
             </li>
             <li>
               <a href={MAILTO_HREF} className="footer-contact-link">

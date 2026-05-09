@@ -8,6 +8,7 @@ import { Services } from './components/Services'
 import { TreatmentsCarousel } from './components/TreatmentsCarousel'
 import { BiofillerSpotlight } from './components/BiofillerSpotlight'
 import { RhinoplastySpotlight } from './components/RhinoplastySpotlight'
+import { ExosomesSpotlight } from './components/ExosomesSpotlight'
 import { Results } from './components/Results'
 import { Gallery } from './components/Gallery'
 import { Locations } from './components/Locations'
@@ -97,6 +98,7 @@ export default function App() {
         <Services />
         <BiofillerSpotlight />
         <RhinoplastySpotlight />
+        <ExosomesSpotlight />
         <Results />
         <Gallery />
         <Locations />

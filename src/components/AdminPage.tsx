@@ -29,7 +29,7 @@ const CLINICS = [
   {
     id: 'piraeus' as const,
     title: 'Ιατρείο Πειραιά',
-    subtitle: 'Γρ. Λαμπράκη 109, 185 34 Πειραιάς',
+    subtitle: 'Γρ. Λαμπράκη 109, 1ος όροφος, 185 34 Πειραιάς',
     variant: 'piraeus' as const,
   },
 ]
