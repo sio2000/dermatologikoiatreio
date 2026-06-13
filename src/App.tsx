@@ -5,7 +5,11 @@ import { Marquee } from './components/Marquee'
 import { Philosophy } from './components/Philosophy'
 import { Doctor } from './components/Doctor'
 import { Services } from './components/Services'
-import { TreatmentsCarousel } from './components/TreatmentsCarousel'
+import { TreatmentsStacked } from './components/TreatmentsStacked'
+import { Offers } from './components/Offers'
+import { FaceTreatments } from './components/FaceTreatments'
+import { BodyTreatments } from './components/BodyTreatments'
+import { ClinicalDermatology } from './components/ClinicalDermatology'
 import { BiofillerSpotlight } from './components/BiofillerSpotlight'
 import { RhinoplastySpotlight } from './components/RhinoplastySpotlight'
 import { ExosomesSpotlight } from './components/ExosomesSpotlight'
@@ -17,11 +21,19 @@ import { FinalCTA } from './components/FinalCTA'
 import { Footer } from './components/Footer'
 import { FullGalleryPage } from './components/FullGalleryPage'
 import { AdminPage } from './components/AdminPage'
+import { TherapyDetailPage } from './components/TherapyDetailPage'
 import { useScrollReveal } from './hooks/useScrollReveal'
 
 export default function App() {
   useScrollReveal()
-  const [loading, setLoading] = useState(true)
+  /** Η αρχική οθόνη φόρτωσης εμφανίζεται μόνο την πρώτη φορά που ανοίγει ο χρήστης το site. */
+  const [loading, setLoading] = useState(() => {
+    try {
+      return window.sessionStorage.getItem('ad_intro_seen') !== '1'
+    } catch {
+      return true
+    }
+  })
   const [loadProgress, setLoadProgress] = useState(0)
   const [route, setRoute] = useState(() => ({
     pathname: window.location.pathname,
@@ -29,18 +41,27 @@ export default function App() {
   }))
 
   useEffect(() => {
+    if (!loading) return
     let progress = 0
     const interval = window.setInterval(() => {
       progress += Math.random() * 14
       if (progress >= 100) {
         progress = 100
         window.clearInterval(interval)
-        window.setTimeout(() => setLoading(false), 420)
+        window.setTimeout(() => {
+          try {
+            window.sessionStorage.setItem('ad_intro_seen', '1')
+          } catch {
+            /* αγνόησε αν δεν υπάρχει sessionStorage */
+          }
+          setLoading(false)
+        }, 420)
       }
       setLoadProgress(progress)
     }, 180)
 
     return () => window.clearInterval(interval)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
@@ -77,6 +98,17 @@ export default function App() {
     return <AdminPage />
   }
 
+  if (route.pathname.startsWith('/therapy/')) {
+    const slug = route.pathname.replace(/^\/therapy\//, '').replace(/\/$/, '')
+    return (
+      <>
+        <Navbar />
+        <TherapyDetailPage slug={slug} />
+        <Footer />
+      </>
+    )
+  }
+
   return (
     <>
       <div className={`deluxe-loader${loading ? '' : ' hidden'}`} aria-hidden={!loading}>
@@ -94,8 +126,12 @@ export default function App() {
         <Marquee />
         <Philosophy />
         <Doctor />
-        <TreatmentsCarousel />
+        <TreatmentsStacked />
         <Services />
+        <Offers />
+        <FaceTreatments />
+        <BodyTreatments />
+        <ClinicalDermatology />
         <BiofillerSpotlight />
         <RhinoplastySpotlight />
         <ExosomesSpotlight />

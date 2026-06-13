@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { GALLERY_EXCLUDED_BASENAMES, assetBaseName } from '../constants/galleryExclude'
 
 export function FullGalleryPage() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
@@ -11,6 +12,7 @@ export function FullGalleryPage() {
 
     return Object.entries(files)
       .filter(([path]) => !path.includes('hero.png') && !path.includes('vite.svg') && !path.includes('react.svg'))
+      .filter(([path]) => !GALLERY_EXCLUDED_BASENAMES.has(assetBaseName(path)))
       .map(([, url]) => url)
   }, [])
 

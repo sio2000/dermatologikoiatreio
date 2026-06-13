@@ -26,19 +26,6 @@ export function Footer() {
           <div className="footer-social">
             <a
               className="social-btn"
-              href="https://www.instagram.com/advanced_derma/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram — Advanced Derma"
-            >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
-                <rect x="2" y="2" width="20" height="20" rx="5" />
-                <circle cx="12" cy="12" r="4" />
-                <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" />
-              </svg>
-            </a>
-            <a
-              className="social-btn"
               href="https://www.facebook.com/advancedermaa/"
               target="_blank"
               rel="noopener noreferrer"
@@ -49,6 +36,31 @@ export function Footer() {
               </svg>
             </a>
           </div>
+          <ul className="footer-instagram" aria-label="Προφίλ Instagram">
+            {[
+              { handle: '@advanced_derma', href: 'https://www.instagram.com/advanced_derma/' },
+              { handle: '@advanced_laser_', href: 'https://www.instagram.com/advanced_laser_/' },
+              { handle: '@advanced_peiraias', href: 'https://www.instagram.com/advanced_peiraias/' },
+              { handle: '@chrysoula_zisimou', href: 'https://www.instagram.com/chrysoula_zisimou/' },
+            ].map((profile) => (
+              <li key={profile.handle}>
+                <a
+                  className="footer-instagram-link"
+                  href={profile.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Instagram — ${profile.handle}`}
+                >
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
+                    <rect x="2" y="2" width="20" height="20" rx="5" />
+                    <circle cx="12" cy="12" r="4" />
+                    <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" />
+                  </svg>
+                  {profile.handle}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <nav aria-labelledby="footer-therapies">
@@ -57,19 +69,19 @@ export function Footer() {
           </div>
           <ul className="footer-links">
             <li>
-              <a href="#services">Αντιγήρανση</a>
+              <a href="#face-treatments">Πρόσωπο</a>
             </li>
             <li>
-              <a href="#services">Ενέσιμες θεραπείες</a>
+              <a href="#body-treatments">Σώμα</a>
+            </li>
+            <li>
+              <a href="#clinical-dermatology">Κλινική Δερματολογία</a>
             </li>
             <li>
               <a href="#services">Laser Hair Removal</a>
             </li>
             <li>
               <a href="#biofiller-spotlight">Biofiller</a>
-            </li>
-            <li>
-              <a href="#services">Κλινική δερματολογία</a>
             </li>
             <li>
               <a href="#services">PRP θεραπεία</a>
@@ -93,6 +105,12 @@ export function Footer() {
             </li>
             <li>
               <a href="#results">Αποτελέσματα</a>
+            </li>
+            <li>
+              <a href="#gallery">Gallery</a>
+            </li>
+            <li>
+              <a href="#testimonials">Αξιολογήσεις</a>
             </li>
             <li>
               <a href="#locations">Επικοινωνία</a>

@@ -20,7 +20,7 @@ export function Philosophy() {
             loading="lazy"
           />
           <div className="philosophy-badge">
-            <div className="philosophy-badge-number">15+</div>
+            <div className="philosophy-badge-number">20+</div>
             <div className="philosophy-badge-text">Χρόνια εμπειρίας</div>
           </div>
         </div>
@@ -28,9 +28,9 @@ export function Philosophy() {
         <div>
           <p className="section-label fade-up">Φιλοσοφία</p>
           <h2 className="section-title fade-up">
-            Η επιστήμη συναντά
+            Η επιστήμη στην υπηρεσία
             <br />
-            την <em>αισθητική αρμονία</em>
+            της <em>φυσικής ομορφιάς</em>
           </h2>
           <div className="gold-rule fade-up" />
           <p

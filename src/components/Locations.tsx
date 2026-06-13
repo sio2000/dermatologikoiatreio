@@ -10,6 +10,10 @@ import {
   TEL_PIRAEUS_MOBILE_LABEL,
 } from '../constants/contact'
 
+/* Φωτογραφίες από τον χώρο του ιατρείου */
+const clinicSpaceAthens = new URL('../assets/χωροςιατρειου.jpg', import.meta.url).href
+const clinicSpacePiraeus = new URL('../assets/χωροςιατρειου2.jpg', import.meta.url).href
+
 export function Locations() {
   return (
     <section id="locations">
@@ -23,6 +27,14 @@ export function Locations() {
         </div>
 
         <div className="location-item fade-in">
+          <figure className="location-photo">
+            <img
+              src={clinicSpaceAthens}
+              alt="Ο χώρος του ιατρείου Advanced Derma — Αθήνα"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
           <div className="location-map">
             <iframe
               title="Χάρτης Advanced Derma Athens"
@@ -32,7 +44,7 @@ export function Locations() {
               referrerPolicy="no-referrer-when-downgrade"
             />
           </div>
-          <h3 className="location-clinic-name">Advanced Derma Athens</h3>
+          <h3 className="location-clinic-name">Advanced Derma Αθήνα</h3>
           <p className="location-address">
             Στρατάρχου Παπάγου Αλεξάνδρου 50, 2ος όροφος
             <br />
@@ -78,6 +90,14 @@ export function Locations() {
         </div>
 
         <div className="location-item fade-in">
+          <figure className="location-photo">
+            <img
+              src={clinicSpacePiraeus}
+              alt="Ο χώρος του ιατρείου Advanced Derma — Πειραιάς"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
           <div className="location-map">
             <iframe
               title="Χάρτης Advanced Derma Piraeus — Γρηγορίου Λαμπράκη 109"
@@ -87,7 +107,7 @@ export function Locations() {
               referrerPolicy="no-referrer-when-downgrade"
             />
           </div>
-          <h3 className="location-clinic-name">Advanced Derma Piraeus</h3>
+          <h3 className="location-clinic-name">Advanced Derma Πειραιάς</h3>
           <p className="location-address">
             Γρηγορίου Λαμπράκη 109, 1ος όροφος
             <br />

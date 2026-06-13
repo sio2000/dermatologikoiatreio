@@ -34,25 +34,36 @@ export function Navbar() {
 
         <ul className="nav-links">
           <li>
-            <a href="#philosophy">Φιλοσοφία</a>
-          </li>
-          <li>
             <a href="#doctor">Ιατρός</a>
           </li>
           <li>
-            <a href="#services">Θεραπείες</a>
+            <a href="#face-treatments">Πρόσωπο</a>
+          </li>
+          <li>
+            <a href="#body-treatments">Σώμα</a>
+          </li>
+          <li>
+            <a href="#clinical-dermatology">Κλινική Δερματολογία</a>
           </li>
           <li>
             <a href="#locations">Τοποθεσίες</a>
           </li>
           <li>
-            <a href="#gallery">Gallery</a>
+            <a href="#testimonials">Αξιολογήσεις</a>
           </li>
         </ul>
 
-        <a href="#booking" className="nav-cta">
-          Ραντεβού
-        </a>
+        <div className="nav-actions">
+          <a href="#offers" className="nav-offers-pill">
+            <span className="nav-offers-pill-spark" aria-hidden>
+              ✦
+            </span>
+            Προσφορές
+          </a>
+          <a href="#booking" className="nav-cta">
+            Ραντεβού
+          </a>
+        </div>
 
         <button
           type="button"
@@ -87,8 +98,23 @@ export function Navbar() {
             </a>
           </li>
           <li>
-            <a href="#services" onClick={closeMobile}>
-              Θεραπείες
+            <a href="#face-treatments" onClick={closeMobile}>
+              Πρόσωπο
+            </a>
+          </li>
+          <li>
+            <a href="#body-treatments" onClick={closeMobile}>
+              Σώμα
+            </a>
+          </li>
+          <li>
+            <a href="#clinical-dermatology" onClick={closeMobile}>
+              Κλινική Δερματολογία
+            </a>
+          </li>
+          <li>
+            <a href="#offers" onClick={closeMobile}>
+              Προσφορές
             </a>
           </li>
           <li>
@@ -99,6 +125,11 @@ export function Navbar() {
           <li>
             <a href="#gallery" onClick={closeMobile}>
               Gallery
+            </a>
+          </li>
+          <li>
+            <a href="#testimonials" onClick={closeMobile}>
+              Αξιολογήσεις
             </a>
           </li>
         </ul>

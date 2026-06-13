@@ -5,40 +5,41 @@ export function RhinoplastySpotlight() {
     <section id="rhinoplasty-spotlight" className="rhino-spotlight" aria-labelledby="rhino-spotlight-heading">
       <div className="rhino-spotlight-inner">
         <div className="rhino-spotlight-copy">
-          <p className="section-label fade-up">Ρινοπλαστική</p>
+          <p className="section-label fade-up">Liquid Rhinoplasty</p>
           <h2 id="rhino-spotlight-heading" className="section-title fade-up rhino-spotlight-heading">
-            Η ομορφιά είναι <em>φως</em>.
-            <span className="rhino-spotlight-heading-sub">Η επιστήμη, ο οδηγός της.</span>
+            Ρινοπλαστική <em>χωρίς</em> χειρουργείο.
+            <span className="rhino-spotlight-heading-sub">Άμεσο, ανώδυνο αποτέλεσμα.</span>
           </h2>
           <div className="gold-rule fade-up" />
           <p className="rhino-spotlight-lede fade-up">
-            Πιστεύουμε ότι κάθε δέρμα αφηγείται μια ιστορία. Ο ρόλος μας είναι να αποκαλύψουμε τη
-            φυσική του λάμψη, χρησιμοποιώντας τις πιο σύγχρονες ιατρικές μεθόδους με σεβασμό στη
-            μοναδικότητα κάθε ανθρώπου. Δεν μεταμορφώνουμε — αναδεικνύουμε.
+            Η Liquid Rhinoplasty είναι μια πρωτοποριακή, μη χειρουργική μέθοδος διόρθωσης του
+            σχήματος της μύτης με ενέσιμο εμφύτευμα υαλουρονικού οξέος. Δυσμορφίες,
+            βαθουλώματα και ελλείμματα ιστού «γεμίζουν» με ακρίβεια, χωρίς νυστέρι και χωρίς
+            ανάρρωση.
           </p>
           <p className="rhino-spotlight-body fade-up">
-            Στη ρινοπλαστική αυτή η φιλοσοφία μεταφράζεται σε αρμονία προσώπου, λειτουργική
-            αναπνοή και αποτέλεσμα που «ανήκει» στο πρόσωπό σας: διακριτικό, ισορροπημένο, με
-            προτεραιότητα την ασφάλεια και την εμπειρία σας σε κάθε στάδιο — από την πρώτη
-            συνάντηση έως την πλήρη ανάρρωση.
+            Η εφαρμογή ολοκληρώνεται σε λίγα λεπτά, το αποτέλεσμα είναι άμεσα ορατό και
+            φυσικό, ενώ η βελτίωση του σχήματος μπορεί να φτάσει έως και την πλήρη διόρθωση
+            της δυσμορφίας. Με μικρή συντήρηση ανά τακτά διαστήματα, το αποτέλεσμα
+            διατηρείται σε βάθος χρόνου.
           </p>
           <ul className="rhino-spotlight-highlights fade-up" aria-label="Στοιχεία προσέγγισης">
             <li>
               <span className="rhino-spotlight-hi-mark" aria-hidden />
-              <span>Ατομικό χειρουργικό πλάνο και ρεαλιστικοί στόχοι</span>
+              <span>Χωρίς χειρουργείο — με ενέσιμο υαλουρονικό οξύ</span>
             </li>
             <li>
               <span className="rhino-spotlight-hi-mark" aria-hidden />
-              <span>Λεπτομερής αξιολόγηση ανατομίας &amp; αισθητικής αρμονίας</span>
+              <span>Άμεση, ανώδυνη εφαρμογή σε λίγα λεπτά</span>
             </li>
             <li>
               <span className="rhino-spotlight-hi-mark" aria-hidden />
-              <span>Συνεχής καθοδήγηση &amp; μετρήσιμα βήματα αποθεραπείας</span>
+              <span>Φυσικό αποτέλεσμα χωρίς χρόνο αποθεραπείας</span>
             </li>
           </ul>
           <p className="rhino-spotlight-foot fade-up">
             <a href="#results" className="rhino-spotlight-link">
-              Δείτε πριν &amp; μετά — ρινοπλαστική
+              Δείτε πριν &amp; μετά
               <span className="rhino-spotlight-link-arrow" aria-hidden>
                 →
               </span>
@@ -51,7 +52,7 @@ export function RhinoplastySpotlight() {
           <div className="rhino-spotlight-frame">
             <img
               src={images.rhinoplastySpotlight}
-              alt="Ενδεικτικό αποτέλεσμα θεραπείας — ρινοπλαστική"
+              alt="Ενδεικτικό αποτέλεσμα θεραπείας — Liquid Rhinoplasty"
               className="rhino-spotlight-img"
               width={900}
               height={1120}

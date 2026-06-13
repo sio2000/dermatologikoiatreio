@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { GALLERY_EXCLUDED_BASENAMES, assetBaseName } from '../constants/galleryExclude'
 
 function gallerySpanClass(index: number) {
   const wide = index % 5 === 0
@@ -18,6 +19,7 @@ export function Gallery() {
     }) as Record<string, string>
 
     return Object.entries(files)
+      .filter(([path]) => !GALLERY_EXCLUDED_BASENAMES.has(assetBaseName(path)))
       .sort(([a], [b]) => a.localeCompare(b, undefined, { sensitivity: 'base' }))
       .map(([path, url]) => ({ path, url }))
   }, [])
@@ -144,19 +146,9 @@ export function Gallery() {
           </div>
         </div>
 
-        <div className="clinic-gallery-actions">
+        <div className="clinic-gallery-actions clinic-gallery-actions--centered">
           <a href="/full-gallery" className="clinic-gallery-btn clinic-gallery-btn--primary">
             Δείτε το πλήρες gallery
-          </a>
-          <a
-            href="https://www.instagram.com/advanced_derma/?hl=en"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="clinic-gallery-btn clinic-gallery-btn--instagram"
-          >
-            <span aria-hidden>📷</span>
-            Ακολουθήστε μας στο Instagram
-            <span aria-hidden>→</span>
           </a>
         </div>
       </div>

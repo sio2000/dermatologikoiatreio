@@ -1,24 +1,26 @@
 ﻿/* DESIGN TOKENS — LUXURY SKIN PALETTE */
+    /* Παλέτα από το logo AD (colors.jpg): χρυσό σε κρεμ φόντο + μαύρο κείμενο */
     :root {
-      --warm-white:    #FAF9F7;
-      --nude:          #E8D5C4;
-      --peach:         #F0C9B0;
-      --blush:         #E8B4A0;
-      --champagne:     #C9A96E;
-      --gold-light:    #DEC58A;
-      --stone:         #8B7D74;
-      --deep-stone:    #5C504A;
-      --text-primary:  #2D2320;
-      --text-body:     #5C504A;
-      --text-muted:    #9B8C85;
-      --surface:       #F5F1EE;
-      --border:        rgba(201,169,110,0.2);
+      --warm-white:    #EAE5DD;
+      --nude:          #E3D5B8;
+      --peach:         #CDAE74;
+      --blush:         #B3905C;
+      --champagne:     #B3905C;
+      --gold-deep:     #8A6F3E;
+      --gold-light:    #E6D2A2;
+      --stone:         #8B7B5E;
+      --deep-stone:    #5C4F36;
+      --text-primary:  #161310;
+      --text-body:     #45403A;
+      --text-muted:    #8D8060;
+      --surface:       #E8E1D3;
+      --border:        rgba(179,144,92,0.42);
       --shadow-soft:   0 4px 40px rgba(90,60,50,0.08);
       --shadow-card:   0 2px 24px rgba(90,60,50,0.10);
 
       --font-display:  'Cormorant Garamond', serif;
       --font-body:     'DM Sans', sans-serif;
-      --font-italic:   'Cormorant', serif;
+      --font-italic:   'Cormorant Garamond', serif;
       /* Hero overlays: πλήρες πλάτος — κεντρικό κείμενο πάνω στο WebGL */
       --hero-vis-mask: none;
     }
@@ -78,7 +80,7 @@
       top: 12px;
     }
 
-    ::selection { background: rgba(201,169,110,0.25); color: var(--text-primary); }
+    ::selection { background: rgba(179,144,92,0.25); color: var(--text-primary); }
 
     .deluxe-loader {
       position: fixed;
@@ -113,14 +115,14 @@
     .deluxe-loader-bar {
       width: min(400px, 70vw);
       height: 1px;
-      background: rgba(201, 169, 110, 0.22);
+      background: rgba(179,144,92, 0.22);
       overflow: hidden;
     }
 
     .deluxe-loader-fill {
       display: block;
       height: 100%;
-      background: linear-gradient(90deg, rgba(201, 169, 110, 0.72), rgba(222, 197, 138, 1));
+      background: linear-gradient(90deg, rgba(179,144,92, 0.72), rgba(222, 197, 138, 1));
       transition: width 0.3s ease;
     }
 
@@ -183,7 +185,7 @@
       border-radius: 50%;
       object-fit: cover;
       flex-shrink: 0;
-      border: 1px solid rgba(201, 169, 110, 0.3);
+      border: 1px solid rgba(179,144,92, 0.3);
     }
 
     .nav-logo-main {
@@ -257,7 +259,7 @@
       position: relative;
       z-index: 1;
       width: 100%;
-      background: #f9f5f0;
+      background: #eae5dd;
       color: #3c2a21;
       padding: clamp(96px, 13vh, 148px) 0 0;
       overflow: hidden;
@@ -270,7 +272,7 @@
       top: 2%;
       width: min(56vw, 500px);
       max-height: 88%;
-      color: #c9a96e;
+      color: #b3905c;
       opacity: 0.1;
       pointer-events: none;
       z-index: 0;
@@ -358,14 +360,14 @@
     }
 
     .hero-dm-btn--primary {
-      background: #c9a96e;
+      background: #b3905c;
       color: #1f1814;
-      border-color: #c9a96e;
+      border-color: #b3905c;
     }
 
     .hero-dm-btn--primary:hover {
-      background: #b8975e;
-      border-color: #b8975e;
+      background: #a8884f;
+      border-color: #a8884f;
       transform: translateY(-1px);
     }
 
@@ -410,7 +412,7 @@
       gap: clamp(14px, 2.5vw, 40px);
       padding: 16px 20px;
       background: #3c2a21;
-      color: #faf9f7;
+      color: #f1ece1;
       font-family: var(--font-body);
       font-size: 0.6rem;
       letter-spacing: 0.2em;
@@ -588,16 +590,19 @@
 
     .marquee-item {
       font-family: var(--font-display);
-      font-size: 0.85rem;
+      font-size: 0.95rem;
       font-style: italic;
+      font-weight: 600;
       letter-spacing: 0.08em;
-      color: var(--champagne);
-      opacity: 0.9;
+      background: linear-gradient(100deg, #cdae74 0%, #e6d2a2 35%, #b3905c 65%, #e6d2a2 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
 
     .marquee-dot {
-      color: var(--blush);
-      opacity: 0.5;
+      color: #b3905c;
+      opacity: 0.85;
     }
 
     @keyframes marqueeScroll {
@@ -733,7 +738,7 @@
     .portrait-frame {
       width: 100%;
       aspect-ratio: 3/4;
-      background: linear-gradient(160deg, var(--nude) 0%, var(--peach) 60%, var(--blush) 100%);
+      background: linear-gradient(160deg, var(--surface) 0%, var(--nude) 100%);
       position: relative;
       overflow: hidden;
     }
@@ -743,9 +748,9 @@
       width: 100%;
       height: 100%;
       background:
-        radial-gradient(ellipse 60% 80% at 50% 30%, rgba(240,201,176,0.9) 0%, transparent 70%),
-        radial-gradient(ellipse 80% 60% at 50% 70%, rgba(232,180,160,0.6) 0%, transparent 70%),
-        linear-gradient(180deg, #E8D5C4 0%, #D4B5A0 100%);
+        radial-gradient(ellipse 60% 80% at 50% 30%, rgba(216,192,144,0.9) 0%, transparent 70%),
+        radial-gradient(ellipse 80% 60% at 50% 70%, rgba(179,144,92,0.6) 0%, transparent 70%),
+        linear-gradient(180deg, #e3d5b8 0%, #b3905c 100%);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -873,7 +878,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: rgba(201,169,110,0.2);
+      background: rgba(179,144,92,0.2);
       font-size: 1rem;
       flex-shrink: 0;
     }
@@ -966,14 +971,14 @@
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
       overflow: hidden;
-      border: 1px solid rgba(201,169,110,0.14);
+      border: 1px solid rgba(179,144,92,0.14);
     }
 
     .service-card::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, var(--surface) 0%, rgba(240,201,176,0.12) 100%);
+      background: linear-gradient(135deg, var(--surface) 0%, rgba(216,192,144,0.12) 100%);
       opacity: 0;
       transition: opacity 0.4s;
     }
@@ -1052,7 +1057,7 @@
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      filter: drop-shadow(0 10px 22px rgba(201, 169, 110, 0.2));
+      filter: drop-shadow(0 10px 22px rgba(179,144,92, 0.2));
     }
 
     .service-laser-caption {
@@ -1068,14 +1073,14 @@
     }
 
     .service-card--laser-spotlight {
-      border-color: rgba(201, 169, 110, 0.4);
+      border-color: rgba(179,144,92, 0.4);
       box-shadow:
         0 16px 44px rgba(45, 35, 32, 0.09),
-        0 0 0 1px rgba(201, 169, 110, 0.1) inset;
+        0 0 0 1px rgba(179,144,92, 0.1) inset;
     }
 
     .service-card--laser-spotlight::before {
-      background: linear-gradient(135deg, rgba(240, 201, 176, 0.2) 0%, rgba(201, 169, 110, 0.12) 100%);
+      background: linear-gradient(135deg, rgba(216,192,144, 0.2) 0%, rgba(179,144,92, 0.12) 100%);
     }
 
     .service-list,
@@ -1184,7 +1189,7 @@
       position: absolute;
       inset: 0;
       backface-visibility: hidden;
-      border: 1px solid rgba(201, 169, 110, 0.26);
+      border: 1px solid rgba(179,144,92, 0.26);
       background: rgba(255, 255, 255, 0.04);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
@@ -1196,8 +1201,8 @@
     }
 
     .treatment-card-front:hover {
-      border-color: rgba(201, 169, 110, 0.6);
-      box-shadow: 0 0 42px rgba(201, 169, 110, 0.14);
+      border-color: rgba(179,144,92, 0.6);
+      box-shadow: 0 0 42px rgba(179,144,92, 0.14);
     }
 
     .treatment-card-front > img {
@@ -1244,7 +1249,7 @@
       font-weight: 500;
       line-height: 1.1;
       margin-bottom: 10px;
-      color: #fff7ec;
+      color: #f6f1e6;
       z-index: 1;
     }
 
@@ -1280,7 +1285,7 @@
       font-size: 1.65rem;
       font-weight: 500;
       line-height: 1.1;
-      color: #f8ebda;
+      color: #efe7d6;
       margin: 0;
     }
 
@@ -1295,7 +1300,7 @@
 
     .treatment-card-back li {
       padding-top: 10px;
-      border-top: 1px solid rgba(201, 169, 110, 0.25);
+      border-top: 1px solid rgba(179,144,92, 0.25);
       font-size: 0.8rem;
       line-height: 1.55;
       color: rgba(250, 249, 247, 0.9);
@@ -1322,8 +1327,8 @@
 
     .treatment-detail-item {
       padding: 22px 18px;
-      border: 1px solid rgba(201, 169, 110, 0.22);
-      background: rgba(201, 169, 110, 0.05);
+      border: 1px solid rgba(179,144,92, 0.22);
+      background: rgba(179,144,92, 0.05);
     }
 
     .treatment-detail-item h4 {
@@ -1352,7 +1357,7 @@
     .treatment-detail-item li {
       font-size: 0.72rem;
       color: rgba(250, 249, 247, 0.72);
-      border-top: 1px solid rgba(201, 169, 110, 0.2);
+      border-top: 1px solid rgba(179,144,92, 0.2);
       padding-top: 8px;
     }
 
@@ -1365,11 +1370,10 @@
       display: block;
       font-size: 1.58rem;
       letter-spacing: 0.028em;
-      background: linear-gradient(92deg, #fff9f0 6%, #f2d5a6 45%, #d9a86a 92%);
+      background: linear-gradient(92deg, #6e5631 6%, #8a6f3e 45%, #a8884f 92%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.38));
     }
 
     .treatment-laser-el {
@@ -1378,11 +1382,11 @@
       font-size: 0.6rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: rgba(255, 236, 210, 0.9);
+      color: #57503f;
     }
 
     .treatment-short-laser strong {
-      color: #ffe8c4;
+      color: #8a6f3e;
       font-weight: 600;
     }
 
@@ -1403,9 +1407,9 @@
       position: relative;
       padding: clamp(88px, 10vw, 120px) 0;
       background:
-        radial-gradient(ellipse 88% 52% at 14% 12%, rgba(201, 169, 110, 0.15) 0%, transparent 55%),
+        radial-gradient(ellipse 88% 52% at 14% 12%, rgba(179,144,92, 0.15) 0%, transparent 55%),
         radial-gradient(ellipse 62% 48% at 92% 82%, rgba(164, 195, 210, 0.11) 0%, transparent 52%),
-        linear-gradient(180deg, #fbfaf7 0%, #f4ece4 42%, #e9dfd4 100%);
+        linear-gradient(180deg, #f3efe7 0%, #ece5d8 42%, #e3dcca 100%);
       overflow: hidden;
     }
 
@@ -1414,7 +1418,7 @@
       position: absolute;
       inset: auto -22% -38% -22%;
       height: 58%;
-      background: radial-gradient(ellipse 74% 58% at 50% 0%, rgba(201, 169, 110, 0.09), transparent 72%);
+      background: radial-gradient(ellipse 74% 58% at 50% 0%, rgba(179,144,92, 0.09), transparent 72%);
       pointer-events: none;
     }
 
@@ -1435,7 +1439,7 @@
       flex-direction: column;
       align-items: flex-start;
       gap: 0;
-      font-family: 'Playfair Display', 'Cormorant Garamond', serif;
+      font-family: var(--font-display);
       font-weight: 500;
       line-height: 1.15;
       letter-spacing: 0.01em;
@@ -1446,7 +1450,7 @@
 
     .biofiller-heading-brand {
       display: block;
-      font-family: 'Playfair Display', 'Cormorant Garamond', serif;
+      font-family: var(--font-display);
       font-size: clamp(2.05rem, 3.9vw, 2.88rem);
       font-weight: 500;
       letter-spacing: 0.06em;
@@ -1487,7 +1491,7 @@
       text-transform: uppercase;
       padding: 8px 15px;
       border-radius: 999px;
-      border: 1px solid rgba(201, 169, 110, 0.36);
+      border: 1px solid rgba(179,144,92, 0.36);
       background: rgba(255, 255, 255, 0.58);
       color: var(--deep-stone);
       box-shadow: 0 8px 24px rgba(45, 35, 32, 0.07);
@@ -1513,7 +1517,7 @@
 
     .biofiller-spotlight-body {
       padding-left: 14px;
-      border-left: 2px solid rgba(201, 169, 110, 0.5);
+      border-left: 2px solid rgba(179,144,92, 0.5);
     }
 
     .biofiller-spotlight-visual {
@@ -1527,7 +1531,7 @@
     .biofiller-visual-aura {
       position: absolute;
       inset: -14% -10% -12% -14%;
-      background: radial-gradient(ellipse 72% 66% at 48% 44%, rgba(201, 169, 110, 0.22) 0%, transparent 69%);
+      background: radial-gradient(ellipse 72% 66% at 48% 44%, rgba(179,144,92, 0.22) 0%, transparent 69%);
       pointer-events: none;
       z-index: 0;
       animation: biofiller-aura-drift 14s ease-in-out infinite alternate;
@@ -1545,7 +1549,7 @@
       border-radius: 20px;
       padding: 10px;
       background: rgba(255, 252, 249, 0.98);
-      border: 1px solid rgba(201, 169, 110, 0.12);
+      border: 1px solid rgba(179,144,92, 0.12);
       box-shadow:
         0 1px 0 rgba(255, 255, 255, 0.95) inset,
         0 26px 52px rgba(22, 18, 16, 0.08),
@@ -1559,12 +1563,12 @@
 
     .biofiller-video-shell:hover {
       transform: translateY(-3px);
-      border-color: rgba(201, 169, 110, 0.2);
+      border-color: rgba(179,144,92, 0.2);
       box-shadow:
         0 1px 0 rgba(255, 255, 255, 1) inset,
         0 34px 64px rgba(22, 18, 16, 0.1),
         0 12px 28px rgba(22, 18, 16, 0.054),
-        0 0 0 1px rgba(201, 169, 110, 0.08) inset;
+        0 0 0 1px rgba(179,144,92, 0.08) inset;
     }
 
     .biofiller-video {
@@ -1588,7 +1592,7 @@
       border-radius: 10px;
       font-size: 0.8125rem;
       line-height: 1.45;
-      color: #fffaf4;
+      color: #f7f3ea;
       background: rgba(72, 24, 24, 0.92);
       border: 1px solid rgba(255, 214, 214, 0.35);
       box-shadow: 0 8px 24px rgba(12, 6, 6, 0.35);
@@ -1654,7 +1658,7 @@
       border-radius: 999px;
       border: 1px solid rgba(255, 255, 255, 0.48);
       background: rgba(14, 12, 10, 0.58);
-      color: #fff7ec;
+      color: #f6f1e6;
       font-size: 0.66rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -1728,7 +1732,7 @@
 
     .biofiller-hero-play-icon {
       font-size: 1.58rem;
-      color: #fff7ec;
+      color: #f6f1e6;
       margin-left: 4px;
     }
 
@@ -1752,9 +1756,9 @@
       position: relative;
       padding: clamp(96px, 11vw, 132px) 0;
       background:
-        radial-gradient(ellipse 90% 55% at 78% 18%, rgba(201, 169, 110, 0.14) 0%, transparent 52%),
-        radial-gradient(ellipse 70% 50% at 12% 88%, rgba(232, 213, 196, 0.45) 0%, transparent 45%),
-        linear-gradient(180deg, #fdfcfa 0%, #f7f1eb 42%, #f0e8df 100%);
+        radial-gradient(ellipse 90% 55% at 78% 18%, rgba(179,144,92, 0.14) 0%, transparent 52%),
+        radial-gradient(ellipse 70% 50% at 12% 88%, rgba(230,220,200, 0.45) 0%, transparent 45%),
+        linear-gradient(180deg, #f3efe7 0%, #ece5d8 42%, #e3dcca 100%);
       overflow: hidden;
     }
 
@@ -1765,7 +1769,7 @@
       right: 0;
       top: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(201, 169, 110, 0.35), transparent);
+      background: linear-gradient(90deg, transparent, rgba(179,144,92, 0.35), transparent);
       opacity: 0.9;
     }
 
@@ -1818,7 +1822,7 @@
       max-width: 52ch;
       margin-bottom: 28px;
       padding-left: 14px;
-      border-left: 2px solid rgba(201, 169, 110, 0.55);
+      border-left: 2px solid rgba(179,144,92, 0.55);
     }
 
     .rhino-spotlight-highlights {
@@ -1847,7 +1851,7 @@
       margin-top: 0.45em;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--champagne), var(--gold-light));
-      box-shadow: 0 0 0 4px rgba(201, 169, 110, 0.12);
+      box-shadow: 0 0 0 4px rgba(179,144,92, 0.12);
     }
 
     .rhino-spotlight-foot {
@@ -1864,7 +1868,7 @@
       color: var(--deep-stone);
       text-decoration: none;
       padding-bottom: 3px;
-      border-bottom: 1px solid rgba(201, 169, 110, 0.45);
+      border-bottom: 1px solid rgba(179,144,92, 0.45);
       transition: color 0.25s ease, border-color 0.25s ease, gap 0.25s ease;
     }
 
@@ -1890,7 +1894,7 @@
     .rhino-spotlight-visual-glow {
       position: absolute;
       inset: -12% -8% -8% -12%;
-      background: radial-gradient(ellipse 70% 65% at 50% 45%, rgba(201, 169, 110, 0.22) 0%, transparent 68%);
+      background: radial-gradient(ellipse 70% 65% at 50% 45%, rgba(179,144,92, 0.22) 0%, transparent 68%);
       pointer-events: none;
       z-index: 0;
     }
@@ -1901,7 +1905,7 @@
       border-radius: 22px;
       padding: 10px;
       background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(245, 236, 226, 0.65));
-      border: 1px solid rgba(201, 169, 110, 0.28);
+      border: 1px solid rgba(179,144,92, 0.28);
       box-shadow:
         0 28px 56px rgba(45, 35, 32, 0.12),
         0 2px 0 rgba(255, 255, 255, 0.85) inset;
@@ -1950,10 +1954,10 @@
       isolation: isolate;
       padding: clamp(96px, 11vw, 132px) 0;
       background:
-        radial-gradient(ellipse 88% 60% at 18% 10%, rgba(201, 169, 110, 0.18) 0%, transparent 55%),
+        radial-gradient(ellipse 88% 60% at 18% 10%, rgba(179,144,92, 0.18) 0%, transparent 55%),
         radial-gradient(ellipse 70% 55% at 92% 92%, rgba(186, 154, 196, 0.16) 0%, transparent 52%),
         linear-gradient(180deg, #15110f 0%, #1a1512 48%, #110d0b 100%);
-      color: #f4ece1;
+      color: #ece5d8;
       overflow: hidden;
     }
 
@@ -2075,7 +2079,7 @@
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: #1a1310;
-      background: linear-gradient(135deg, #f1d99a, #c9a96e);
+      background: linear-gradient(135deg, #e6d2a2, #b3905c);
       box-shadow: 0 14px 32px rgba(20, 14, 10, 0.45), 0 0 0 1px rgba(255, 240, 210, 0.25) inset;
     }
 
@@ -2138,7 +2142,7 @@
       border-radius: 10px;
       font-size: 0.8125rem;
       line-height: 1.45;
-      color: #fffaf4;
+      color: #f7f3ea;
       background: rgba(72, 24, 24, 0.92);
       border: 1px solid rgba(255, 214, 214, 0.35);
       box-shadow: 0 8px 24px rgba(12, 6, 6, 0.45);
@@ -2199,7 +2203,7 @@
       border-radius: 999px;
       border: 1px solid rgba(255, 255, 255, 0.55);
       background: rgba(14, 10, 8, 0.6);
-      color: #fff7ec;
+      color: #f6f1e6;
       font-size: 0.66rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -2273,7 +2277,7 @@
 
     .exosomes-hero-play-icon {
       font-size: 1.62rem;
-      color: #fff7ec;
+      color: #f6f1e6;
       margin-left: 4px;
     }
 
@@ -2299,7 +2303,7 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      color: #f1d99a;
+      color: #e6d2a2;
       letter-spacing: 0.24em;
     }
 
@@ -2307,7 +2311,7 @@
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: #f1d99a;
+      background: #e6d2a2;
       box-shadow: 0 0 0 3px rgba(241, 217, 154, 0.18);
       animation: exosomes-pulse 1.8s ease-in-out infinite;
     }
@@ -2317,23 +2321,23 @@
       flex-direction: column;
       align-items: flex-start;
       gap: 0;
-      font-family: 'Playfair Display', 'Cormorant Garamond', serif;
+      font-family: var(--font-display);
       font-weight: 500;
       line-height: 1.12;
       letter-spacing: 0.01em;
       text-transform: none;
       margin: 14px 0 0;
-      color: #faf2e4;
+      color: #f1ebdd;
     }
 
     .exosomes-heading-brand {
       display: block;
-      font-family: 'Playfair Display', 'Cormorant Garamond', serif;
+      font-family: var(--font-display);
       font-size: clamp(2.4rem, 4.6vw, 3.4rem);
       font-weight: 500;
       letter-spacing: 0.04em;
       line-height: 1;
-      background: linear-gradient(135deg, #fff3d6 0%, #f1d99a 45%, #c9a96e 100%);
+      background: linear-gradient(135deg, #f0e3bf 0%, #e6d2a2 45%, #b3905c 100%);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -2354,7 +2358,7 @@
     }
 
     .exosomes-heading-sub em {
-      color: #f1d99a;
+      color: #e6d2a2;
       font-style: italic;
       font-weight: 500;
     }
@@ -2380,7 +2384,7 @@
       border-radius: 999px;
       border: 1px solid rgba(241, 217, 154, 0.35);
       background: rgba(255, 245, 220, 0.06);
-      color: #f4ece1;
+      color: #ece5d8;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
@@ -2406,14 +2410,14 @@
     }
 
     .exosomes-spotlight-lede strong {
-      color: #f1d99a;
+      color: #e6d2a2;
       font-weight: 500;
       letter-spacing: 0.02em;
     }
 
     .exosomes-spotlight-lede em {
       font-style: italic;
-      color: #faf2e4;
+      color: #f1ebdd;
     }
 
     .exosomes-spotlight-body {
@@ -2455,7 +2459,7 @@
       height: 12px;
       margin-top: 0.42em;
       border-radius: 50%;
-      background: linear-gradient(135deg, #f1d99a, #c9a96e);
+      background: linear-gradient(135deg, #e6d2a2, #b3905c);
       box-shadow:
         0 0 0 4px rgba(241, 217, 154, 0.14),
         0 0 14px rgba(241, 217, 154, 0.45);
@@ -2466,7 +2470,7 @@
       font-family: var(--font-display);
       font-size: 0.92rem;
       letter-spacing: 0.02em;
-      color: #faf2e4;
+      color: #f1ebdd;
       margin-bottom: 4px;
     }
 
@@ -2492,10 +2496,10 @@
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: #1a1310;
-      background: linear-gradient(135deg, #f1d99a 0%, #c9a96e 100%);
+      background: linear-gradient(135deg, #e6d2a2 0%, #b3905c 100%);
       text-decoration: none;
       box-shadow:
-        0 18px 38px rgba(201, 169, 110, 0.35),
+        0 18px 38px rgba(179,144,92, 0.35),
         0 0 0 1px rgba(255, 240, 210, 0.3) inset;
       transition: transform 0.3s ease, box-shadow 0.3s ease, gap 0.3s ease;
     }
@@ -2504,7 +2508,7 @@
       transform: translateY(-2px);
       gap: 16px;
       box-shadow:
-        0 24px 48px rgba(201, 169, 110, 0.5),
+        0 24px 48px rgba(179,144,92, 0.5),
         0 0 0 1px rgba(255, 240, 210, 0.5) inset;
     }
 
@@ -2549,7 +2553,7 @@
       color: var(--champagne);
       line-height: 1.65;
       text-wrap: balance;
-      text-shadow: 0 1px 18px rgba(201, 169, 110, 0.18);
+      text-shadow: 0 1px 18px rgba(179,144,92, 0.18);
     }
 
     .comparison-wrapper {
@@ -2602,7 +2606,7 @@
     }
 
     .comp-before {
-      background: linear-gradient(135deg, #D4C4B8 0%, #C8B5A5 100%);
+      background: linear-gradient(135deg, #e0d8c8 0%, #cdc2ac 100%);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -2611,7 +2615,7 @@
     }
 
     .comp-after {
-      background: linear-gradient(135deg, #E8D5C4 0%, #F0C9B0 100%);
+      background: linear-gradient(135deg, #e3d5b8 0%, #cdae74 100%);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -2685,7 +2689,7 @@
       left: 50%;
       width: 60px;
       transform: translateX(-50%);
-      background: radial-gradient(ellipse 30px 100% at 50% 50%, rgba(201,169,110,0.2) 0%, transparent 100%);
+      background: radial-gradient(ellipse 30px 100% at 50% 50%, rgba(179,144,92,0.2) 0%, transparent 100%);
       pointer-events: none;
       z-index: 11;
     }
@@ -2830,14 +2834,14 @@
 
     .treatment-opt:hover,
     .treatment-opt.selected {
-      border-color: rgba(201, 169, 110, 0.85);
+      border-color: rgba(179,144,92, 0.85);
       background: rgba(255, 250, 242, 0.95);
       box-shadow: 0 6px 22px rgba(45, 35, 32, 0.06);
     }
 
     .treatment-opt.selected {
       background: linear-gradient(135deg, rgba(255, 252, 247, 1) 0%, rgba(245, 232, 214, 0.55) 100%);
-      box-shadow: 0 8px 26px rgba(201, 169, 110, 0.12);
+      box-shadow: 0 8px 26px rgba(179,144,92, 0.12);
     }
 
     .treatment-opt.selected .opt-indicator,
@@ -2857,7 +2861,7 @@
 
     .treatment-opt:hover .opt-indicator,
     .location-card:hover .opt-indicator {
-      border-color: rgba(201, 169, 110, 0.65);
+      border-color: rgba(179,144,92, 0.65);
     }
 
     .opt-label {
@@ -2905,14 +2909,14 @@
 
     .location-card:hover,
     .location-card.selected {
-      border-color: rgba(201, 169, 110, 0.85);
+      border-color: rgba(179,144,92, 0.85);
       background: rgba(255, 250, 242, 0.95);
       box-shadow: 0 6px 22px rgba(45, 35, 32, 0.06);
     }
 
     .location-card.selected {
       background: linear-gradient(135deg, rgba(255, 252, 247, 1) 0%, rgba(245, 232, 214, 0.55) 100%);
-      box-shadow: 0 8px 26px rgba(201, 169, 110, 0.12);
+      box-shadow: 0 8px 26px rgba(179,144,92, 0.12);
     }
 
     .location-name {
@@ -3242,24 +3246,39 @@
 
     .location-item {
       padding: 48px;
-      border: 1px solid rgba(201,169,110,0.2);
+      border: 1px solid rgba(179,144,92,0.2);
       transition: all 0.4s;
     }
 
     .location-item:hover {
-      border-color: rgba(201,169,110,0.5);
-      background: rgba(201,169,110,0.04);
+      border-color: rgba(179,144,92,0.5);
+      background: rgba(179,144,92,0.04);
+    }
+
+    .location-photo {
+      margin: 0 0 24px;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      border: 1px solid rgba(179,144,92,0.18);
+    }
+    .location-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
     }
 
     .location-map {
       width: 100%;
       height: 200px;
-      background: rgba(201,169,110,0.08);
+      background: rgba(179,144,92,0.08);
       margin-bottom: 32px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid rgba(201,169,110,0.1);
+      border: 1px solid rgba(179,144,92,0.1);
       position: relative;
       overflow: hidden;
     }
@@ -3268,8 +3287,8 @@
       position: absolute;
       inset: 0;
       background-image:
-        linear-gradient(rgba(201,169,110,0.1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(201,169,110,0.1) 1px, transparent 1px);
+        linear-gradient(rgba(179,144,92,0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(179,144,92,0.1) 1px, transparent 1px);
       background-size: 24px 24px;
     }
 
@@ -3287,7 +3306,7 @@
     .map-coords {
       font-size: 0.6rem;
       letter-spacing: 0.2em;
-      color: rgba(201,169,110,0.6);
+      color: rgba(179,144,92,0.6);
     }
 
     .location-clinic-name {
@@ -3348,7 +3367,7 @@
     a.loc-detail-link {
       color: rgba(250, 249, 247, 0.82);
       text-decoration: none;
-      border-bottom: 1px solid rgba(201, 169, 110, 0.38);
+      border-bottom: 1px solid rgba(179,144,92, 0.38);
       transition:
         color 0.22s ease,
         border-color 0.22s ease;
@@ -3356,7 +3375,7 @@
 
     a.loc-detail-link:hover {
       color: var(--champagne);
-      border-bottom-color: rgba(201, 169, 110, 0.72);
+      border-bottom-color: rgba(179,144,92, 0.72);
     }
 
     /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -3475,6 +3494,67 @@
       line-height: 1;
     }
 
+    /* Νέο layout κριτικών — masonry για κείμενα διαφορετικού μήκους */
+    .testimonials-grid {
+      column-count: 3;
+      column-gap: 24px;
+    }
+    .testimonials-grid .testimonial-card {
+      display: inline-block;
+      width: 100%;
+      break-inside: avoid;
+      margin: 0 0 24px;
+      border: 1px solid var(--border);
+      border-bottom: 2px solid transparent;
+    }
+    @media (max-width: 980px) {
+      .testimonials-grid { column-count: 2; }
+    }
+    @media (max-width: 640px) {
+      .testimonials-grid { column-count: 1; }
+    }
+
+    /* Σελιδοποίηση κριτικών */
+    .testimonials-pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 48px;
+    }
+    .testimonials-page-dot,
+    .testimonials-page-arrow {
+      min-width: 38px;
+      height: 38px;
+      padding: 0 10px;
+      border: 1px solid var(--border);
+      background: var(--warm-white);
+      color: var(--text-body);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s, border-color 0.3s;
+    }
+    .testimonials-page-dot:hover,
+    .testimonials-page-arrow:hover:not(:disabled) {
+      border-color: var(--champagne);
+      color: var(--gold-deep);
+    }
+    .testimonials-page-dot.active {
+      background: linear-gradient(135deg, #cdae74 0%, #b3905c 52%, #9c7c45 100%);
+      color: #fdfaf3;
+      border-color: var(--champagne);
+      font-weight: 600;
+    }
+    .testimonials-page-arrow {
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+    .testimonials-page-arrow:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
     .testimonials-gallery-rotator {
       margin-top: 72px;
       padding-top: 22px;
@@ -3507,7 +3587,7 @@
     .testimonials-gallery-card {
       flex: 0 0 clamp(170px, 14vw, 260px);
       height: clamp(120px, 10vw, 190px);
-      border: 1px solid rgba(201, 169, 110, 0.25);
+      border: 1px solid rgba(179,144,92, 0.25);
       overflow: hidden;
       background: #fff;
       box-shadow: 0 8px 22px rgba(45, 35, 32, 0.12);
@@ -3534,8 +3614,8 @@
     #gallery.clinic-gallery {
       padding: clamp(100px, 12vw, 150px) 0;
       background:
-        radial-gradient(ellipse 120% 80% at 50% 0%, rgba(201, 169, 110, 0.09) 0%, transparent 55%),
-        linear-gradient(180deg, #fdfcfa 0%, #f4ebe3 48%, #efe6dd 100%);
+        radial-gradient(ellipse 120% 80% at 50% 0%, rgba(179,144,92, 0.09) 0%, transparent 55%),
+        linear-gradient(180deg, #f3efe7 0%, #ece5d8 48%, #e3dcca 100%);
     }
 
     .clinic-gallery-inner {
@@ -3580,7 +3660,7 @@
       border-radius: 20px;
       padding: clamp(18px, 2.5vw, 28px);
       background: rgba(255, 255, 255, 0.55);
-      border: 1px solid rgba(201, 169, 110, 0.18);
+      border: 1px solid rgba(179,144,92, 0.18);
       box-shadow:
         0 4px 24px rgba(45, 35, 32, 0.04),
         0 1px 0 rgba(255, 255, 255, 0.65) inset;
@@ -3617,19 +3697,19 @@
 
     .clinic-gallery-btn--primary {
       color: #fff;
-      background: linear-gradient(135deg, #2d2320, #5c504a);
+      background: linear-gradient(135deg, #161310, #45403a);
       box-shadow: 0 8px 18px rgba(45, 35, 32, 0.2);
     }
 
     .clinic-gallery-btn--instagram {
       color: #fff;
-      background: linear-gradient(90deg, #4a90e2, #6d3ec7);
-      box-shadow: 0 10px 24px rgba(109, 62, 199, 0.24);
+      background: linear-gradient(90deg, #b3905c, #8a6f3e);
+      box-shadow: 0 10px 24px rgba(138,111,62,0.28);
     }
 
     .full-gallery-page {
       min-height: 100vh;
-      background: linear-gradient(180deg, #fbf8f5 0%, #f3ece5 100%);
+      background: linear-gradient(180deg, #f3efe7 0%, #ece5d8 100%);
       padding: 56px 0 80px;
     }
 
@@ -3682,7 +3762,7 @@
     .full-gallery-item {
       overflow: hidden;
       border-radius: 10px;
-      border: 1px solid rgba(201, 169, 110, 0.2);
+      border: 1px solid rgba(179,144,92, 0.2);
       box-shadow: 0 10px 24px rgba(45, 35, 32, 0.08);
       background: #fff;
       cursor: zoom-in;
@@ -3700,8 +3780,8 @@
       margin-top: 44px;
       padding: 44px 20px;
       border-radius: 16px;
-      border: 1px solid rgba(201, 169, 110, 0.24);
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.75), rgba(232, 213, 196, 0.5));
+      border: 1px solid rgba(179,144,92, 0.24);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.75), rgba(230,220,200, 0.5));
       text-align: center;
     }
 
@@ -3719,7 +3799,7 @@
       justify-content: center;
       padding: 13px 28px;
       border-radius: 999px;
-      background: linear-gradient(135deg, #2d2320, #5c504a);
+      background: linear-gradient(135deg, #161310, #45403a);
       color: #fff;
       text-decoration: none;
       font-size: 0.72rem;
@@ -3810,8 +3890,8 @@
     .clinic-gallery-item {
       overflow: hidden;
       position: relative;
-      background: linear-gradient(145deg, #ebe2d9, #dfd4c8);
-      border: 1px solid rgba(201, 169, 110, 0.22);
+      background: linear-gradient(145deg, #e7e0d0, #d8cdb4);
+      border: 1px solid rgba(179,144,92, 0.22);
       border-radius: 14px;
       box-shadow:
         0 12px 28px rgba(45, 35, 32, 0.07),
@@ -3830,7 +3910,7 @@
     }
 
     .clinic-gallery-item:hover {
-      border-color: rgba(201, 169, 110, 0.45);
+      border-color: rgba(179,144,92, 0.45);
       box-shadow:
         0 18px 40px rgba(45, 35, 32, 0.1),
         0 0 0 1px rgba(255, 255, 255, 0.45) inset;
@@ -3876,7 +3956,7 @@
     }
 
     button.clinic-gallery-item:focus-visible {
-      outline: 2px solid rgba(201, 169, 110, 0.85);
+      outline: 2px solid rgba(179,144,92, 0.85);
       outline-offset: 3px;
       z-index: 2;
     }
@@ -3903,8 +3983,8 @@
       z-index: 1;
       background: linear-gradient(135deg,
         rgba(250,249,247,0.85) 0%,
-        rgba(240,201,176,0.5) 50%,
-        rgba(232,180,160,0.4) 100%
+        rgba(216,192,144,0.5) 50%,
+        rgba(179,144,92,0.4) 100%
       );
     }
 
@@ -3949,7 +4029,7 @@
       margin: 0 auto;
       padding: clamp(36px, 5vw, 52px) clamp(28px, 4vw, 48px) clamp(44px, 5vw, 60px);
       background: rgba(252, 250, 246, 0.82);
-      border: 1px solid rgba(201, 169, 110, 0.22);
+      border: 1px solid rgba(179,144,92, 0.22);
       box-shadow: 0 24px 72px rgba(45, 42, 38, 0.07);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
@@ -3965,7 +4045,7 @@
     .final-cta-booking-merged {
       margin-top: 20px;
       padding-top: 28px;
-      border-top: 1px solid rgba(201, 169, 110, 0.28);
+      border-top: 1px solid rgba(179,144,92, 0.28);
       text-align: left;
     }
 
@@ -3986,10 +4066,10 @@
       right: calc(12.5% + 30px);
       background: linear-gradient(
         90deg,
-        rgba(201, 169, 110, 0.2),
-        rgba(201, 169, 110, 0.55) 45%,
-        rgba(201, 169, 110, 0.55) 55%,
-        rgba(201, 169, 110, 0.2)
+        rgba(179,144,92, 0.2),
+        rgba(179,144,92, 0.55) 45%,
+        rgba(179,144,92, 0.55) 55%,
+        rgba(179,144,92, 0.2)
       );
     }
 
@@ -4009,12 +4089,12 @@
     }
 
     #final-cta .booking-step.active .step-circle {
-      box-shadow: 0 8px 26px rgba(201, 169, 110, 0.4);
+      box-shadow: 0 8px 26px rgba(179,144,92, 0.4);
       transform: scale(1.04);
     }
 
     #final-cta .booking-step.completed .step-circle {
-      box-shadow: 0 4px 14px rgba(201, 169, 110, 0.22);
+      box-shadow: 0 4px 14px rgba(179,144,92, 0.22);
     }
 
     #final-cta .step-label {
@@ -4121,7 +4201,7 @@
       border-radius: 50%;
       object-fit: cover;
       margin-bottom: 12px;
-      border: 1px solid rgba(201, 169, 110, 0.32);
+      border: 1px solid rgba(179,144,92, 0.32);
     }
 
     .footer-logo-sub {
@@ -4149,11 +4229,11 @@
     .social-btn {
       width: 36px;
       height: 36px;
-      border: 1px solid rgba(201,169,110,0.25);
+      border: 1px solid var(--champagne);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: rgba(201,169,110,0.6);
+      color: #cdae74;
       text-decoration: none;
       transition: all 0.3s;
     }
@@ -4203,11 +4283,11 @@
     .footer-contact-link {
       text-decoration: underline;
       text-underline-offset: 3px;
-      text-decoration-color: rgba(201, 169, 110, 0.42);
+      text-decoration-color: rgba(179,144,92, 0.42);
     }
 
     .footer-contact-link:hover {
-      text-decoration-color: rgba(201, 169, 110, 0.85);
+      text-decoration-color: rgba(179,144,92, 0.85);
       color: rgba(250, 249, 247, 0.92) !important;
     }
 
@@ -4215,7 +4295,7 @@
       max-width: 1320px;
       margin: 0 auto;
       padding-top: 36px;
-      border-top: 1px solid rgba(201, 169, 110, 0.14);
+      border-top: 1px solid rgba(179,144,92, 0.14);
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
@@ -4715,7 +4795,7 @@
       display: block;
       border-radius: 2px;
       box-shadow: 0 14px 28px rgba(45, 35, 32, 0.1);
-      background: #efe6df;
+      background: #e3dcca;
     }
     .philosophy-badge {
       z-index: 2;
@@ -4728,7 +4808,7 @@
       background-size: contain;
       background-position: center;
       background-repeat: no-repeat;
-      background-color: #e4dcd4;
+      background-color: #ddd5c2;
     }
 
     .comp-label-stack {
@@ -4800,14 +4880,15 @@
     .location-map-embed {
       width: 100%;
       height: 200px;
-      border: 1px solid rgba(201, 169, 110, 0.15);
+      border: 1px solid rgba(179,144,92, 0.15);
       filter: saturate(0.95);
     }
 
     .portrait-photo {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
+      object-position: center;
       display: block;
     }
 
@@ -4815,4 +4896,1131 @@
       .nav-mobile-toggle {
         display: flex;
       }
+    }
+
+
+    /* ═══════════════════════════════════════════
+       ΝΕΑ SECTIONS — Διορθώσεις πελάτισσας (Ιούνιος 2026)
+       Θεραπείες στοιχισμένες · Προσφορές · Πρόσωπο · Σώμα ·
+       Παθήσεις Δέρματος · Συνέδρια · Instagram footer
+    ═══════════════════════════════════════════ */
+
+    /* Φωτογραφίες θεραπειών: η μία κάτω από την άλλη, στοιχισμένες */
+    .treatments-stacked {
+      padding: 96px 24px;
+      background: var(--warm-white);
+    }
+    .treatments-stacked-inner {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .treatments-stacked-head {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .treatments-stacked-head .gold-rule { margin-left: auto; margin-right: auto; }
+    .treatments-stacked-list {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .treatment-stack-card {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      align-items: stretch;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+    }
+    .treatment-stack-card--laser {
+      border-color: var(--champagne);
+      box-shadow: 0 6px 32px rgba(179,144,92,0.25);
+    }
+    .treatment-stack-media {
+      position: relative;
+      min-height: 260px;
+      padding: 0;
+      border: 0;
+      width: 100%;
+      display: block;
+      background: var(--surface);
+      cursor: pointer;
+      overflow: hidden;
+    }
+    .treatment-stack-media img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .treatment-stack-media:hover img {
+      transform: scale(1.05);
+    }
+    .treatment-stack-zoom {
+      position: absolute;
+      bottom: 12px;
+      right: 14px;
+      z-index: 2;
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: #fff;
+      background: rgba(22,19,16,0.5);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .treatment-stack-media:hover .treatment-stack-zoom {
+      opacity: 1;
+    }
+    .treatment-stack-num {
+      position: absolute;
+      top: 12px;
+      left: 14px;
+      z-index: 1;
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      letter-spacing: 0.12em;
+      color: var(--warm-white);
+      background: rgba(22,19,16,0.55);
+      padding: 2px 10px;
+    }
+    .treatment-stack-body {
+      padding: 28px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      justify-content: center;
+    }
+    .treatment-stack-body h3 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      line-height: 1.25;
+    }
+    .treatment-stack-body p {
+      color: var(--text-body);
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+    .treatment-stack-body ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .treatment-stack-body li {
+      position: relative;
+      padding-left: 18px;
+      color: var(--text-body);
+      font-size: 0.85rem;
+    }
+    .treatment-stack-body li::before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      color: var(--champagne);
+      font-size: 0.7rem;
+    }
+    @media (max-width: 768px) {
+      .treatment-stack-card { grid-template-columns: 1fr; }
+      .treatment-stack-media { min-height: 220px; }
+    }
+
+    /* Προσφορές */
+    .offers-section {
+      padding: 96px 24px;
+      background: var(--surface);
+    }
+    .offers-inner { max-width: 1080px; margin: 0 auto; }
+    .offers-header { text-align: center; margin-bottom: 48px; }
+    .offers-header .gold-rule { margin-left: auto; margin-right: auto; }
+    .offers-lead {
+      max-width: 640px;
+      margin: 14px auto 0;
+      color: var(--text-body);
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+    .offers-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .offer-card {
+      background: var(--warm-white);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-card);
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .offer-title {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+    .offer-lines { display: flex; flex-direction: column; gap: 10px; }
+    .offer-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      border-bottom: 1px dashed var(--border);
+      padding-bottom: 8px;
+    }
+    .offer-line-label { color: var(--text-body); font-size: 0.88rem; }
+    .offer-line-price {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      color: var(--champagne);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .offer-note { color: var(--text-muted); font-size: 0.8rem; line-height: 1.6; }
+    .offer-cta {
+      margin-top: auto;
+      align-self: flex-start;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--champagne);
+      padding-bottom: 2px;
+    }
+    .offer-cta:hover { color: var(--champagne); }
+    @media (max-width: 900px) {
+      .offers-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+    }
+
+    /* Δομή τύπου Athens City Med — εναλλασσόμενα blocks εικόνας/κειμένου (δικά μας χρώματα) */
+    .svc-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(32px, 5vw, 72px);
+      align-items: center;
+      margin-bottom: 56px;
+    }
+    .svc-intro--reverse .svc-intro-copy { order: 2; }
+    .svc-intro--reverse .svc-intro-media { order: 1; }
+    .svc-intro-copy {
+      text-align: left;
+    }
+    .svc-intro-copy .gold-rule {
+      margin-left: 0;
+      margin-right: 0;
+    }
+    .svc-intro-copy .face-treatments-lead,
+    .svc-intro-copy .body-treatments-lead,
+    .svc-intro-copy .clinical-derm-lead {
+      margin-left: 0;
+      margin-right: 0;
+      max-width: none;
+      text-align: left;
+    }
+    .svc-intro-media {
+      margin: 0;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-card);
+    }
+    .svc-intro-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+    @media (max-width: 860px) {
+      .svc-intro { grid-template-columns: 1fr; gap: 28px; margin-bottom: 40px; }
+      .svc-intro--reverse .svc-intro-copy { order: 1; }
+      .svc-intro--reverse .svc-intro-media { order: 2; }
+    }
+
+    /* Πρόσωπο — λίστα θεραπειών */
+    .face-treatments {
+      padding: 96px 24px;
+      background: var(--warm-white);
+    }
+    .face-treatments-inner { max-width: 1080px; margin: 0 auto; }
+    .face-treatments-header { text-align: center; margin-bottom: 44px; }
+    .face-treatments-header .gold-rule { margin-left: auto; margin-right: auto; }
+    .face-treatments-lead {
+      max-width: 640px;
+      margin: 14px auto 0;
+      color: var(--text-body);
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+    .face-treatments-grid {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+    }
+    .face-treatment-chip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 12px 16px;
+      color: var(--text-body);
+      font-size: 0.88rem;
+      line-height: 1.4;
+    }
+    .face-treatment-mark { color: var(--champagne); font-size: 0.75rem; flex-shrink: 0; }
+
+    /* Σώμα — θεραπείες */
+    .body-treatments {
+      padding: 96px 24px;
+      background: var(--surface);
+    }
+    .body-treatments-inner { max-width: 1080px; margin: 0 auto; }
+    .body-treatments-header { text-align: center; margin-bottom: 44px; }
+    .body-treatments-header .gold-rule { margin-left: auto; margin-right: auto; }
+    .body-treatments-lead {
+      max-width: 640px;
+      margin: 14px auto 0;
+      color: var(--text-body);
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+    .body-treatments-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .body-treatment-card {
+      background: var(--warm-white);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-card);
+      padding: 26px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .body-treatment-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+    .body-treatment-card p {
+      color: var(--text-body);
+      font-size: 0.86rem;
+      line-height: 1.7;
+    }
+
+    /* Κλινική Δερματολογία — Παθήσεις Δέρματος */
+    .clinical-derm {
+      padding: 96px 24px;
+      background: var(--warm-white);
+    }
+    .clinical-derm-inner { max-width: 1080px; margin: 0 auto; }
+    .clinical-derm-header { text-align: center; margin-bottom: 44px; }
+    .clinical-derm-header .gold-rule { margin-left: auto; margin-right: auto; }
+    .clinical-derm-lead {
+      max-width: 640px;
+      margin: 14px auto 0;
+      color: var(--text-body);
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+    .clinical-derm-grid {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 12px;
+    }
+    .clinical-derm-chip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 12px 16px;
+      color: var(--text-body);
+      font-size: 0.88rem;
+      line-height: 1.4;
+    }
+    .clinical-derm-mark {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--champagne);
+      flex-shrink: 0;
+    }
+
+    /* Φωτογραφίες ιατρού από συνέδρια */
+    .doctor-conferences { margin-top: 28px; }
+    .doctor-conferences-title {
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--champagne);
+      margin-bottom: 12px;
+    }
+    .doctor-conferences-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .doctor-conference-item {
+      margin: 0;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      background: var(--surface);
+    }
+    .doctor-conference-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    @media (max-width: 640px) {
+      .doctor-conferences-grid { grid-template-columns: 1fr; }
+      .doctor-conference-item { aspect-ratio: 16 / 10; }
+    }
+
+    /* Κριτικές — υπότιτλος (δομή SkinDoctor) */
+    .testimonials-kicker {
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    /* Footer — 4 Instagram profiles */
+    .footer-instagram {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 14px;
+      padding: 0;
+    }
+    .footer-instagram-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #cdae74;
+      text-decoration: none;
+      font-size: 0.84rem;
+    }
+    .footer-instagram-link:hover { color: #e6d2a2; }
+
+
+    /* ═══════════════════════════════════════════
+       ΔΙΟΡΘΩΣΕΙΣ ΓΥΡΟΥ 2 — hero εικόνα, στατικά πριν/μετά,
+       μικροεικόνες ιατρού, nav Προσφορές pill
+    ═══════════════════════════════════════════ */
+
+    /* Hero: στατική εικόνα στη θέση του 3D μοντέλου */
+    .hero-dm-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+    }
+
+    /* Πριν & Μετά: στατικές εικόνες-post */
+    .results-static-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      align-items: stretch;
+      margin-bottom: 28px;
+    }
+    .results-static-item {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      display: block;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    }
+    .results-static-item:hover {
+      transform: translateY(-3px);
+      border-color: var(--champagne);
+      box-shadow: 0 8px 24px rgba(138,111,62,0.22);
+    }
+    .results-static-item img {
+      width: 100%;
+      height: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+    @media (max-width: 900px) {
+      .results-static-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .results-static-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    }
+
+    /* Μικροεικόνες ιατρού κάτω από το πορτρέτο */
+    .portrait-stack {
+      position: relative;
+    }
+    .doctor-photo-thumbs {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-top: 22px;
+    }
+    .doctor-photo-thumb {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      display: block;
+      cursor: pointer;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .doctor-photo-thumb:hover {
+      border-color: var(--champagne);
+      transform: translateY(-2px);
+    }
+    .doctor-photo-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    @media (max-width: 640px) {
+      .doctor-photo-thumbs { grid-template-columns: repeat(5, 1fr); gap: 6px; }
+    }
+
+    /* Πορτρέτο & συνέδρια ως clickable (fullscreen) */
+    .portrait-frame--button {
+      padding: 0;
+      border: 0;
+      cursor: pointer;
+      display: block;
+      font: inherit;
+    }
+    .portrait-zoom {
+      position: absolute;
+      bottom: 14px;
+      right: 14px;
+      z-index: 3;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: #fff;
+      background: rgba(22,19,16,0.5);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .portrait-frame--button:hover .portrait-zoom { opacity: 1; }
+    .doctor-conference-item {
+      padding: 0;
+      width: 100%;
+      display: block;
+      cursor: pointer;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .doctor-conference-item:hover {
+      border-color: var(--champagne);
+      transform: translateY(-2px);
+    }
+
+    /* Nav: Προσφορές pill δίπλα στο Ραντεβού */
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .nav-offers-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #6e5631;
+      background: linear-gradient(120deg, rgba(230,210,162,0.55), rgba(179,144,92,0.3));
+      border: 1px solid var(--champagne);
+      border-radius: 999px;
+      padding: 11px 22px;
+      text-decoration: none;
+      box-shadow: 0 4px 18px rgba(138,111,62,0.16);
+      transition: background 0.3s, color 0.3s, transform 0.2s, box-shadow 0.3s;
+    }
+    .nav-offers-pill:hover {
+      background: var(--champagne);
+      color: var(--warm-white);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(138,111,62,0.3);
+    }
+    .nav-offers-pill-spark {
+      font-size: 0.72rem;
+      line-height: 1;
+    }
+
+    @media (max-width: 640px) {
+      .nav-offers-pill {
+        padding: 9px 14px;
+        font-size: 0.64rem;
+        letter-spacing: 0.14em;
+      }
+    }
+    @media (max-width: 420px) {
+      .nav-offers-pill {
+        display: none;
+      }
+    }
+
+    /* ═══════════════════════════════════════════
+       GOLD ENRICHMENT — εντονότερη παρουσία του χρυσού του logo AD
+    ═══════════════════════════════════════════ */
+
+    /* Μεταλλικό χρυσό στα em των τίτλων (όπως οι ανταύγειες του logo) */
+    .section-title em,
+    .hero-dm-title em {
+      background: linear-gradient(100deg, #8a6f3e 8%, #c9a767 42%, #9c7c45 70%, #c9a767 96%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* Section labels: βαθύ χρυσό αντί για αχνό */
+    .section-label {
+      color: var(--gold-deep);
+    }
+
+    /* Gold rule: πιο πλούσια χρυσή γραμμή */
+    .gold-rule {
+      background: linear-gradient(90deg, transparent 0%, #b3905c 18%, #8a6f3e 50%, #b3905c 82%, transparent 100%);
+      height: 2px;
+    }
+
+    /* Κύρια κουμπιά: μεταλλικό χρυσό gradient */
+    .nav-cta,
+    .hero-dm-btn--primary,
+    .clinic-gallery-btn--primary,
+    .nav-drawer-cta {
+      background: linear-gradient(135deg, #cdae74 0%, #b3905c 52%, #9c7c45 100%);
+      color: #fdfaf3;
+    }
+    .nav-cta:hover,
+    .hero-dm-btn--primary:hover,
+    .clinic-gallery-btn--primary:hover,
+    .nav-drawer-cta:hover {
+      background: linear-gradient(135deg, #d8bb82 0%, #b3905c 55%, #8a6f3e 100%);
+    }
+
+    /* Ghost κουμπί hero: χρυσό περίγραμμα/κείμενο */
+    .hero-dm-btn--ghost {
+      border-color: var(--champagne);
+      color: var(--gold-deep);
+    }
+    .hero-dm-btn--ghost:hover {
+      background: rgba(179,144,92,0.12);
+    }
+
+    /* Τίτλοι καρτών σε βαθύ χρυσό */
+    .body-treatment-card h3,
+    .offer-title {
+      color: var(--gold-deep);
+    }
+
+    /* Χρυσή κορυφαία γραμμή στις κάρτες προσφορών */
+    .offer-card {
+      border-top: 3px solid var(--champagne);
+    }
+
+    /* Chips: πιο ζεστό χρυσό περίγραμμα + κρεμ-χρυσό φόντο */
+    .face-treatment-chip,
+    .clinical-derm-chip {
+      background: linear-gradient(135deg, #ece5d5 0%, #e7ddc6 100%);
+    }
+
+    /* Στατιστικά ιατρού σε βαθύ χρυσό */
+    .doctor-stat strong {
+      color: var(--gold-deep);
+    }
+
+    /* Τιμές προσφορών: μαύρα έντονα (αίτημα πελάτισσας) */
+    .offer-line-price {
+      color: #000000;
+      font-weight: 700;
+    }
+
+    /* Κάρτες θεραπειών: διακριτικό χρυσό φιλέτο αριστερά */
+    .treatment-stack-card {
+      border-left: 3px solid var(--champagne);
+    }
+
+
+    /* ═══════════════════════════════════════════
+       ΣΕΛΙΔΕΣ ΘΕΡΑΠΕΙΩΝ + clickable chips + All in 1 Pack
+    ═══════════════════════════════════════════ */
+
+    /* Clickable θεραπείες */
+    .face-treatment-link,
+    .clinical-derm-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      flex: 1;
+      color: var(--gold-deep);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.25s;
+    }
+    /* Διακριτικός, αισθητικός διαχωρισμός: τα clickable έχουν χρυσό φιλέτο + μόνιμο βελάκι */
+    .face-treatment-chip.is-clickable,
+    .clinical-derm-chip.is-clickable {
+      cursor: pointer;
+      border-left: 2px solid var(--champagne);
+      background: linear-gradient(135deg, rgba(230,210,162,0.18), rgba(179,144,92,0.08));
+    }
+    .face-treatment-chip.is-clickable:hover,
+    .clinical-derm-chip.is-clickable:hover {
+      border-color: var(--champagne);
+      box-shadow: 0 4px 16px rgba(138,111,62,0.16);
+      transform: translateY(-1px);
+    }
+    .face-treatment-chip,
+    .clinical-derm-chip {
+      transition: transform 0.2s, box-shadow 0.3s, border-color 0.3s;
+    }
+    .face-treatment-link:hover,
+    .clinical-derm-link:hover {
+      color: #8a6f3e;
+    }
+    .treatment-chip-arrow {
+      margin-left: auto;
+      color: var(--champagne);
+      font-size: 0.82rem;
+      opacity: 0.6;
+      transition: opacity 0.25s, transform 0.25s;
+    }
+    .face-treatment-chip.is-clickable:hover .treatment-chip-arrow,
+    .clinical-derm-chip.is-clickable:hover .treatment-chip-arrow,
+    .body-treatment-card--link:hover .treatment-chip-arrow {
+      opacity: 1;
+      transform: translateX(3px);
+    }
+    .body-treatment-card--link {
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      border-top: 2px solid var(--champagne);
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    }
+    .body-treatment-card--link:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(138,111,62,0.2);
+    }
+    .body-treatment-card--link h3 {
+      color: var(--gold-deep);
+    }
+    .body-treatment-card--link h3 .treatment-chip-arrow {
+      opacity: 0.55;
+    }
+
+    /* Σελίδα λεπτομερειών θεραπείας */
+    .therapy-page {
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse 120% 80% at 50% 0%, rgba(179,144,92,0.10) 0%, transparent 55%),
+        linear-gradient(180deg, #f3efe7 0%, #ece5d8 100%);
+      padding: clamp(96px, 12vh, 140px) 24px 80px;
+    }
+    .therapy-shell {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .therapy-back {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-body);
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      padding: 9px 18px;
+      cursor: pointer;
+      margin-bottom: 32px;
+      transition: border-color 0.3s, color 0.3s;
+    }
+    .therapy-back:hover { border-color: var(--champagne); color: var(--gold-deep); }
+    .therapy-header { margin-bottom: 28px; }
+    .therapy-title { margin-top: 6px; }
+    .therapy-header .gold-rule { margin: 20px 0; }
+    .therapy-tagline {
+      font-family: var(--font-italic);
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--gold-deep);
+      line-height: 1.5;
+    }
+    .therapy-intro {
+      color: var(--text-body);
+      font-size: 1.02rem;
+      line-height: 1.85;
+      margin-bottom: 28px;
+    }
+    .therapy-bullets {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      margin: 0 0 40px;
+      padding: 24px;
+      background: var(--warm-white);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--champagne);
+    }
+    .therapy-bullets li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-primary);
+      font-size: 0.92rem;
+    }
+    .therapy-bullet-mark { color: var(--champagne); font-size: 0.8rem; }
+    .therapy-sections { display: flex; flex-direction: column; gap: 30px; }
+    .therapy-section h2 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--gold-deep);
+      margin-bottom: 10px;
+    }
+    .therapy-section p {
+      color: var(--text-body);
+      font-size: 0.98rem;
+      line-height: 1.85;
+      margin-bottom: 10px;
+    }
+    .therapy-cta {
+      margin-top: 48px;
+      padding: 40px;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(205,174,116,0.16), rgba(179,144,92,0.10));
+      border: 1px solid var(--border);
+    }
+    .therapy-cta-title {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+    }
+    .therapy-cta-text {
+      color: var(--text-body);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      max-width: 520px;
+      margin: 0 auto 22px;
+    }
+    .therapy-cta-btn {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #fdfaf3;
+      background: linear-gradient(135deg, #cdae74 0%, #b3905c 52%, #9c7c45 100%);
+      padding: 14px 34px;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .therapy-cta-btn:hover { transform: translateY(-1px); }
+    .therapy-disclaimer {
+      margin-top: 28px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* All in 1 Pack — featured offer */
+    .all-in-one {
+      background: linear-gradient(160deg, #2a221c 0%, #161310 100%);
+      border: 1px solid rgba(179,144,92,0.45);
+      padding: clamp(36px, 5vw, 56px);
+      margin-bottom: 28px;
+    }
+    .all-in-one-head { text-align: center; margin-bottom: 40px; }
+    .all-in-one-brand {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: #cdae74;
+      margin-bottom: 12px;
+    }
+    .all-in-one-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      background: linear-gradient(100deg, #cdae74 0%, #e6d2a2 40%, #b3905c 70%, #e6d2a2 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      line-height: 1.1;
+    }
+    .all-in-one-price {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 3.5vw, 2rem);
+      color: #f3efe7;
+      margin-top: 6px;
+    }
+    .all-in-one-price strong { color: #e6d2a2; }
+    .all-in-one-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(20px, 4vw, 44px);
+    }
+    .all-in-one-step { text-align: center; }
+    .all-in-one-step-media {
+      width: clamp(120px, 16vw, 168px);
+      height: clamp(120px, 16vw, 168px);
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid rgba(205,174,116,0.5);
+    }
+    .all-in-one-step-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .all-in-one-step-label {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.66rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #161310;
+      background: linear-gradient(135deg, #cdae74, #b3905c);
+      padding: 5px 14px;
+      margin-bottom: 12px;
+    }
+    .all-in-one-step-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #f3efe7;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .all-in-one-step-desc {
+      color: rgba(243,239,231,0.78);
+      font-size: 0.88rem;
+      line-height: 1.65;
+    }
+    .all-in-one-cta {
+      display: block;
+      width: fit-content;
+      margin: 40px auto 0;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #161310;
+      background: linear-gradient(135deg, #e6d2a2 0%, #cdae74 52%, #b3905c 100%);
+      padding: 14px 36px;
+      text-decoration: none;
+      transition: transform 0.2s;
+    }
+    .all-in-one-cta:hover { transform: translateY(-1px); }
+    .offers-grid--secondary { grid-template-columns: repeat(2, 1fr); max-width: 760px; margin: 0 auto; }
+    @media (max-width: 760px) {
+      .all-in-one-steps { grid-template-columns: 1fr; gap: 32px; }
+      .offers-grid--secondary { grid-template-columns: 1fr; max-width: 480px; }
+    }
+
+
+    /* ═══════════════════════════════════════════
+       Δευτερεύουσες προσφορές — ίδιο dark/gold style με το All in 1 Pack
+    ═══════════════════════════════════════════ */
+    .offers-grid--secondary .offer-card {
+      background: linear-gradient(160deg, #2a221c 0%, #161310 100%);
+      border: 1px solid rgba(179,144,92,0.45);
+      border-top: 3px solid var(--champagne);
+      padding: 36px 32px;
+    }
+    .offers-grid--secondary .offer-title {
+      font-family: var(--font-display);
+      background: linear-gradient(100deg, #cdae74 0%, #e6d2a2 40%, #b3905c 70%, #e6d2a2 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .offers-grid--secondary .offer-line {
+      border-bottom: 1px dashed rgba(179,144,92,0.4);
+    }
+    .offers-grid--secondary .offer-line-label {
+      color: rgba(243,239,231,0.85);
+    }
+    .offers-grid--secondary .offer-line-price {
+      color: #e6d2a2;
+      font-weight: 700;
+    }
+    .offers-grid--secondary .offer-note {
+      color: rgba(243,239,231,0.6);
+    }
+    .offers-grid--secondary .offer-cta {
+      align-self: flex-start;
+      color: #161310;
+      background: linear-gradient(135deg, #e6d2a2 0%, #cdae74 52%, #b3905c 100%);
+      border: none;
+      padding: 11px 24px;
+      letter-spacing: 0.16em;
+      transition: transform 0.2s;
+    }
+    .offers-grid--secondary .offer-cta:hover {
+      color: #161310;
+      transform: translateY(-1px);
+    }
+
+
+    /* ═══════════════════════════════════════════
+       RESPONSIVE OPTIMIZATION — tablet / mobile (desktop ανέπαφο)
+    ═══════════════════════════════════════════ */
+
+    /* TABLET (≤ 1024px) */
+    @media (max-width: 1024px) {
+      .treatments-stacked-inner,
+      .offers-inner,
+      .face-treatments-inner,
+      .body-treatments-inner,
+      .clinical-derm-inner { padding-left: 28px; padding-right: 28px; }
+
+      .all-in-one-steps { gap: 24px; }
+      .doctor-conferences-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* TABLET portrait & μικρά tablet (≤ 860px) */
+    @media (max-width: 860px) {
+      .treatments-stacked,
+      .offers-section,
+      .face-treatments,
+      .body-treatments,
+      .clinical-derm { padding-top: 72px; padding-bottom: 72px; }
+
+      .all-in-one { padding: 32px 24px; }
+      .body-treatments-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* PHONES (≤ 640px) */
+    @media (max-width: 640px) {
+      /* Γενική άνεση spacing */
+      .treatments-stacked,
+      .offers-section,
+      .face-treatments,
+      .body-treatments,
+      .clinical-derm { padding: 60px 18px; }
+
+      .treatments-stacked-inner,
+      .offers-inner,
+      .face-treatments-inner,
+      .body-treatments-inner,
+      .clinical-derm-inner { padding-left: 0; padding-right: 0; }
+
+      /* Στοιχισμένες θεραπείες: η εικόνα πάνω, το κείμενο κάτω */
+      .treatment-stack-card { grid-template-columns: 1fr; }
+      .treatment-stack-media { min-height: 200px; }
+      .treatment-stack-body { padding: 22px 22px; }
+
+      /* svc-intro ήδη γίνεται 1 στήλη στα 860 — λίγο σφιχτότερα εδώ */
+      .svc-intro { gap: 22px; margin-bottom: 32px; }
+      .svc-intro-media { aspect-ratio: 16 / 11; }
+
+      /* Λίστες θεραπειών: 1 στήλη, άνετο tap target */
+      .face-treatments-grid,
+      .clinical-derm-grid { grid-template-columns: 1fr; }
+      .face-treatment-chip,
+      .clinical-derm-chip { padding: 14px 16px; font-size: 0.92rem; }
+      .body-treatments-grid { grid-template-columns: 1fr; }
+
+      /* All in 1 Pack */
+      .all-in-one { padding: 28px 18px; margin-bottom: 20px; }
+      .all-in-one-head { margin-bottom: 28px; }
+      .all-in-one-steps { gap: 28px; }
+      .all-in-one-cta { width: 100%; text-align: center; }
+      .offers-grid--secondary { gap: 16px; }
+
+      /* Doctor section */
+      .doctor-photo-thumbs { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+      .doctor-conferences-grid { grid-template-columns: repeat(2, 1fr); }
+      .doctor-conference-item { aspect-ratio: 4 / 3; }
+
+      /* Κριτικές: pagination άνετο */
+      .testimonials-pagination { flex-wrap: wrap; gap: 6px; }
+      .testimonials-page-dot,
+      .testimonials-page-arrow { min-width: 34px; height: 34px; }
+
+      /* Σελίδα θεραπείας */
+      .therapy-page { padding: 92px 18px 56px; }
+      .therapy-cta { padding: 28px 20px; }
+      .therapy-cta-title { font-size: 1.35rem; }
+      .therapy-section h2 { font-size: 1.3rem; }
+      .therapy-intro { font-size: 0.96rem; }
+      .therapy-bullets { padding: 18px; }
+
+      /* Ιατρεία: εικόνα χώρου πιο χαμηλή */
+      .location-photo { aspect-ratio: 16 / 11; }
+      .location-item { padding: 28px 22px; }
+    }
+
+    /* ΠΟΛΥ ΜΙΚΡΕΣ ΟΘΟΝΕΣ (≤ 400px) */
+    @media (max-width: 400px) {
+      .doctor-photo-thumbs { grid-template-columns: repeat(2, 1fr); }
+      .all-in-one-title { font-size: 1.7rem; }
+      .all-in-one-price { font-size: 1.3rem; }
+      .therapy-back { width: 100%; }
+      .nav-logo-sub { display: none; }
+    }
+
+
+    /* Εικόνα κατηγορίας στις σελίδες θεραπειών */
+    .therapy-hero-image {
+      margin: 0 0 32px;
+      width: 100%;
+      aspect-ratio: 3 / 2;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-card);
+    }
+    .therapy-hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+    @media (max-width: 640px) {
+      .therapy-hero-image { aspect-ratio: 4 / 3; margin-bottom: 24px; }
     }
