@@ -23,6 +23,11 @@ import { FullGalleryPage } from './components/FullGalleryPage'
 import { AdminPage } from './components/AdminPage'
 import { TherapyDetailPage } from './components/TherapyDetailPage'
 import { useScrollReveal } from './hooks/useScrollReveal'
+import { collectSiteImageUrls, preloadSiteImages } from './lib/preloadSiteImages'
+
+const INTRO_MIN_MS = 1200
+const INTRO_MAX_MS = 22000
+const INTRO_FADE_MS = 420
 
 export default function App() {
   useScrollReveal()
@@ -42,27 +47,43 @@ export default function App() {
 
   useEffect(() => {
     if (!loading) return
-    let progress = 0
-    const interval = window.setInterval(() => {
-      progress += Math.random() * 14
-      if (progress >= 100) {
-        progress = 100
-        window.clearInterval(interval)
-        window.setTimeout(() => {
-          try {
-            window.sessionStorage.setItem('ad_intro_seen', '1')
-          } catch {
-            /* αγνόησε αν δεν υπάρχει sessionStorage */
-          }
-          setLoading(false)
-        }, 420)
-      }
-      setLoadProgress(progress)
-    }, 180)
 
-    return () => window.clearInterval(interval)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    let cancelled = false
+    const startedAt = Date.now()
+    let finished = false
+
+    const finishIntro = () => {
+      if (cancelled || finished) return
+      finished = true
+      window.clearTimeout(maxTimer)
+      setLoadProgress(100)
+      window.setTimeout(() => {
+        if (cancelled) return
+        try {
+          window.sessionStorage.setItem('ad_intro_seen', '1')
+        } catch {
+          /* αγνόησε αν δεν υπάρχει sessionStorage */
+        }
+        setLoading(false)
+      }, INTRO_FADE_MS)
+    }
+
+    const maxTimer = window.setTimeout(finishIntro, INTRO_MAX_MS)
+
+    void preloadSiteImages(collectSiteImageUrls(), ({ percent }) => {
+      if (!cancelled) setLoadProgress(percent)
+    }).finally(() => {
+      if (cancelled) return
+      const elapsed = Date.now() - startedAt
+      const remaining = Math.max(0, INTRO_MIN_MS - elapsed)
+      window.setTimeout(finishIntro, remaining)
+    })
+
+    return () => {
+      cancelled = true
+      window.clearTimeout(maxTimer)
+    }
+  }, [loading])
 
   useEffect(() => {
     const syncRoute = () =>
