@@ -406,18 +406,22 @@ export const THERAPY_BY_SLUG: Record<string, Therapy> = Object.fromEntries(
  * Κλινική (παθήσεις/σπίλοι) → δερματοσκόπηση · Κλινική (δερματοχειρουργική) → μικρο-επέμβαση.
  */
 export const THERAPY_IMAGE_BY_SLUG: Record<string, string> = {
-  // Θεραπείες Προσώπου (laser/ανάπλαση προσώπου) — μόνο στις 2 πιο ταιριαστές
+  // Θεραπείες Προσώπου — ειδικές εικόνες ανά θεραπεία
+  bacio: 'Skinbooster Χειλιών.png',
+  yaqoot: 'Yaqoot.png',
+  polynucleotides: 'Πολυνουκλεοτίδια (Rejuran).png',
+  'iv-drip': 'IV Drip.png',
   'fractional-laser-co2': 'Θεραπείες Προσώπου.png',
   'chimiko-peeling': 'Θεραπείες Προσώπου.png',
   // Σώμα — Ενέσιμες & Σμίλευση (όγκος/λίπος με ένεση)
   'body-filler': 'Θεραπείες Σώματος (Ενέσιμες & Σμίλευση).png',
   'aqualyx-michelangelo': 'Θεραπείες Σώματος (Ενέσιμες & Σμίλευση).png',
-  // Σώμα — Μη-Επεμβατικές / λειτουργικές (botox)
-  'barbie-botox': 'Θεραπείες Σώματος (Μη-Επεμβατικές).png',
-  'botox-yperidrosias': 'Θεραπείες Σώματος (Μη-Επεμβατικές).png',
-  // Κλινική Δερματολογία — Δερματοχειρουργική (αφαίρεση αλλοιώσεων)
-  kondylomata: 'Κλινική Δερματολογία (Δερματοχειρουργική).png',
-  myrmigkies: 'Κλινική Δερματολογία (Δερματοχειρουργική).png',
+  // Σώμα — ειδικές εικόνες ανά θεραπεία
+  'barbie-botox': 'Barbie Botox.png',
+  'botox-yperidrosias': 'Botox Υπεριδρωσίας.png',
+  // Κλινική Δερματολογία — ειδικές εικόνες ανά θεραπεία
+  kondylomata: 'Κονδυλώματα.png',
+  myrmigkies: 'Μυρμηγκιές.png',
   // Κλινική Δερματολογία — Παθήσεις Δέρματος / σπίλοι (δερματοσκόπηση)
   'chartografisi-spilon': 'Κλινική Δερματολογία (Παθήσεις Δέρματος).png',
 }
